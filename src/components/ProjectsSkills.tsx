@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Code, Palette, Database, Tool } from 'lucide-react';
+import { ExternalLink, Github, Code, Palette, Database, PenTool as Tool } from 'lucide-react';
 
 const ProjectsSkills: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
