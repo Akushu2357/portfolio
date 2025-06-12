@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ExternalLink, Github, Code, Palette, Database, PenTool as Tool } from 'lucide-react';
 
 const ProjectsSkills: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<number>(0); // Start with first project selected
 
   const projects = [
     {
@@ -107,8 +107,8 @@ const ProjectsSkills: React.FC = () => {
     setSelectedProject(index);
   };
 
-  const handleProjectLeave = () => {
-    setSelectedProject(null);
+  const handleProjectClick = (index: number) => {
+    setSelectedProject(index);
   };
 
   const getCategoryColor = (category: string) => {
@@ -142,7 +142,7 @@ const ProjectsSkills: React.FC = () => {
             Projects & Skills
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Explore my projects and discover the skills behind each one. Hover over any project to see the technologies and expertise involved.
+            Explore my projects and discover the skills behind each one. Click or hover over any project to see the technologies and expertise involved.
           </p>
         </div>
 
@@ -160,8 +160,7 @@ const ProjectsSkills: React.FC = () => {
                         : 'hover:shadow-xl hover:scale-[1.01]'
                     }`}
                     onMouseEnter={() => handleProjectHover(index)}
-                    onMouseLeave={handleProjectLeave}
-                    onClick={() => setSelectedProject(selectedProject === index ? null : index)}
+                    onClick={() => handleProjectClick(index)}
                   >
                     <div className="relative overflow-hidden">
                       <img
@@ -214,82 +213,66 @@ const ProjectsSkills: React.FC = () => {
 
             {/* Skills Panel */}
             <div className="bg-gray-50 rounded-xl p-6 overflow-y-auto scrollbar-hide">
-              {selectedProject !== null ? (
-                <div className="animate-fade-in">
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                      <Code className="text-blue-600" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900">
-                        {projects[selectedProject].title}
-                      </h3>
-                      <p className="text-gray-600">Skills & Technologies</p>
-                    </div>
+              <div className="animate-fade-in">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                    <Code className="text-blue-600" size={24} />
                   </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      {projects[selectedProject].title}
+                    </h3>
+                    <p className="text-gray-600">Skills & Technologies</p>
+                  </div>
+                </div>
 
-                  <div className="space-y-4">
-                    {projects[selectedProject].skills.map((skill, skillIndex) => (
-                      <div
-                        key={skill.name}
-                        className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300"
-                        style={{ animationDelay: `${skillIndex * 0.1}s` }}
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center space-x-3">
-                            <div className="text-gray-600">
-                              {skill.icon}
-                            </div>
-                            <div>
-                              <span className="font-semibold text-gray-900">
-                                {skill.name}
-                              </span>
-                              <div className={`inline-block ml-2 px-2 py-1 text-xs rounded-full border ${getCategoryColor(skill.category)}`}>
-                                {skill.category}
-                              </div>
+                <div className="space-y-4">
+                  {projects[selectedProject].skills.map((skill, skillIndex) => (
+                    <div
+                      key={skill.name}
+                      className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300"
+                      style={{ animationDelay: `${skillIndex * 0.1}s` }}
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="text-gray-600">
+                            {skill.icon}
+                          </div>
+                          <div>
+                            <span className="font-semibold text-gray-900">
+                              {skill.name}
+                            </span>
+                            <div className={`inline-block ml-2 px-2 py-1 text-xs rounded-full border ${getCategoryColor(skill.category)}`}>
+                              {skill.category}
                             </div>
                           </div>
-                          <span className="text-sm font-medium text-gray-500">
-                            {skill.level}%
-                          </span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
-                            style={{
-                              width: `${skill.level}%`,
-                              animationDelay: `${skillIndex * 0.1}s`,
-                            }}
-                          />
-                        </div>
+                        <span className="text-sm font-medium text-gray-500">
+                          {skill.level}%
+                        </span>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">
-                      Project Highlights
-                    </h4>
-                    <p className="text-blue-800 text-sm leading-relaxed">
-                      {projects[selectedProject].description}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex items-center justify-center h-full text-center">
-                  <div className="animate-fade-in">
-                    <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Code className="text-gray-400" size={32} />
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                          style={{
+                            width: `${skill.level}%`,
+                            animationDelay: `${skillIndex * 0.1}s`,
+                          }}
+                        />
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                      Select a Project
-                    </h3>
-                    <p className="text-gray-500">
-                      Hover over or click any project card to explore the skills and technologies used.
-                    </p>
-                  </div>
+                  ))}
                 </div>
-              )}
+
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                  <h4 className="font-semibold text-blue-900 mb-2">
+                    Project Highlights
+                  </h4>
+                  <p className="text-blue-800 text-sm leading-relaxed">
+                    {projects[selectedProject].description}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
