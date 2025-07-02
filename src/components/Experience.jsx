@@ -185,12 +185,12 @@ const Experience = () => {
             </h3>
             <div className="max-h-[60vh] overflow-y-auto scrollbar-hide">
               {/* Timeline Container with proper padding for circles */}
-              <div className="relative pl-8 pr-4">
+              <div className="relative pl-12 pr-4 py-4">
                 {/* Vertical Timeline Line - positioned to align with circles */}
-                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
+                <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
 
                 {/* Timeline Items */}
-                <div className="space-y-6 sm:space-y-8">
+                <div className="space-y-8 sm:space-y-10">
                   {experiences.map((exp, index) => (
                     <div 
                       key={exp.id} 
@@ -199,8 +199,8 @@ const Experience = () => {
                       }`}
                       onClick={() => handleExperienceClick(index)}
                     >
-                      {/* Timeline Node - Properly positioned within container */}
-                      <div className={`absolute left-[-20px] top-4 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 rounded-full z-10 transition-all duration-300 ${
+                      {/* Timeline Node - Properly centered with adequate spacing */}
+                      <div className={`absolute left-[-24px] top-6 w-4 h-4 bg-white border-4 rounded-full z-10 transition-all duration-300 ${
                         selectedExperience === index ? 'border-cyan-500 bg-cyan-500 shadow-lg' : 'border-slate-300'
                       }`}></div>
 
