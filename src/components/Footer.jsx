@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-2xl font-bold gradient-text mb-4">
-              John Doe
+              Worapat Chuchoed (Tang)
             </h3>
             <p className="text-gray-400 leading-relaxed">
               Full Stack Developer passionate about creating exceptional
@@ -64,7 +64,7 @@ const Footer = () => {
                 <Linkedin size={20} />
               </a>
               <a
-                href="mailto:john@example.com"
+                href="mailto:tang.tang2004@gmail.com"
                 className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-300"
               >
                 <Mail size={20} />
@@ -75,7 +75,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 pt-8 text-center">
           <p className="text-gray-400 flex items-center justify-center space-x-2">
-            <span>© {currentYear} John Doe. Made with</span>
+            <span>© {currentYear} Worapat Chuchoed (Tang). Made with</span>
             <Heart size={16} className="text-red-500" />
             <span>and lots of coffee.</span>
           </p>

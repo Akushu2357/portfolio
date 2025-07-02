@@ -16,8 +16,12 @@ const Hero = () => {
           
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
             Hi, I'm{' '}
-            <span className="gradient-text">John Doe</span>
+            <span className="gradient-text">Tang</span>
           </h1>
+          
+          <h2 className="text-2xl md:text-3xl text-gray-700 mb-4">
+            Worapat Chuchoed
+          </h2>
           
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Full Stack Developer & UI/UX Designer passionate about creating
@@ -51,7 +55,7 @@ const Hero = () => {
               <Linkedin size={24} className="text-blue-600" />
             </a>
             <a
-              href="mailto:john@example.com"
+              href="mailto:tang.tang2004@gmail.com"
               className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
             >
               <Mail size={24} className="text-red-500" />

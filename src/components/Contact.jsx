@@ -16,7 +16,7 @@ const Contact = () => {
     const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
     
     // Open email client with pre-filled content
-    window.location.href = `mailto:john@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = `mailto:tang.tang2004@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
     
     // Reset form after sending
     setFormData({ name: '', email: '', message: '' });
@@ -36,19 +36,19 @@ const Contact = () => {
     {
       icon: <Mail size={24} />,
       title: 'Email',
-      value: 'john@example.com',
-      link: 'mailto:john@example.com',
+      value: 'tang.tang2004@gmail.com',
+      link: 'mailto:tang.tang2004@gmail.com',
     },
     {
       icon: <Phone size={24} />,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      value: '+66 (xxx) xxx-xxxx',
+      link: 'tel:+66xxxxxxxxx',
     },
     {
       icon: <MapPin size={24} />,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Thailand',
       link: '#',
     },
   ];
