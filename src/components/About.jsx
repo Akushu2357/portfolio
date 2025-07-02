@@ -24,10 +24,10 @@ const About = () => {
     <section id="about" className="py-20 bg-white">
       <div className="container-max section-padding">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
             About Me
           </h2>
-          <p className="text-xl text-stone-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             I'm a passionate developer with 5+ years of experience creating
             digital solutions that bridge the gap between design and functionality.
           </p>
@@ -43,15 +43,15 @@ const About = () => {
           </div>
           
           <div className="animate-slide-up">
-            <h3 className="text-3xl font-bold text-stone-900 mb-6">
+            <h3 className="text-3xl font-bold text-slate-900 mb-6">
               My Journey
             </h3>
-            <p className="text-stone-600 mb-6 leading-relaxed">
+            <p className="text-slate-600 mb-6 leading-relaxed">
               Started as a curious student who loved solving problems through code,
               I've evolved into a full-stack developer who thrives on turning
               complex challenges into elegant solutions.
             </p>
-            <p className="text-stone-600 mb-8 leading-relaxed">
+            <p className="text-slate-600 mb-8 leading-relaxed">
               When I'm not coding, you'll find me exploring new technologies,
               contributing to open-source projects, or sharing knowledge with
               the developer community.
@@ -69,13 +69,13 @@ const About = () => {
               className="card p-8 text-center animate-slide-up"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="text-emerald-600 mb-4 flex justify-center">
+              <div className="text-cyan-600 mb-4 flex justify-center">
                 {item.icon}
               </div>
-              <h4 className="text-xl font-bold text-stone-900 mb-4">
+              <h4 className="text-xl font-bold text-slate-900 mb-4">
                 {item.title}
               </h4>
-              <p className="text-stone-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed">
                 {item.description}
               </p>
             </div>
