@@ -200,7 +200,7 @@ const Experience = () => {
                       onClick={() => handleExperienceClick(index)}
                     >
                       {/* Timeline Node - Properly centered with adequate spacing */}
-                      <div className={`absolute left-[-32px] top-6 w-4 h-4 bg-white border-4 rounded-full z-10 transition-all duration-300 ${
+                      <div className={`absolute left-[-31px] top-6 w-4 h-4 bg-white border-4 rounded-full z-10 transition-all duration-300 ${
                         selectedExperience === index ? 'border-cyan-500 bg-cyan-500 shadow-lg' : 'border-slate-300'
                       }`}></div>
 
