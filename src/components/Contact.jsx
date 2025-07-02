@@ -10,10 +10,19 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
+    
+    // Create email content
+    const subject = `Portfolio Contact: Message from ${formData.name}`;
+    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    
+    // Open email client with pre-filled content
+    window.location.href = `mailto:john@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    
+    // Reset form after sending
     setFormData({ name: '', email: '', message: '' });
+    
+    // Show success message (optional)
+    alert('Email client opened! Please send the email from your email application.');
   };
 
   const handleChange = (e) => {
