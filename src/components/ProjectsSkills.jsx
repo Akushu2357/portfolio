@@ -148,15 +148,15 @@ const ProjectsSkills = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Projects Grid */}
-          <div className="pl-4 lg:pl-0">
+          <div className="space-y-4">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:hidden">
               Projects
             </h3>
-            <div className="grid gap-4 sm:gap-6 max-h-[65vh] overflow-y-auto scrollbar-hide pr-2">
+            <div className="space-y-4 sm:space-y-6 max-h-[70vh] overflow-y-auto scrollbar-hide pr-2">
               {projects.map((project, index) => (
                 <div
                   key={project.title}
-                  className={`card overflow-hidden cursor-pointer transition-all duration-300 ${
+                  className={`card overflow-hidden cursor-pointer transition-all duration-300 mx-4 sm:mx-0 ${
                     selectedProject === index 
                       ? 'ring-2 ring-blue-500 shadow-2xl scale-[1.02]' 
                       : 'hover:shadow-xl hover:scale-[1.01]'
@@ -214,7 +214,7 @@ const ProjectsSkills = () => {
           </div>
 
           {/* Skills Panel */}
-          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[65vh] flex flex-col">
+          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col mx-4 sm:mx-0">
             <div className="animate-fade-in flex-1 flex flex-col min-h-0">
               <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
