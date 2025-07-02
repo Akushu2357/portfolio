@@ -146,13 +146,13 @@ const ProjectsSkills = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Projects Grid */}
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:hidden">
               Projects
             </h3>
-            <div className="grid gap-4 sm:gap-6 max-h-[60vh] lg:max-h-[70vh] overflow-y-auto scrollbar-hide pr-2">
+            <div className="grid gap-4 sm:gap-6 max-h-[70vh] overflow-y-auto scrollbar-hide pr-2">
               {projects.map((project, index) => (
                 <div
                   key={project.title}
@@ -164,7 +164,7 @@ const ProjectsSkills = () => {
                   onMouseEnter={() => handleProjectHover(index)}
                   onClick={() => handleProjectClick(index)}
                 >
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden rounded-t-xl">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -214,9 +214,9 @@ const ProjectsSkills = () => {
           </div>
 
           {/* Skills Panel */}
-          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8">
-            <div className="animate-fade-in">
-              <div className="flex items-center mb-4 sm:mb-6">
+          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8 h-[70vh] flex flex-col">
+            <div className="animate-fade-in flex-1 flex flex-col">
+              <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
                   <Code className="text-blue-600" size={20} />
                 </div>
@@ -228,7 +228,7 @@ const ProjectsSkills = () => {
                 </div>
               </div>
 
-              <div className="space-y-3 sm:space-y-4 max-h-[50vh] lg:max-h-[60vh] overflow-y-auto scrollbar-hide">
+              <div className="space-y-3 sm:space-y-4 flex-1 overflow-y-auto scrollbar-hide">
                 {projects[selectedProject].skills.map((skill, skillIndex) => (
                   <div
                     key={skill.name}
@@ -254,7 +254,7 @@ const ProjectsSkills = () => {
                 ))}
               </div>
 
-              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg">
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg flex-shrink-0">
                 <h4 className="font-semibold text-blue-900 mb-2 text-sm sm:text-base">
                   Project Highlights
                 </h4>
