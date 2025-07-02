@@ -152,7 +152,7 @@ const ProjectsSkills = () => {
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">
               Projects
             </h3>
-            <div className="space-y-4 sm:space-y-6 max-h-[60vh] overflow-y-auto scrollbar-hide">
+            <div className="space-y-4 sm:space-y-6 max-h-[60vh] overflow-y-auto scrollbar-hide p-2 sm:p-3 lg:p-4">
               {projects.map((project, index) => (
                 <div
                   key={project.title}
