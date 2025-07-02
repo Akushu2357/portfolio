@@ -183,8 +183,8 @@ const Experience = () => {
               <TrendingUp className="text-cyan-600" size={24} />
               <span>Career Timeline</span>
             </h3>
-            <div className="max-h-[60vh] overflow-y-auto scrollbar-hide p-2 sm:p-3 lg:p-4">
-              <div className="relative">
+            <div className="max-h-[60vh] overflow-y-auto scrollbar-hide">
+              <div className="relative pl-8 pr-4">
                 {/* Vertical Timeline Line */}
                 <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
 
@@ -193,22 +193,24 @@ const Experience = () => {
                   {experiences.map((exp, index) => (
                     <div 
                       key={exp.id} 
-                      className={`relative flex items-start cursor-pointer transition-all duration-300 ${
+                      className={`relative cursor-pointer transition-all duration-300 ${
                         selectedExperience === index ? 'scale-105' : 'hover:scale-102'
                       }`}
                       onClick={() => handleExperienceClick(index)}
                     >
-                      {/* Timeline Node */}
-                      <div className={`absolute left-6 transform -translate-x-1/2 -translate-y-1 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 rounded-full z-10 transition-all duration-300 ${
+                      {/* Timeline Node - Fixed positioning */}
+                      <div className={`absolute left-[-26px] top-4 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 rounded-full z-10 transition-all duration-300 ${
                         selectedExperience === index ? 'border-cyan-500 shadow-lg' : 'border-slate-300'
                       }`}></div>
 
-                      {/* Content Card - Alternating sides on desktop, same side on mobile */}
-                      <div className={`ml-12 sm:ml-16 flex-1 lg:ml-0 ${
-                        index % 2 === 0 ? 'lg:ml-16' : 'lg:mr-16 lg:text-right'
+                      {/* Content Card - All on right side for mobile, alternating for desktop */}
+                      <div className={`${
+                        index % 2 === 0 ? 'lg:pr-8' : 'lg:pl-8 lg:ml-8'
                       }`}>
                         <div className={`bg-slate-50 rounded-lg p-4 sm:p-6 hover:shadow-lg transition-all duration-300 ${
                           selectedExperience === index ? 'ring-2 ring-cyan-500 shadow-xl bg-cyan-50' : ''
+                        } ${
+                          index % 2 === 1 ? 'lg:text-right' : ''
                         }`}>
                           {/* Header */}
                           <div className={`flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 gap-2 ${
@@ -246,11 +248,11 @@ const Experience = () => {
                             </div>
                           </div>
 
-                          {/* Technologies */}
+                          {/* Technologies - Show all with proper wrapping */}
                           <div className={`flex flex-wrap gap-1 ${
                             index % 2 === 1 ? 'lg:justify-end' : ''
                           }`}>
-                            {exp.technologies.slice(0, 3).map((tech) => (
+                            {exp.technologies.map((tech) => (
                               <span
                                 key={tech}
                                 className="px-2 py-1 bg-slate-200 text-slate-700 text-xs rounded-full font-medium"
@@ -258,11 +260,6 @@ const Experience = () => {
                                 {tech}
                               </span>
                             ))}
-                            {exp.technologies.length > 3 && (
-                              <span className="px-2 py-1 bg-slate-200 text-slate-700 text-xs rounded-full font-medium">
-                                +{exp.technologies.length - 3} more
-                              </span>
-                            )}
                           </div>
                         </div>
                       </div>
@@ -312,14 +309,14 @@ const Experience = () => {
                   </ul>
                 </div>
 
-                {/* All Technologies */}
+                {/* All Technologies - Show all skills with proper scrolling */}
                 <div className="bg-blue-50 rounded-lg p-4">
                   <h4 className="font-semibold text-blue-900 mb-3 text-sm sm:text-base">Technologies & Skills</h4>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto scrollbar-hide">
                     {experiences[selectedExperience].technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-blue-200 text-blue-800 text-xs rounded-full font-medium"
+                        className="px-3 py-1 bg-blue-200 text-blue-800 text-xs rounded-full font-medium flex-shrink-0"
                       >
                         {tech}
                       </span>
