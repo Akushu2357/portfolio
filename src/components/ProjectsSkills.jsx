@@ -113,43 +113,43 @@ const ProjectsSkills = () => {
 
   const getCategoryColor = (category) => {
     const colors = {
-      'Frontend': 'bg-blue-100 text-blue-600 border-blue-200',
-      'Backend': 'bg-green-100 text-green-600 border-green-200',
-      'Database': 'bg-purple-100 text-purple-600 border-purple-200',
-      'Integration': 'bg-orange-100 text-orange-600 border-orange-200',
-      'Security': 'bg-red-100 text-red-600 border-red-200',
-      'UX': 'bg-pink-100 text-pink-600 border-pink-200',
-      'Real-time': 'bg-yellow-100 text-yellow-600 border-yellow-200',
-      'Features': 'bg-indigo-100 text-indigo-600 border-indigo-200',
-      'Visualization': 'bg-teal-100 text-teal-600 border-teal-200',
-      'Styling': 'bg-cyan-100 text-cyan-600 border-cyan-200',
-      'Analytics': 'bg-emerald-100 text-emerald-600 border-emerald-200',
-      'Cloud': 'bg-slate-100 text-slate-600 border-slate-200',
-      'Caching': 'bg-violet-100 text-violet-600 border-violet-200',
-      'Data': 'bg-rose-100 text-rose-600 border-rose-200',
-      'AI/ML': 'bg-amber-100 text-amber-600 border-amber-200',
-      'Design': 'bg-fuchsia-100 text-fuchsia-600 border-fuchsia-200',
-      'Mobile': 'bg-lime-100 text-lime-600 border-lime-200',
+      'Frontend': 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      'Backend': 'bg-teal-100 text-teal-700 border-teal-200',
+      'Database': 'bg-stone-100 text-stone-700 border-stone-200',
+      'Integration': 'bg-amber-100 text-amber-700 border-amber-200',
+      'Security': 'bg-red-100 text-red-700 border-red-200',
+      'UX': 'bg-rose-100 text-rose-700 border-rose-200',
+      'Real-time': 'bg-yellow-100 text-yellow-700 border-yellow-200',
+      'Features': 'bg-indigo-100 text-indigo-700 border-indigo-200',
+      'Visualization': 'bg-cyan-100 text-cyan-700 border-cyan-200',
+      'Styling': 'bg-sky-100 text-sky-700 border-sky-200',
+      'Analytics': 'bg-lime-100 text-lime-700 border-lime-200',
+      'Cloud': 'bg-slate-100 text-slate-700 border-slate-200',
+      'Caching': 'bg-violet-100 text-violet-700 border-violet-200',
+      'Data': 'bg-orange-100 text-orange-700 border-orange-200',
+      'AI/ML': 'bg-purple-100 text-purple-700 border-purple-200',
+      'Design': 'bg-pink-100 text-pink-700 border-pink-200',
+      'Mobile': 'bg-green-100 text-green-700 border-green-200',
     };
-    return colors[category] || 'bg-gray-100 text-gray-600 border-gray-200';
+    return colors[category] || 'bg-stone-100 text-stone-700 border-stone-200';
   };
 
   return (
     <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="container-max section-padding">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 mb-4 sm:mb-6">
             Projects & Skills
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-stone-600 max-w-3xl mx-auto">
             Explore my projects and discover the skills behind each one. Click or hover over any project to see the technologies and expertise involved.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Projects Grid */}
-          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">
+          <div className="bg-stone-50 rounded-xl p-4 sm:p-6 lg:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4 lg:mb-6">
               Projects
             </h3>
             <div className="space-y-4 sm:space-y-6 max-h-[60vh] overflow-y-auto scrollbar-hide p-2 sm:p-3 lg:p-4">
@@ -158,7 +158,7 @@ const ProjectsSkills = () => {
                   key={project.title}
                   className={`card overflow-hidden cursor-pointer transition-all duration-300 ${
                     selectedProject === index 
-                      ? 'ring-2 ring-blue-500 shadow-2xl scale-[1.02]' 
+                      ? 'ring-2 ring-emerald-500 shadow-2xl scale-[1.02]' 
                       : 'hover:shadow-xl hover:scale-[1.01]'
                   }`}
                   onMouseEnter={() => handleProjectHover(index)}
@@ -177,31 +177,31 @@ const ProjectsSkills = () => {
                           className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <ExternalLink size={16} className="text-gray-700" />
+                          <ExternalLink size={16} className="text-stone-700" />
                         </a>
                         <a
                           href={project.githubUrl}
                           className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <Github size={16} className="text-gray-700" />
+                          <Github size={16} className="text-stone-700" />
                         </a>
                       </div>
                     </div>
                   </div>
                   
                   <div className="p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                    <h3 className="text-lg sm:text-xl font-bold text-stone-900 mb-2 sm:mb-3">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-2">
+                    <p className="text-stone-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-1 sm:gap-2">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-1 bg-blue-100 text-blue-600 text-xs sm:text-sm rounded-full font-medium"
+                          className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs sm:text-sm rounded-full font-medium"
                         >
                           {tech}
                         </span>
@@ -214,17 +214,17 @@ const ProjectsSkills = () => {
           </div>
 
           {/* Skills Panel */}
-          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
+          <div className="bg-stone-50 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
             <div className="animate-fade-in flex-1 flex flex-col min-h-0">
               <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
-                  <Code className="text-blue-600" size={20} />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                  <Code className="text-emerald-600" size={20} />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-stone-900 truncate">
                     {projects[selectedProject].title}
                   </h3>
-                  <p className="text-sm sm:text-base text-gray-600">Skills & Technologies</p>
+                  <p className="text-sm sm:text-base text-stone-600">Skills & Technologies</p>
                 </div>
               </div>
 
@@ -236,12 +236,12 @@ const ProjectsSkills = () => {
                     style={{ animationDelay: `${skillIndex * 0.1}s` }}
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="text-gray-600 flex-shrink-0">
+                      <div className="text-stone-600 flex-shrink-0">
                         {skill.icon}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                          <span className="font-semibold text-gray-900 text-sm sm:text-base truncate">
+                          <span className="font-semibold text-stone-900 text-sm sm:text-base truncate">
                             {skill.name}
                           </span>
                           <div className={`inline-block px-2 py-1 text-xs rounded-full border flex-shrink-0 ${getCategoryColor(skill.category)}`}>
@@ -254,11 +254,11 @@ const ProjectsSkills = () => {
                 ))}
               </div>
 
-              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg flex-shrink-0">
-                <h4 className="font-semibold text-blue-900 mb-2 text-sm sm:text-base">
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg flex-shrink-0">
+                <h4 className="font-semibold text-emerald-900 mb-2 text-sm sm:text-base">
                   Project Highlights
                 </h4>
-                <p className="text-blue-800 text-xs sm:text-sm leading-relaxed">
+                <p className="text-emerald-800 text-xs sm:text-sm leading-relaxed">
                   {projects[selectedProject].description}
                 </p>
               </div>

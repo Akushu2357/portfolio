@@ -53,13 +53,13 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-stone-50">
       <div className="container-max section-padding">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-stone-600 max-w-3xl mx-auto">
             Ready to start your next project? Let's discuss how we can work
             together to bring your ideas to life.
           </p>
@@ -67,7 +67,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="animate-slide-up">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">
+            <h3 className="text-2xl font-bold text-stone-900 mb-8">
               Let's Start a Conversation
             </h3>
             
@@ -78,24 +78,24 @@ const Contact = () => {
                   href={info.link}
                   className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
                 >
-                  <div className="text-blue-600 mr-4">
+                  <div className="text-emerald-600 mr-4">
                     {info.icon}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">
+                    <h4 className="font-semibold text-stone-900">
                       {info.title}
                     </h4>
-                    <p className="text-gray-600">{info.value}</p>
+                    <p className="text-stone-600">{info.value}</p>
                   </div>
                 </a>
               ))}
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-bold text-gray-900 mb-4">
+              <h4 className="font-bold text-stone-900 mb-4">
                 Why Work With Me?
               </h4>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-stone-600">
                 <li>✓ 5+ years of professional experience</li>
                 <li>✓ Fast turnaround and reliable communication</li>
                 <li>✓ Modern, scalable solutions</li>
@@ -106,13 +106,13 @@ const Contact = () => {
 
           <div className="animate-slide-up">
             <form onSubmit={handleSubmit} className="card p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              <h3 className="text-2xl font-bold text-stone-900 mb-6">
                 Send a Message
               </h3>
               
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-2">
                     Name
                   </label>
                   <input
@@ -122,13 +122,13 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
                     placeholder="Your name"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-2">
                     Message
                   </label>
                   <textarea
@@ -138,7 +138,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </div>

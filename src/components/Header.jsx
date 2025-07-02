@@ -42,7 +42,7 @@ const Header = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300"
+                className="text-stone-700 hover:text-emerald-600 font-medium transition-colors duration-300"
               >
                 {item.label}
               </a>
@@ -65,7 +65,7 @@ const Header = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-300"
+                className="block px-4 py-2 text-stone-700 hover:text-emerald-600 hover:bg-stone-50 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}

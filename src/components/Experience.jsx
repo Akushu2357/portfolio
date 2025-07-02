@@ -94,133 +94,179 @@ const Experience = () => {
   const getTypeColor = (type) => {
     switch (type) {
       case 'work':
-        return 'bg-blue-100 text-blue-600 border-blue-200';
+        return 'bg-emerald-100 text-emerald-700 border-emerald-200';
       case 'education':
-        return 'bg-green-100 text-green-600 border-green-200';
+        return 'bg-amber-100 text-amber-700 border-amber-200';
       default:
-        return 'bg-gray-100 text-gray-600 border-gray-200';
+        return 'bg-stone-100 text-stone-700 border-stone-200';
     }
   };
 
   return (
-    <section id="experience" className="min-h-screen bg-gray-50 flex flex-col">
-      <div className="container-max section-padding flex-1 flex flex-col py-8 sm:py-12 lg:py-16">
-        {/* Header - Fixed height */}
-        <div className="text-center mb-8 sm:mb-12 flex-shrink-0">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+    <section id="experience" className="py-12 sm:py-16 lg:py-20 bg-stone-50">
+      <div className="container-max section-padding">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 mb-4 sm:mb-6">
             Experience & Education
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-stone-600 max-w-3xl mx-auto">
             My journey through education and professional development, showcasing the experiences that shaped my skills and expertise.
           </p>
         </div>
 
-        {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
-          <div className="max-w-4xl mx-auto pb-8">
-            <div className="relative">
-              {/* Vertical Timeline Line */}
-              <div className="absolute left-6 sm:left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+          {/* Timeline Section */}
+          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4 lg:mb-6">
+              Career Timeline
+            </h3>
+            <div className="max-h-[60vh] overflow-y-auto scrollbar-hide p-2 sm:p-3 lg:p-4">
+              <div className="relative">
+                {/* Vertical Timeline Line */}
+                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 to-amber-500"></div>
 
-              {/* Timeline Items */}
-              <div className="space-y-8 sm:space-y-12">
-                {experiences.map((exp, index) => (
-                  <div
-                    key={exp.id}
-                    className={`relative flex items-start ${
-                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                    }`}
-                  >
-                    {/* Timeline Node */}
-                    <div className="absolute left-6 sm:left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-y-1 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 border-blue-500 rounded-full z-10"></div>
+                {/* Timeline Items */}
+                <div className="space-y-6 sm:space-y-8">
+                  {experiences.map((exp, index) => (
+                    <div key={exp.id} className="relative flex items-start">
+                      {/* Timeline Node */}
+                      <div className="absolute left-6 transform -translate-x-1/2 -translate-y-1 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 border-emerald-500 rounded-full z-10"></div>
 
-                    {/* Content Card */}
-                    <div className={`ml-12 sm:ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-4 lg:pr-8' : 'md:pl-4 lg:pl-8'}`}>
-                      <div className="card p-4 sm:p-6 animate-slide-up" style={{ animationDelay: `${index * 0.2}s` }}>
-                        {/* Header */}
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-2">
-                          <div className="flex items-center space-x-2 sm:space-x-3">
-                            <div className={`p-1.5 sm:p-2 rounded-lg ${exp.type === 'work' ? 'bg-blue-100 text-blue-600' : 'bg-green-100 text-green-600'}`}>
-                              {getIcon(exp.type)}
+                      {/* Content Card */}
+                      <div className="ml-12 sm:ml-16 flex-1">
+                        <div className="bg-stone-50 rounded-lg p-4 sm:p-6 hover:shadow-lg transition-all duration-300">
+                          {/* Header */}
+                          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 gap-2">
+                            <div className="flex items-center space-x-2">
+                              <div className={`p-1.5 rounded-lg ${exp.type === 'work' ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}`}>
+                                {getIcon(exp.type)}
+                              </div>
+                              <div className={`px-2 py-1 text-xs rounded-full border font-medium ${getTypeColor(exp.type)}`}>
+                                {exp.type === 'work' ? 'Work' : 'Education'}
+                              </div>
                             </div>
-                            <div className={`px-2 sm:px-3 py-1 text-xs rounded-full border font-medium ${getTypeColor(exp.type)}`}>
-                              {exp.type === 'work' ? 'Work' : 'Education'}
-                            </div>
-                          </div>
-                          <div className="text-left sm:text-right text-sm text-gray-500">
-                            <div className="flex items-center space-x-1">
-                              <Calendar size={14} />
+                            <div className="text-xs text-stone-500 flex items-center space-x-1">
+                              <Calendar size={12} />
                               <span>{exp.period}</span>
                             </div>
                           </div>
-                        </div>
 
-                        {/* Title and Company */}
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                          {exp.title}
-                        </h3>
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-4 gap-1 sm:gap-0">
-                          <h4 className="text-base sm:text-lg font-semibold text-blue-600">
-                            {exp.company}
+                          {/* Title and Company */}
+                          <h4 className="text-base sm:text-lg font-bold text-stone-900 mb-1">
+                            {exp.title}
                           </h4>
-                          <div className="flex items-center space-x-1 text-gray-500">
-                            <MapPin size={14} />
-                            <span className="text-sm">{exp.location}</span>
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-3 gap-1">
+                            <h5 className="text-sm sm:text-base font-semibold text-emerald-600">
+                              {exp.company}
+                            </h5>
+                            <div className="flex items-center space-x-1 text-stone-500">
+                              <MapPin size={12} />
+                              <span className="text-xs">{exp.location}</span>
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Description */}
-                        <p className="text-gray-600 mb-4 leading-relaxed text-sm sm:text-base">
-                          {exp.description}
-                        </p>
-
-                        {/* Achievements */}
-                        <div className="mb-4">
-                          <h5 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Key Achievements:</h5>
-                          <ul className="space-y-1">
-                            {exp.achievements.map((achievement, achIndex) => (
-                              <li key={achIndex} className="text-xs sm:text-sm text-gray-600 flex items-start space-x-2">
-                                <span className="text-green-500 mt-0.5 sm:mt-1 flex-shrink-0">✓</span>
-                                <span>{achievement}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Technologies */}
-                        <div>
-                          <h5 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Technologies:</h5>
-                          <div className="flex flex-wrap gap-1 sm:gap-2">
-                            {exp.technologies.map((tech) => (
+                          {/* Technologies */}
+                          <div className="flex flex-wrap gap-1">
+                            {exp.technologies.slice(0, 3).map((tech) => (
                               <span
                                 key={tech}
-                                className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium"
+                                className="px-2 py-1 bg-stone-200 text-stone-700 text-xs rounded-full font-medium"
                               >
                                 {tech}
                               </span>
                             ))}
+                            {exp.technologies.length > 3 && (
+                              <span className="px-2 py-1 bg-stone-200 text-stone-700 text-xs rounded-full font-medium">
+                                +{exp.technologies.length - 3} more
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    {/* Empty space for alternating layout on desktop */}
-                    <div className="hidden md:block md:w-1/2"></div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Call to Action */}
-            <div className="text-center mt-12 sm:mt-16">
-              <div className="card p-6 sm:p-8 max-w-2xl mx-auto">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                  Ready to Work Together?
-                </h3>
-                <p className="text-gray-600 mb-6 text-sm sm:text-base">
-                  I'm always excited to take on new challenges and collaborate on innovative projects.
+          {/* Details Panel */}
+          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
+            <div className="animate-fade-in flex-1 flex flex-col min-h-0">
+              <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                  <Briefcase className="text-emerald-600" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-stone-900">
+                    {experiences[0].title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-stone-600">Current Position</p>
+                </div>
+              </div>
+
+              <div className="space-y-4 sm:space-y-6 flex-1 overflow-y-auto scrollbar-hide min-h-0">
+                {/* Description */}
+                <div className="bg-stone-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-stone-900 mb-2 text-sm sm:text-base">Description</h4>
+                  <p className="text-stone-700 text-xs sm:text-sm leading-relaxed">
+                    {experiences[0].description}
+                  </p>
+                </div>
+
+                {/* Achievements */}
+                <div className="bg-emerald-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-emerald-900 mb-3 text-sm sm:text-base">Key Achievements</h4>
+                  <ul className="space-y-2">
+                    {experiences[0].achievements.map((achievement, index) => (
+                      <li key={index} className="text-xs sm:text-sm text-emerald-800 flex items-start space-x-2">
+                        <span className="text-emerald-500 mt-0.5 flex-shrink-0">✓</span>
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* All Technologies */}
+                <div className="bg-amber-50 rounded-lg p-4">
+                  <h4 className="font-semibold text-amber-900 mb-3 text-sm sm:text-base">Technologies & Skills</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {experiences[0].technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-amber-200 text-amber-800 text-xs rounded-full font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Career Stats */}
+                <div className="bg-stone-100 rounded-lg p-4">
+                  <h4 className="font-semibold text-stone-900 mb-3 text-sm sm:text-base">Career Overview</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center">
+                      <div className="text-lg sm:text-xl font-bold text-emerald-600">5+</div>
+                      <div className="text-xs text-stone-600">Years Experience</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg sm:text-xl font-bold text-amber-600">20+</div>
+                      <div className="text-xs text-stone-600">Projects Completed</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Call to Action */}
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-emerald-50 to-amber-50 rounded-lg flex-shrink-0">
+                <h4 className="font-semibold text-stone-900 mb-2 text-sm sm:text-base">
+                  Ready to Collaborate?
+                </h4>
+                <p className="text-stone-700 text-xs sm:text-sm mb-3">
+                  Let's discuss how my experience can help bring your project to life.
                 </p>
-                <a href="#contact" className="btn-primary">
+                <a href="#contact" className="btn-primary text-xs sm:text-sm px-4 py-2">
                   Get In Touch
                 </a>
               </div>
