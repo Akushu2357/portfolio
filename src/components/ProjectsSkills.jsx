@@ -13,12 +13,12 @@ const ProjectsSkills = () => {
       liveUrl: '#',
       githubUrl: '#',
       skills: [
-        { name: 'React', level: 95, category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Node.js', level: 85, category: 'Backend', icon: <Database size={20} /> },
-        { name: 'MongoDB', level: 78, category: 'Database', icon: <Database size={20} /> },
-        { name: 'Stripe API', level: 82, category: 'Integration', icon: <Tool size={20} /> },
-        { name: 'JWT Auth', level: 88, category: 'Security', icon: <Tool size={20} /> },
-        { name: 'Responsive Design', level: 92, category: 'Frontend', icon: <Palette size={20} /> },
+        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
+        { name: 'Node.js', category: 'Backend', icon: <Database size={20} /> },
+        { name: 'MongoDB', category: 'Database', icon: <Database size={20} /> },
+        { name: 'Stripe API', category: 'Integration', icon: <Tool size={20} /> },
+        { name: 'JWT Auth', category: 'Security', icon: <Tool size={20} /> },
+        { name: 'Responsive Design', category: 'Frontend', icon: <Palette size={20} /> },
       ]
     },
     {
@@ -29,12 +29,12 @@ const ProjectsSkills = () => {
       liveUrl: '#',
       githubUrl: '#',
       skills: [
-        { name: 'React', level: 95, category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'TypeScript', level: 90, category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Socket.io', level: 85, category: 'Real-time', icon: <Tool size={20} /> },
-        { name: 'PostgreSQL', level: 82, category: 'Database', icon: <Database size={20} /> },
-        { name: 'Drag & Drop', level: 88, category: 'UX', icon: <Palette size={20} /> },
-        { name: 'Team Collaboration', level: 85, category: 'Features', icon: <Tool size={20} /> },
+        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
+        { name: 'TypeScript', category: 'Frontend', icon: <Code size={20} /> },
+        { name: 'Socket.io', category: 'Real-time', icon: <Tool size={20} /> },
+        { name: 'PostgreSQL', category: 'Database', icon: <Database size={20} /> },
+        { name: 'Drag & Drop', category: 'UX', icon: <Palette size={20} /> },
+        { name: 'Team Collaboration', category: 'Features', icon: <Tool size={20} /> },
       ]
     },
     {
@@ -45,12 +45,12 @@ const ProjectsSkills = () => {
       liveUrl: '#',
       githubUrl: '#',
       skills: [
-        { name: 'React', level: 95, category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'API Integration', level: 90, category: 'Backend', icon: <Tool size={20} /> },
-        { name: 'Chart.js', level: 85, category: 'Visualization', icon: <Palette size={20} /> },
-        { name: 'Tailwind CSS', level: 92, category: 'Styling', icon: <Palette size={20} /> },
-        { name: 'Geolocation', level: 80, category: 'Features', icon: <Tool size={20} /> },
-        { name: 'Data Visualization', level: 88, category: 'Analytics', icon: <Palette size={20} /> },
+        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
+        { name: 'API Integration', category: 'Backend', icon: <Tool size={20} /> },
+        { name: 'Chart.js', category: 'Visualization', icon: <Palette size={20} /> },
+        { name: 'Tailwind CSS', category: 'Styling', icon: <Palette size={20} /> },
+        { name: 'Geolocation', category: 'Features', icon: <Tool size={20} /> },
+        { name: 'Data Visualization', category: 'Analytics', icon: <Palette size={20} /> },
       ]
     },
     {
@@ -61,12 +61,12 @@ const ProjectsSkills = () => {
       liveUrl: '#',
       githubUrl: '#',
       skills: [
-        { name: 'Next.js', level: 88, category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Python', level: 80, category: 'Backend', icon: <Database size={20} /> },
-        { name: 'Redis', level: 75, category: 'Caching', icon: <Database size={20} /> },
-        { name: 'AWS', level: 70, category: 'Cloud', icon: <Tool size={20} /> },
-        { name: 'Social APIs', level: 85, category: 'Integration', icon: <Tool size={20} /> },
-        { name: 'Analytics', level: 82, category: 'Data', icon: <Palette size={20} /> },
+        { name: 'Next.js', category: 'Frontend', icon: <Code size={20} /> },
+        { name: 'Python', category: 'Backend', icon: <Database size={20} /> },
+        { name: 'Redis', category: 'Caching', icon: <Database size={20} /> },
+        { name: 'AWS', category: 'Cloud', icon: <Tool size={20} /> },
+        { name: 'Social APIs', category: 'Integration', icon: <Tool size={20} /> },
+        { name: 'Analytics', category: 'Data', icon: <Palette size={20} /> },
       ]
     },
     {
@@ -77,12 +77,12 @@ const ProjectsSkills = () => {
       liveUrl: '#',
       githubUrl: '#',
       skills: [
-        { name: 'React', level: 95, category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Python', level: 80, category: 'Backend', icon: <Database size={20} /> },
-        { name: 'OpenAI API', level: 85, category: 'AI/ML', icon: <Tool size={20} /> },
-        { name: 'WebSocket', level: 88, category: 'Real-time', icon: <Tool size={20} /> },
-        { name: 'NLP', level: 75, category: 'AI/ML', icon: <Tool size={20} /> },
-        { name: 'Chat UI/UX', level: 90, category: 'Design', icon: <Palette size={20} /> },
+        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
+        { name: 'Python', category: 'Backend', icon: <Database size={20} /> },
+        { name: 'OpenAI API', category: 'AI/ML', icon: <Tool size={20} /> },
+        { name: 'WebSocket', category: 'Real-time', icon: <Tool size={20} /> },
+        { name: 'NLP', category: 'AI/ML', icon: <Tool size={20} /> },
+        { name: 'Chat UI/UX', category: 'Design', icon: <Palette size={20} /> },
       ]
     },
     {
@@ -93,12 +93,12 @@ const ProjectsSkills = () => {
       liveUrl: '#',
       githubUrl: '#',
       skills: [
-        { name: 'React Native', level: 85, category: 'Mobile', icon: <Code size={20} /> },
-        { name: 'Firebase', level: 88, category: 'Backend', icon: <Database size={20} /> },
-        { name: 'Chart.js', level: 85, category: 'Visualization', icon: <Palette size={20} /> },
-        { name: 'Health APIs', level: 80, category: 'Integration', icon: <Tool size={20} /> },
-        { name: 'Mobile UX', level: 90, category: 'Design', icon: <Palette size={20} /> },
-        { name: 'Data Analytics', level: 82, category: 'Analytics', icon: <Tool size={20} /> },
+        { name: 'React Native', category: 'Mobile', icon: <Code size={20} /> },
+        { name: 'Firebase', category: 'Backend', icon: <Database size={20} /> },
+        { name: 'Chart.js', category: 'Visualization', icon: <Palette size={20} /> },
+        { name: 'Health APIs', category: 'Integration', icon: <Tool size={20} /> },
+        { name: 'Mobile UX', category: 'Design', icon: <Palette size={20} /> },
+        { name: 'Data Analytics', category: 'Analytics', icon: <Tool size={20} /> },
       ]
     },
   ];
@@ -135,145 +135,132 @@ const ProjectsSkills = () => {
   };
 
   return (
-    <section id="projects" className="min-h-screen bg-white py-8 sm:py-12 lg:py-16">
-      <div className="container-max section-padding h-full flex flex-col">
-        <div className="text-center mb-8 sm:mb-12 flex-shrink-0">
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-white">
+      <div className="container-max section-padding">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             Projects & Skills
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
             Explore my projects and discover the skills behind each one. Click or hover over any project to see the technologies and expertise involved.
           </p>
         </div>
 
-        <div className="flex-1 overflow-hidden">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 h-full">
-            {/* Projects Grid */}
-            <div className="overflow-y-auto scrollbar-hide max-h-[70vh] lg:max-h-full">
-              <div className="grid gap-4 sm:gap-6 pr-2 lg:pr-4">
-                {projects.map((project, index) => (
-                  <div
-                    key={project.title}
-                    className={`card overflow-hidden cursor-pointer transition-all duration-300 ${
-                      selectedProject === index 
-                        ? 'ring-2 ring-blue-500 shadow-2xl scale-[1.02]' 
-                        : 'hover:shadow-xl hover:scale-[1.01]'
-                    }`}
-                    onMouseEnter={() => handleProjectHover(index)}
-                    onClick={() => handleProjectClick(index)}
-                  >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-24 sm:h-32 lg:h-40 object-cover transition-transform duration-300 hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
-                        <div className="flex space-x-4">
-                          <a
-                            href={project.liveUrl}
-                            className="p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <ExternalLink size={16} className="text-gray-700" />
-                          </a>
-                          <a
-                            href={project.githubUrl}
-                            className="p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <Github size={16} className="text-gray-700" />
-                          </a>
-                        </div>
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+          {/* Projects Grid */}
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:hidden">
+              Projects
+            </h3>
+            <div className="grid gap-4 sm:gap-6 max-h-[60vh] lg:max-h-[70vh] overflow-y-auto scrollbar-hide pr-2">
+              {projects.map((project, index) => (
+                <div
+                  key={project.title}
+                  className={`card overflow-hidden cursor-pointer transition-all duration-300 ${
+                    selectedProject === index 
+                      ? 'ring-2 ring-blue-500 shadow-2xl scale-[1.02]' 
+                      : 'hover:shadow-xl hover:scale-[1.01]'
+                  }`}
+                  onMouseEnter={() => handleProjectHover(index)}
+                  onClick={() => handleProjectClick(index)}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-32 sm:h-40 lg:h-48 object-cover transition-transform duration-300 hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+                      <div className="flex space-x-4">
+                        <a
+                          href={project.liveUrl}
+                          className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <ExternalLink size={16} className="text-gray-700" />
+                        </a>
+                        <a
+                          href={project.githubUrl}
+                          className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Github size={16} className="text-gray-700" />
+                        </a>
                       </div>
                     </div>
-                    
-                    <div className="p-3 sm:p-4 lg:p-6">
-                      <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-600 text-xs sm:text-sm lg:text-base mb-3 leading-relaxed line-clamp-2">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1 sm:gap-2">
-                        {project.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded-full font-medium"
-                          >
-                            {tech}
+                  </div>
+                  
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-2">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1 sm:gap-2">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-1 bg-blue-100 text-blue-600 text-xs sm:text-sm rounded-full font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Skills Panel */}
+          <div className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8">
+            <div className="animate-fade-in">
+              <div className="flex items-center mb-4 sm:mb-6">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                  <Code className="text-blue-600" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">
+                    {projects[selectedProject].title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600">Skills & Technologies</p>
+                </div>
+              </div>
+
+              <div className="space-y-3 sm:space-y-4 max-h-[50vh] lg:max-h-[60vh] overflow-y-auto scrollbar-hide">
+                {projects[selectedProject].skills.map((skill, skillIndex) => (
+                  <div
+                    key={skill.name}
+                    className="bg-white rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300"
+                    style={{ animationDelay: `${skillIndex * 0.1}s` }}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="text-gray-600 flex-shrink-0">
+                        {skill.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                          <span className="font-semibold text-gray-900 text-sm sm:text-base truncate">
+                            {skill.name}
                           </span>
-                        ))}
+                          <div className={`inline-block px-2 py-1 text-xs rounded-full border flex-shrink-0 ${getCategoryColor(skill.category)}`}>
+                            {skill.category}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* Skills Panel */}
-            <div className="bg-gray-50 rounded-xl p-4 sm:p-6 overflow-y-auto scrollbar-hide max-h-[70vh] lg:max-h-full">
-              <div className="animate-fade-in">
-                <div className="flex items-center mb-4 sm:mb-6">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
-                    <Code className="text-blue-600" size={20} />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">
-                      {projects[selectedProject].title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600">Skills & Technologies</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 sm:space-y-4">
-                  {projects[selectedProject].skills.map((skill, skillIndex) => (
-                    <div
-                      key={skill.name}
-                      className="bg-white rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300"
-                      style={{ animationDelay: `${skillIndex * 0.1}s` }}
-                    >
-                      <div className="flex items-center justify-between mb-2 sm:mb-3">
-                        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
-                          <div className="text-gray-600 flex-shrink-0">
-                            {skill.icon}
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                              <span className="font-semibold text-gray-900 text-sm sm:text-base truncate">
-                                {skill.name}
-                              </span>
-                              <div className={`inline-block px-2 py-1 text-xs rounded-full border flex-shrink-0 ${getCategoryColor(skill.category)}`}>
-                                {skill.category}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <span className="text-xs sm:text-sm font-medium text-gray-500 flex-shrink-0 ml-2">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
-                          style={{
-                            width: `${skill.level}%`,
-                            animationDelay: `${skillIndex * 0.1}s`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-semibold text-blue-900 mb-2 text-sm sm:text-base">
-                    Project Highlights
-                  </h4>
-                  <p className="text-blue-800 text-xs sm:text-sm leading-relaxed">
-                    {projects[selectedProject].description}
-                  </p>
-                </div>
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2 text-sm sm:text-base">
+                  Project Highlights
+                </h4>
+                <p className="text-blue-800 text-xs sm:text-sm leading-relaxed">
+                  {projects[selectedProject].description}
+                </p>
               </div>
             </div>
           </div>
