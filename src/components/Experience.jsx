@@ -176,16 +176,16 @@ const Experience = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-          {/* Timeline Section */}
-          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 lg:mb-6 flex items-center space-x-2">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+          {/* Timeline Section - Fixed Height */}
+          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 h-[70vh] flex flex-col">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 lg:mb-6 flex items-center space-x-2 flex-shrink-0">
               <TrendingUp className="text-cyan-600" size={24} />
               <span>Career Timeline</span>
             </h3>
-            <div className="max-h-[60vh] overflow-y-auto scrollbar-hide">
+            <div className="flex-1 overflow-y-auto scrollbar-hide">
               {/* Timeline Container with proper padding for circles */}
-              <div className="relative pl-12 pr-4 py-4">
+              <div className="relative pl-12 pr-4 py-4 h-full">
                 {/* Vertical Timeline Line - positioned to align with circles */}
                 <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
 
@@ -271,8 +271,8 @@ const Experience = () => {
             </div>
           </div>
 
-          {/* Details Panel */}
-          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
+          {/* Details Panel - Fixed Height to Match Timeline */}
+          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 h-[70vh] flex flex-col">
             <div className="animate-fade-in flex-1 flex flex-col min-h-0">
               <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
