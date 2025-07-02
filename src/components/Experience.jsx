@@ -185,9 +185,9 @@ const Experience = () => {
             </h3>
             <div className="max-h-[60vh] overflow-y-auto scrollbar-hide">
               {/* Timeline Container with proper padding for circles */}
-              <div className="relative pl-12 pr-4">
+              <div className="relative pl-8 pr-4">
                 {/* Vertical Timeline Line - positioned to align with circles */}
-                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
+                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
 
                 {/* Timeline Items */}
                 <div className="space-y-6 sm:space-y-8">
@@ -195,13 +195,13 @@ const Experience = () => {
                     <div 
                       key={exp.id} 
                       className={`relative cursor-pointer transition-all duration-300 ${
-                        selectedExperience === index ? 'scale-105' : 'hover:scale-102'
+                        selectedExperience === index ? '' : 'hover:scale-102'
                       }`}
                       onClick={() => handleExperienceClick(index)}
                     >
                       {/* Timeline Node - Properly positioned within container */}
-                      <div className={`absolute left-[-30px] top-4 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 rounded-full z-10 transition-all duration-300 ${
-                        selectedExperience === index ? 'border-cyan-500 shadow-lg scale-125' : 'border-slate-300'
+                      <div className={`absolute left-[-20px] top-4 w-3 h-3 sm:w-4 sm:h-4 bg-white border-2 sm:border-4 rounded-full z-10 transition-all duration-300 ${
+                        selectedExperience === index ? 'border-cyan-500 bg-cyan-500 shadow-lg' : 'border-slate-300'
                       }`}></div>
 
                       {/* Content Card - All on right side for mobile, alternating for desktop */}
@@ -315,7 +315,7 @@ const Experience = () => {
                   <h4 className="font-semibold text-blue-900 mb-3 text-sm sm:text-base">Technologies & Skills</h4>
                   <div className="space-y-2">
                     {/* Show all technologies in a scrollable container */}
-                    <div className="max-h-40 overflow-y-auto scrollbar-hide">
+                    <div className="max-h-32 overflow-y-auto scrollbar-hide">
                       <div className="flex flex-wrap gap-2">
                         {experiences[selectedExperience].technologies.map((tech) => (
                           <span
