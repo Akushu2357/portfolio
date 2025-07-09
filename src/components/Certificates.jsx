@@ -409,90 +409,92 @@ const Certificates = () => {
         </div>
 
         {/* Certificates Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredCertificates.map((cert, index) => (
-            <div 
-              key={cert.id} 
-              className="card overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Certificate Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  className="w-full h-32 object-cover"
-                />
-                <div className="absolute top-3 right-3">
-                  <div className={`px-2 py-1 text-xs rounded-full border font-medium ${getLevelColor(cert.level)}`}>
-                    {cert.level}
-                  </div>
-                </div>
-              </div>
-
-              {/* Certificate Content */}
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-slate-900 mb-1 text-sm leading-tight line-clamp-2">
-                      {cert.title}
-                    </h3>
-                    <p className="text-cyan-600 font-semibold text-sm">
-                      {cert.issuer}
-                    </p>
-                  </div>
-                  <a
-                    href={cert.verifyUrl}
-                    className="ml-2 p-1.5 text-slate-400 hover:text-cyan-600 transition-colors duration-300 flex-shrink-0"
-                    title="Verify Certificate"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                </div>
-
-                <p className="text-slate-600 text-xs mb-4 leading-relaxed line-clamp-3">
-                  {cert.description}
-                </p>
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center space-x-1 text-slate-500">
-                      <Calendar size={12} />
-                      <span className="text-xs">Issued: {cert.date}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="text-xs text-slate-400 truncate">
-                    ID: {cert.credentialId}
-                  </div>
-                  
-                  {/* Skills Tags */}
-                  <div className="space-y-2">
-                    <div className="flex flex-wrap gap-1">
-                      {cert.skills.slice(0, 4).map((skill) => (
-                        <span
-                          key={skill}
-                          className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${
-                            selectedSkillFilters.includes(skill)
-                              ? 'bg-cyan-600 text-white'
-                              : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                          }`}
-                          onClick={() => handleSkillToggle(skill)}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                      {cert.skills.length > 4 && (
-                        <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full font-medium">
-                          +{cert.skills.length - 4}
-                        </span>
-                      )}
+        <div className="overflow-x-auto pb-4">
+          <div className="flex space-x-6 w-max">
+            {filteredCertificates.map((cert, index) => (
+              <div 
+                key={cert.id} 
+                className="card overflow-hidden animate-slide-up flex-shrink-0 w-80"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Certificate Image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full h-32 object-cover"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <div className={`px-2 py-1 text-xs rounded-full border font-medium ${getLevelColor(cert.level)}`}>
+                      {cert.level}
                     </div>
                   </div>
                 </div>
+
+                {/* Certificate Content */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-slate-900 mb-1 text-sm leading-tight line-clamp-2">
+                        {cert.title}
+                      </h3>
+                      <p className="text-cyan-600 font-semibold text-sm">
+                        {cert.issuer}
+                      </p>
+                    </div>
+                    <a
+                      href={cert.verifyUrl}
+                      className="ml-2 p-1.5 text-slate-400 hover:text-cyan-600 transition-colors duration-300 flex-shrink-0"
+                      title="Verify Certificate"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                  </div>
+
+                  <p className="text-slate-600 text-xs mb-4 leading-relaxed line-clamp-3">
+                    {cert.description}
+                  </p>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center space-x-1 text-slate-500">
+                        <Calendar size={12} />
+                        <span className="text-xs">Issued: {cert.date}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-slate-400 truncate">
+                      ID: {cert.credentialId}
+                    </div>
+                    
+                    {/* Skills Tags */}
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap gap-1">
+                        {cert.skills.slice(0, 4).map((skill) => (
+                          <span
+                            key={skill}
+                            className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${
+                              selectedSkillFilters.includes(skill)
+                                ? 'bg-cyan-600 text-white'
+                                : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                            }`}
+                            onClick={() => handleSkillToggle(skill)}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {cert.skills.length > 4 && (
+                          <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full font-medium">
+                            +{cert.skills.length - 4}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* No Results Message */}
