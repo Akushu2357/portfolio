@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Award, ExternalLink, Calendar, Filter, X, Search, Tag } from 'lucide-react';
 
 const Certificates = () => {
+  const scrollContainerRef = useRef(null);
   const [selectedSkillFilters, setSelectedSkillFilters] = useState([]);
   const [selectedLevelFilter, setSelectedLevelFilter] = useState('all');
   const [selectedIssuerFilter, setSelectedIssuerFilter] = useState('all');
@@ -9,6 +11,8 @@ const Certificates = () => {
   const [showSkillsFilter, setShowSkillsFilter] = useState(false);
   const [showLevelFilter, setShowLevelFilter] = useState(false);
   const [showIssuerFilter, setShowIssuerFilter] = useState(false);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [scrollDirection, setScrollDirection] = useState(1); // 1 for right, -1 for left
 
   const certificates = [
     {
@@ -171,6 +175,54 @@ const Certificates = () => {
         return 'bg-slate-100 text-slate-700 border-slate-200';
     }
   };
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!isAutoScrolling || !scrollContainerRef.current) return;
+
+    const scrollContainer = scrollContainerRef.current;
+    const scrollSpeed = 1; // pixels per frame
+    const scrollInterval = 50; // milliseconds
+
+    const autoScroll = () => {
+      if (!scrollContainer) return;
+
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+      const maxScroll = scrollWidth - clientWidth;
+
+      // Check if we've reached the end or beginning
+      if (scrollDirection === 1 && scrollLeft >= maxScroll - 10) {
+        setScrollDirection(-1); // Change direction to left
+      } else if (scrollDirection === -1 && scrollLeft <= 10) {
+        setScrollDirection(1); // Change direction to right
+      }
+
+      // Scroll in the current direction
+      scrollContainer.scrollLeft += scrollSpeed * scrollDirection;
+    };
+
+    const intervalId = setInterval(autoScroll, scrollInterval);
+
+    return () => clearInterval(intervalId);
+  }, [isAutoScrolling, scrollDirection, filteredCertificates]);
+
+  // Pause auto-scroll on hover
+  const handleMouseEnter = () => {
+    setIsAutoScrolling(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoScrolling(true);
+  };
+
+  // Reset auto-scroll when filters change
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = 0;
+      setScrollDirection(1);
+      setIsAutoScrolling(true);
+    }
+  }, [filteredCertificates]);
 
   return (
     <section id="certificates" className="py-12 sm:py-16 lg:py-20 bg-white">
@@ -409,12 +461,18 @@ const Certificates = () => {
         </div>
 
         {/* Certificates Grid */}
-        <div className="overflow-x-auto pb-4">
+        <div 
+          ref={scrollContainerRef}
+          className="overflow-x-auto pb-4 scrollbar-hide"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{ scrollBehavior: 'auto' }}
+        >
           <div className="flex space-x-6 w-max">
             {filteredCertificates.map((cert, index) => (
               <div 
                 key={cert.id} 
-                className="card overflow-hidden animate-slide-up flex-shrink-0 w-80"
+                className="card overflow-hidden animate-slide-up flex-shrink-0 w-80 hover:scale-105 transition-transform duration-300"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Certificate Image */}
@@ -494,6 +552,26 @@ const Certificates = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Auto-scroll Controls */}
+        <div className="flex justify-center mt-6">
+          <div className="flex items-center space-x-4 bg-slate-100 rounded-lg p-2">
+            <button
+              onClick={() => setIsAutoScrolling(!isAutoScrolling)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                isAutoScrolling
+                  ? 'bg-cyan-600 text-white shadow-md'
+                  : 'bg-white text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              {isAutoScrolling ? 'Pause Auto-scroll' : 'Resume Auto-scroll'}
+            </button>
+            <div className="flex items-center space-x-2 text-sm text-slate-600">
+              <div className={`w-2 h-2 rounded-full ${isAutoScrolling ? 'bg-green-500 animate-pulse' : 'bg-slate-400'}`}></div>
+              <span>{isAutoScrolling ? 'Auto-scrolling' : 'Paused'}</span>
+            </div>
           </div>
         </div>
 
