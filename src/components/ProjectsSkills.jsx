@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Code, Palette, Database, PenTool as Tool } from 'lucide-react';
+import { ExternalLink, Github, Code, Palette, Database, PenTool as Tool, Filter, X } from 'lucide-react';
 
 const ProjectsSkills = () => {
   const [selectedProject, setSelectedProject] = useState(0); // Start with first project selected
+  const [selectedSkillFilter, setSelectedSkillFilter] = useState('all');
+  const [showSkillsFilter, setShowSkillsFilter] = useState(false);
 
   const projects = [
     {
@@ -103,12 +105,28 @@ const ProjectsSkills = () => {
     },
   ];
 
+  // Get all unique skills from projects
+  const allSkills = [...new Set(projects.flatMap(project => 
+    project.skills.map(skill => skill.name)
+  ))].sort();
+
+  // Filter projects based on selected skill
+  const filteredProjects = selectedSkillFilter === 'all' 
+    ? projects 
+    : projects.filter(project => 
+        project.skills.some(skill => skill.name === selectedSkillFilter)
+      );
+
   const handleProjectHover = (index) => {
-    setSelectedProject(index);
+    // Adjust index based on filtered projects
+    const actualIndex = projects.findIndex(p => p === filteredProjects[index]);
+    setSelectedProject(actualIndex);
   };
 
   const handleProjectClick = (index) => {
-    setSelectedProject(index);
+    // Adjust index based on filtered projects
+    const actualIndex = projects.findIndex(p => p === filteredProjects[index]);
+    setSelectedProject(actualIndex);
   };
 
   const getCategoryColor = (category) => {
@@ -142,8 +160,75 @@ const ProjectsSkills = () => {
             Projects & Skills
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto">
-            Explore my projects and discover the skills behind each one. Click or hover over any project to see the technologies and expertise involved.
+            Explore my projects and discover the skills behind each one. Filter by skills to find projects that match your interests.
           </p>
+        </div>
+
+        {/* Skills Filter Section */}
+        <div className="mb-8 lg:mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setShowSkillsFilter(!showSkillsFilter)}
+                className="flex items-center space-x-2 px-4 py-2 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all duration-300"
+              >
+                <Filter size={16} />
+                <span className="font-medium">Filter by Skills</span>
+              </button>
+              
+              {selectedSkillFilter !== 'all' && (
+                <button
+                  onClick={() => setSelectedSkillFilter('all')}
+                  className="flex items-center space-x-2 px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm hover:bg-cyan-200 transition-colors duration-300"
+                >
+                  <X size={14} />
+                  <span>Clear Filter</span>
+                </button>
+              )}
+            </div>
+
+            <div className="text-sm text-slate-600">
+              Showing {filteredProjects.length} of {projects.length} projects
+            </div>
+          </div>
+
+          {/* Skills Filter Options */}
+          {showSkillsFilter && (
+            <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
+              <h4 className="font-semibold text-slate-900 mb-3">Filter by Skills:</h4>
+              <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto scrollbar-hide">
+                <button
+                  onClick={() => {
+                    setSelectedSkillFilter('all');
+                    setShowSkillsFilter(false);
+                  }}
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                    selectedSkillFilter === 'all'
+                      ? 'bg-cyan-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                  }`}
+                >
+                  All Skills
+                </button>
+                {allSkills.map((skill) => (
+                  <button
+                    key={skill}
+                    onClick={() => {
+                      setSelectedSkillFilter(skill);
+                      setShowSkillsFilter(false);
+                    }}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                      selectedSkillFilter === skill
+                        ? 'bg-cyan-600 text-white'
+                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                    }`}
+                  >
+                    {skill}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
@@ -153,7 +238,7 @@ const ProjectsSkills = () => {
               Projects
             </h3>
             <div className="space-y-4 sm:space-y-6 max-h-[60vh] overflow-y-auto scrollbar-hide p-2 sm:p-3 lg:p-4">
-              {projects.map((project, index) => (
+              {filteredProjects.map((project, index) => (
                 <div
                   key={project.title}
                   className={`card overflow-hidden cursor-pointer transition-all duration-300 ${
@@ -211,6 +296,27 @@ const ProjectsSkills = () => {
                 </div>
               ))}
             </div>
+            
+            {/* No Results Message */}
+            {filteredProjects.length === 0 && (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Code className="text-slate-400" size={24} />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                  No projects found
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  No projects match the selected skill filter.
+                </p>
+                <button
+                  onClick={() => setSelectedSkillFilter('all')}
+                  className="btn-primary"
+                >
+                  Show All Projects
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Skills Panel */}
@@ -232,8 +338,11 @@ const ProjectsSkills = () => {
                 {projects[selectedProject].skills.map((skill, skillIndex) => (
                   <div
                     key={skill.name}
-                    className="bg-white rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0"
+                    className={`bg-white rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 cursor-pointer ${
+                      selectedSkillFilter === skill.name ? 'ring-2 ring-cyan-500' : ''
+                    }`}
                     style={{ animationDelay: `${skillIndex * 0.1}s` }}
+                    onClick={() => setSelectedSkillFilter(skill.name)}
                   >
                     <div className="flex items-center space-x-3">
                       <div className="text-slate-600 flex-shrink-0">
@@ -244,7 +353,11 @@ const ProjectsSkills = () => {
                           <span className="font-semibold text-slate-900 text-sm sm:text-base truncate">
                             {skill.name}
                           </span>
-                          <div className={`inline-block px-2 py-1 text-xs rounded-full border flex-shrink-0 ${getCategoryColor(skill.category)}`}>
+                          <div className={`inline-block px-2 py-1 text-xs rounded-full border flex-shrink-0 ${
+                            selectedSkillFilter === skill.name 
+                              ? 'bg-cyan-600 text-white border-cyan-600' 
+                              : getCategoryColor(skill.category)
+                          }`}>
                             {skill.category}
                           </div>
                         </div>
@@ -256,11 +369,21 @@ const ProjectsSkills = () => {
 
               <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg flex-shrink-0">
                 <h4 className="font-semibold text-cyan-900 mb-2 text-sm sm:text-base">
-                  Project Highlights
+                  {selectedSkillFilter !== 'all' ? `Projects using ${selectedSkillFilter}` : 'Project Highlights'}
                 </h4>
                 <p className="text-cyan-800 text-xs sm:text-sm leading-relaxed">
                   {projects[selectedProject].description}
                 </p>
+                {selectedSkillFilter !== 'all' && (
+                  <div className="mt-3">
+                    <button
+                      onClick={() => setSelectedSkillFilter('all')}
+                      className="text-xs text-cyan-700 hover:text-cyan-800 font-medium"
+                    >
+                      View all projects →
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
