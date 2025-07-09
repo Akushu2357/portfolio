@@ -554,26 +554,6 @@ const Certificates = () => {
           </div>
         </div>
 
-        {/* Auto-scroll Controls */}
-        <div className="flex justify-center mt-6">
-          <div className="flex items-center space-x-4 bg-slate-100 rounded-lg p-2">
-            <button
-              onClick={() => setIsAutoScrolling(!isAutoScrolling)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                isAutoScrolling
-                  ? 'bg-cyan-600 text-white shadow-md'
-                  : 'bg-white text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              {isAutoScrolling ? 'Pause Auto-scroll' : 'Resume Auto-scroll'}
-            </button>
-            <div className="flex items-center space-x-2 text-sm text-slate-600">
-              <div className={`w-2 h-2 rounded-full ${isAutoScrolling ? 'bg-green-500 animate-pulse' : 'bg-slate-400'}`}></div>
-              <span>{isAutoScrolling ? 'Auto-scrolling' : 'Paused'}</span>
-            </div>
-          </div>
-        </div>
-
         {/* No Results Message */}
         {filteredCertificates.length === 0 && (
           <div className="text-center py-12">
