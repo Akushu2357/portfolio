@@ -186,8 +186,8 @@ const Experience = () => {
             <div className="flex-1 overflow-y-auto scrollbar-hide">
               {/* Timeline Container with proper padding for circles */}
               <div className="relative pl-12 pr-4 py-4 h-full">
-                {/* Vertical Timeline Line - positioned to align with circles */}
-                <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
+                {/* Vertical Timeline Line - extends full height */}
+                <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
 
                 {/* Timeline Items */}
                 <div className="space-y-8 sm:space-y-10">
