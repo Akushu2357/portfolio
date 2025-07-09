@@ -183,11 +183,11 @@ const Experience = () => {
               <TrendingUp className="text-cyan-600" size={24} />
               <span>Career Timeline</span>
             </h3>
-            <div className="flex-1 overflow-y-auto scrollbar-hide">
+            <div className="relative flex-1 overflow-y-auto scrollbar-hide">
               {/* Timeline Container with proper padding for circles */}
-              <div className="relative pl-12 pr-4 py-4 h-full">
+              <div className=" pl-12 pr-4 py-4 h-full">
                 {/* Vertical Timeline Line - extends full height */}
-                <div className=" h-full left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
+                <div className="absolute h-full left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
 
                 {/* Timeline Items */}
                 <div className="space-y-8 sm:space-y-10">
