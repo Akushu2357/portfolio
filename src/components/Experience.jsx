@@ -190,7 +190,7 @@ const Experience = () => {
                 <div className="absolute left-6 top-4 w-0.5 bg-gradient-to-b from-cyan-500 to-blue-500" style={{ height: `calc(100% - 2rem)` }}></div>
 
                 {/* Timeline Items */}
-                <div className="space-y-8 sm:space-y-10">
+                <div className="space-y-8 sm:space-y-10 py-8">
                   {experiences.map((exp, index) => (
                     <div 
                       key={exp.id} 
