@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Award, ExternalLink, Calendar, Filter, X } from 'lucide-react';
+import { Award, ExternalLink, Calendar, Filter, X, Search, Tag } from 'lucide-react';
 
 const Certificates = () => {
-  const [selectedSkillFilter, setSelectedSkillFilter] = useState('all');
+  const [selectedSkillFilters, setSelectedSkillFilters] = useState([]);
+  const [selectedLevelFilter, setSelectedLevelFilter] = useState('all');
+  const [selectedIssuerFilter, setSelectedIssuerFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [showSkillsFilter, setShowSkillsFilter] = useState(false);
+  const [showLevelFilter, setShowLevelFilter] = useState(false);
+  const [showIssuerFilter, setShowIssuerFilter] = useState(false);
 
   const certificates = [
     {
@@ -106,11 +111,53 @@ const Certificates = () => {
 
   // Get all unique skills
   const allSkills = [...new Set(certificates.flatMap(cert => cert.skills))].sort();
+  const allLevels = [...new Set(certificates.map(cert => cert.level))].sort();
+  const allIssuers = [...new Set(certificates.map(cert => cert.issuer))].sort();
 
-  // Filter certificates based on selected skill
-  const filteredCertificates = selectedSkillFilter === 'all' 
-    ? certificates 
-    : certificates.filter(cert => cert.skills.includes(selectedSkillFilter));
+  // Filter certificates based on multiple criteria
+  const filteredCertificates = certificates.filter(cert => {
+    // Search filter
+    const matchesSearch = searchQuery === '' || 
+      cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cert.issuer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cert.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cert.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    // Skills filter (multiple selection)
+    const matchesSkills = selectedSkillFilters.length === 0 || 
+      selectedSkillFilters.every(skill => cert.skills.includes(skill));
+
+    // Level filter
+    const matchesLevel = selectedLevelFilter === 'all' || cert.level === selectedLevelFilter;
+
+    // Issuer filter
+    const matchesIssuer = selectedIssuerFilter === 'all' || cert.issuer === selectedIssuerFilter;
+
+    return matchesSearch && matchesSkills && matchesLevel && matchesIssuer;
+  });
+
+  const handleSkillToggle = (skill) => {
+    setSelectedSkillFilters(prev => 
+      prev.includes(skill) 
+        ? prev.filter(s => s !== skill)
+        : [...prev, skill]
+    );
+  };
+
+  const clearAllFilters = () => {
+    setSelectedSkillFilters([]);
+    setSelectedLevelFilter('all');
+    setSelectedIssuerFilter('all');
+    setSearchQuery('');
+    setShowSkillsFilter(false);
+    setShowLevelFilter(false);
+    setShowIssuerFilter(false);
+  };
+
+  const hasActiveFilters = selectedSkillFilters.length > 0 || 
+    selectedLevelFilter !== 'all' || 
+    selectedIssuerFilter !== 'all' || 
+    searchQuery !== '';
 
   const getLevelColor = (level) => {
     switch (level) {
@@ -137,25 +184,82 @@ const Certificates = () => {
           </p>
         </div>
 
-        {/* Skills Filter Section */}
+        {/* Search and Filter Section */}
         <div className="mb-8 lg:mb-12">
+          {/* Search Bar */}
+          <div className="mb-4">
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+              <input
+                type="text"
+                placeholder="Search certificates, skills, or issuers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Filter Controls */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Skills Filter */}
               <button
                 onClick={() => setShowSkillsFilter(!showSkillsFilter)}
-                className="flex items-center space-x-2 px-4 py-2 bg-slate-100 rounded-lg hover:bg-slate-200 transition-all duration-300"
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+                  selectedSkillFilters.length > 0 
+                    ? 'bg-cyan-100 text-cyan-700 border border-cyan-200' 
+                    : 'bg-slate-100 hover:bg-slate-200'
+                }`}
               >
-                <Filter size={16} />
-                <span className="font-medium">Filter by Skills</span>
+                <Tag size={16} />
+                <span className="font-medium">
+                  Skills {selectedSkillFilters.length > 0 && `(${selectedSkillFilters.length})`}
+                </span>
               </button>
               
-              {selectedSkillFilter !== 'all' && (
+              {/* Level Filter */}
+              <button
+                onClick={() => setShowLevelFilter(!showLevelFilter)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+                  selectedLevelFilter !== 'all' 
+                    ? 'bg-blue-100 text-blue-700 border border-blue-200' 
+                    : 'bg-slate-100 hover:bg-slate-200'
+                }`}
+              >
+                <Award size={16} />
+                <span className="font-medium">Level</span>
+              </button>
+
+              {/* Issuer Filter */}
+              <button
+                onClick={() => setShowIssuerFilter(!showIssuerFilter)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+                  selectedIssuerFilter !== 'all' 
+                    ? 'bg-green-100 text-green-700 border border-green-200' 
+                    : 'bg-slate-100 hover:bg-slate-200'
+                }`}
+              >
+                <Filter size={16} />
+                <span className="font-medium">Issuer</span>
+              </button>
+              
+              {/* Clear All Filters */}
+              {hasActiveFilters && (
                 <button
-                  onClick={() => setSelectedSkillFilter('all')}
-                  className="flex items-center space-x-2 px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm hover:bg-cyan-200 transition-colors duration-300"
+                  onClick={clearAllFilters}
+                  className="flex items-center space-x-2 px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm hover:bg-red-200 transition-colors duration-300"
                 >
                   <X size={14} />
-                  <span>Clear Filter</span>
+                  <span>Clear All</span>
                 </button>
               )}
             </div>
@@ -165,38 +269,138 @@ const Certificates = () => {
             </div>
           </div>
 
-          {/* Skills Filter Options */}
+          {/* Active Filters Display */}
+          {hasActiveFilters && (
+            <div className="mt-4 p-3 bg-slate-50 rounded-lg border">
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-sm font-medium text-slate-700">Active filters:</span>
+                
+                {searchQuery && (
+                  <span className="px-2 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">
+                    Search: "{searchQuery}"
+                  </span>
+                )}
+                
+                {selectedSkillFilters.map(skill => (
+                  <span key={skill} className="px-2 py-1 bg-cyan-100 text-cyan-700 text-sm rounded-full flex items-center space-x-1">
+                    <span>{skill}</span>
+                    <button onClick={() => handleSkillToggle(skill)}>
+                      <X size={12} />
+                    </button>
+                  </span>
+                ))}
+                
+                {selectedLevelFilter !== 'all' && (
+                  <span className="px-2 py-1 bg-blue-100 text-blue-700 text-sm rounded-full flex items-center space-x-1">
+                    <span>Level: {selectedLevelFilter}</span>
+                    <button onClick={() => setSelectedLevelFilter('all')}>
+                      <X size={12} />
+                    </button>
+                  </span>
+                )}
+                
+                {selectedIssuerFilter !== 'all' && (
+                  <span className="px-2 py-1 bg-green-100 text-green-700 text-sm rounded-full flex items-center space-x-1">
+                    <span>Issuer: {selectedIssuerFilter}</span>
+                    <button onClick={() => setSelectedIssuerFilter('all')}>
+                      <X size={12} />
+                    </button>
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Filter Dropdowns */}
           {showSkillsFilter && (
             <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
-              <h4 className="font-semibold text-slate-900 mb-3">Filter by Skills:</h4>
+              <h4 className="font-semibold text-slate-900 mb-3">Select Skills (multiple selection):</h4>
               <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto scrollbar-hide">
-                <button
-                  onClick={() => {
-                    setSelectedSkillFilter('all');
-                    setShowSkillsFilter(false);
-                  }}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                    selectedSkillFilter === 'all'
-                      ? 'bg-cyan-600 text-white'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                  }`}
-                >
-                  All Skills
-                </button>
                 {allSkills.map((skill) => (
                   <button
                     key={skill}
-                    onClick={() => {
-                      setSelectedSkillFilter(skill);
-                      setShowSkillsFilter(false);
-                    }}
+                    onClick={() => handleSkillToggle(skill)}
                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                      selectedSkillFilter === skill
+                      selectedSkillFilters.includes(skill)
                         ? 'bg-cyan-600 text-white'
                         : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                     }`}
                   >
                     {skill}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {showLevelFilter && (
+            <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
+              <h4 className="font-semibold text-slate-900 mb-3">Filter by Level:</h4>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => {
+                    setSelectedLevelFilter('all');
+                    setShowLevelFilter(false);
+                  }}
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                    selectedLevelFilter === 'all'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                  }`}
+                >
+                  All Levels
+                </button>
+                {allLevels.map((level) => (
+                  <button
+                    key={level}
+                    onClick={() => {
+                      setSelectedLevelFilter(level);
+                      setShowLevelFilter(false);
+                    }}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                      selectedLevelFilter === level
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                    }`}
+                  >
+                    {level}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {showIssuerFilter && (
+            <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
+              <h4 className="font-semibold text-slate-900 mb-3">Filter by Issuer:</h4>
+              <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto scrollbar-hide">
+                <button
+                  onClick={() => {
+                    setSelectedIssuerFilter('all');
+                    setShowIssuerFilter(false);
+                  }}
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                    selectedIssuerFilter === 'all'
+                      ? 'bg-green-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                  }`}
+                >
+                  All Issuers
+                </button>
+                {allIssuers.map((issuer) => (
+                  <button
+                    key={issuer}
+                    onClick={() => {
+                      setSelectedIssuerFilter(issuer);
+                      setShowIssuerFilter(false);
+                    }}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                      selectedIssuerFilter === issuer
+                        ? 'bg-green-600 text-white'
+                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                    }`}
+                  >
+                    {issuer}
                   </button>
                 ))}
               </div>
@@ -269,11 +473,11 @@ const Certificates = () => {
                         <span
                           key={skill}
                           className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${
-                            selectedSkillFilter === skill
+                            selectedSkillFilters.includes(skill)
                               ? 'bg-cyan-600 text-white'
                               : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
                           }`}
-                          onClick={() => setSelectedSkillFilter(skill)}
+                          onClick={() => handleSkillToggle(skill)}
                         >
                           {skill}
                         </span>
@@ -304,7 +508,7 @@ const Certificates = () => {
               No certificates match the selected skill filter.
             </p>
             <button
-              onClick={() => setSelectedSkillFilter('all')}
+              onClick={clearAllFilters}
               className="btn-primary"
             >
               Show All Certificates
