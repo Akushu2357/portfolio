@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { Award, ExternalLink, Calendar, Filter, X, Search, Tag } from 'lucide-react';
 
