@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Award, Briefcase, Star, TrendingUp } from 'lucide-react';
 import { experiences, sumExperienceYears } from '../utils/experienceUtils';
+import { countCompletedProjects } from '../utils/projectsUtils';
 
 const Experience = () => {
   const [focusExperience, setFocusExperience] = useState(null);
@@ -60,7 +61,7 @@ const Experience = () => {
             <div className="text-xs text-slate-600">Years Experience</div>
           </div>
           <div className="text-center">
-            <div className="text-lg sm:text-xl font-bold text-blue-600">20+</div>
+            <div className="text-lg sm:text-xl font-bold text-blue-600">{countCompletedProjects()}+</div>
             <div className="text-xs text-slate-600">Projects Completed</div>
           </div>
         </div>

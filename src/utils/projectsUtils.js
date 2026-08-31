@@ -18,6 +18,11 @@ export const projects = [
             { name: 'Vercel', category: 'Deployment' },
             { name: 'Integration API', category: 'Backend' },
             { name: 'OAuth 2.0', category: 'Security' },
-        ]
+        ],
+        completed: true,
     },
 ];
+
+export const countCompletedProjects = () => {
+    return projects.filter(project => project.completed).length;
+}

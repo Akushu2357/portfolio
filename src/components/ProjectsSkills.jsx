@@ -2,18 +2,32 @@ import React, { useState } from 'react';
 import {
   ExternalLink,
   Github,
-  Code,
-  Palette,
-  Database,
   PenTool,
   Wrench,
-  Filter,
   X,
   TrendingUp,
-  Cloud,
-  Smartphone,
   Search,
-  Tag
+  Tag,
+  Brain,
+  Cpu,
+  Eye,
+  Code,
+  Server,
+  Database,
+  Plug,
+  Shield,
+  Layout,
+  Zap,
+  Layers,
+  PieChart,
+  Palette,
+  BarChart3,
+  Cloud,
+  HardDrive,
+  Table,
+  Bot,
+  Smartphone,
+  Rocket,
 } from 'lucide-react';
 import { projects } from '../utils/projectsUtils';
 
@@ -25,11 +39,58 @@ const ProjectsSkills = () => {
   const [showSkillsFilter, setShowSkillsFilter] = useState(false);
   const [showTechFilter, setShowTechFilter] = useState(false);
 
+  const categoryIconMap = {
+    Frontend: [Code, "#0e7490"],
+    Backend: [Server, "#3b82f6"],
+    Database: [Database, "#6b7280"],
+    Integration: [Plug, "#8b5cf6"],
+    Security: [Shield, "#ef4444"],
+    UX: [Layout, "#ec4899"],
+    'Real-time': [Zap, "#f59e0b"],
+    Features: [Layers, "#8b5cf6"],
+    Visualization: [PieChart, "#10b981"],
+    Styling: [Palette, "#8b5cf6"],
+    Analytics: [BarChart3, "#3b82f6"],
+    Cloud: [Cloud, "#6b7280"],
+    Caching: [HardDrive, "#6b7280"],
+    Data: [Table, "#6b7280"],
+    'AI/ML': [Bot, "#f59e0b"],
+    Design: [Palette, "#8b5cf6"],
+    Mobile: [Smartphone, "#10b981"],
+    Deployment: [Rocket, "#f59e0b"],
+  };
+
+  const getCategoryColor = (category) => {
+    const colors = {
+      'Frontend': 'bg-cyan-100 text-cyan-700 border-cyan-200',
+      'Backend': 'bg-blue-100 text-blue-700 border-blue-200',
+      'Database': 'bg-slate-100 text-slate-700 border-slate-200',
+      'Integration': 'bg-indigo-100 text-indigo-700 border-indigo-200',
+      'Security': 'bg-red-100 text-red-700 border-red-200',
+      'UX': 'bg-rose-100 text-rose-700 border-rose-200',
+      'Real-time': 'bg-yellow-100 text-yellow-700 border-yellow-200',
+      'Features': 'bg-purple-100 text-purple-700 border-purple-200',
+      'Visualization': 'bg-teal-100 text-teal-700 border-teal-200',
+      'Styling': 'bg-sky-100 text-sky-700 border-sky-200',
+      'Analytics': 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      'Cloud': 'bg-gray-100 text-gray-700 border-gray-200',
+      'Caching': 'bg-violet-100 text-violet-700 border-violet-200',
+      'Data': 'bg-orange-100 text-orange-700 border-orange-200',
+      'AI/ML': 'bg-amber-100 text-amber-700 border-amber-200',
+      'Design': 'bg-pink-100 text-pink-700 border-pink-200',
+      'Mobile': 'bg-green-100 text-green-700 border-green-200',
+      'Deployment': 'bg-lime-100 text-lime-700 border-lime-200',
+    };
+    return colors[category] || 'bg-slate-100 text-slate-700 border-slate-200';
+  };
+
   const groupedSkills = (project) => project.reduce((acc, skill) => {
     if (!acc[skill.category]) {
-      acc[skill.category] = [];
+      acc[skill.category] = { skills: [] };
+      const [Icon, color] = categoryIconMap[skill.category] || [Code, "#6b7280"];
+      acc[skill.category].icon = <Icon size={20} color={color} />;
     }
-    acc[skill.category].push((skill));
+    acc[skill.category].skills.push(skill.name);
     return acc;
   }, {});
 
@@ -94,49 +155,6 @@ const ProjectsSkills = () => {
     // Adjust index based on filtered projects
     const actualIndex = projects.findIndex(p => p === filteredProjects[index]);
     setSelectedProject(actualIndex);
-  };
-
-  const getCategoryColor = (category) => {
-    const colors = {
-      'Frontend': 'bg-cyan-100 text-cyan-700 border-cyan-200',
-      'Backend': 'bg-blue-100 text-blue-700 border-blue-200',
-      'Database': 'bg-slate-100 text-slate-700 border-slate-200',
-      'Integration': 'bg-indigo-100 text-indigo-700 border-indigo-200',
-      'Security': 'bg-red-100 text-red-700 border-red-200',
-      'UX': 'bg-rose-100 text-rose-700 border-rose-200',
-      'Real-time': 'bg-yellow-100 text-yellow-700 border-yellow-200',
-      'Features': 'bg-purple-100 text-purple-700 border-purple-200',
-      'Visualization': 'bg-teal-100 text-teal-700 border-teal-200',
-      'Styling': 'bg-sky-100 text-sky-700 border-sky-200',
-      'Analytics': 'bg-emerald-100 text-emerald-700 border-emerald-200',
-      'Cloud': 'bg-gray-100 text-gray-700 border-gray-200',
-      'Caching': 'bg-violet-100 text-violet-700 border-violet-200',
-      'Data': 'bg-orange-100 text-orange-700 border-orange-200',
-      'AI/ML': 'bg-amber-100 text-amber-700 border-amber-200',
-      'Design': 'bg-pink-100 text-pink-700 border-pink-200',
-      'Mobile': 'bg-green-100 text-green-700 border-green-200',
-    };
-    return colors[category] || 'bg-slate-100 text-slate-700 border-slate-200';
-  };
-
-  const categoryIconMap = {
-    Frontend: Code,
-    Backend: Database,
-    Database: Database,
-    Integration: Wrench,
-    Security: Wrench,
-    UX: Palette,
-    'Real-time': TrendingUp,
-    Features: PenTool,
-    Visualization: Palette,
-    Styling: Palette,
-    Analytics: TrendingUp,
-    Cloud: Cloud,
-    Caching: Database,
-    Data: Database,
-    'AI/ML': TrendingUp,
-    Design: Palette,
-    Mobile: Smartphone,
   };
 
   return (
@@ -414,31 +432,28 @@ const ProjectsSkills = () => {
               </div>
 
               <div className="space-y-3 sm:space-y-4 flex-1 overflow-y-auto scrollbar-hide min-h-0">
-                {Object.entries(groupedSkills(projects[selectedProject].skills)).map(([category, skills]) => (
+                {Object.entries(groupedSkills(projects[selectedProject].skills)).map(([category, { skills, icon }]) => (
                   <div
                     key={category}
                     className="bg-slate-100 rounded-lg p-4 sm:p-5"
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="text-slate-600 flex-shrink-0">
-                        {(() => {
-                          const Icon = categoryIconMap[category] || Code;
-                          return <Icon size={16} />;
-                        })()}
+                      <div className={"flex-shrink-0 p-2 rounded-lg " + getCategoryColor(category)}>
+                        {icon}
                       </div>
-                      <div className={"font-semibold text-sm sm:text-base " + getCategoryColor(category)}>
+                      <div className="font-semibold text-slate-900 text-sm sm:text-base truncate">
                         {category}
                       </div>
                     </div>
                     <div>
-                      <div className="mt-2 flex flex-wrap gap-2">
+                      <div className="mt-2 ml-3 flex flex-wrap gap-2">
                         {skills.map(skill => (
                           <div
-                            key={skill.name}
-                            className="bg-cyan-100 text-cyan-800 text-xs sm:text-sm font-medium px-3 py-1 rounded-full cursor-pointer transition-colors duration-300 hover:bg-cyan-200"
-                            onClick={() => handleSkillToggle(skill.name)}
+                            key={skill}
+                            className={getCategoryColor(category) + " bg-opacity-50 text-xs sm:text-sm font-medium px-3 py-1 rounded-full cursor-pointer transition-colors duration-300 hover:bg-opacity-100 " + (selectedSkillFilters.includes(skill) ? 'ring-2 ring-cyan-500' : '')}
+                            onClick={() => handleSkillToggle(skill)}
                           >
-                            {skill.name}
+                            {skill}
                           </div>
                         ))}
                       </div>
