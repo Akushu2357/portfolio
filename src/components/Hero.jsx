@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import profileImage from '../assets/profile.jpg';
 
 const Hero = () => {
   return (
@@ -8,26 +9,25 @@ const Hero = () => {
         <div className="animate-fade-in">
           <div className="mb-8">
             <img
-              src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400"
+              src={profileImage}
               alt="Profile"
-              className="w-32 h-32 rounded-full mx-auto mb-6 shadow-xl border-4 border-white"
+              className="w-32 h-32 rounded-full mx-auto mb-6 shadow-xl border-4 border-white aspect-auto object-cover"
             />
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6">
             Hi, I'm{' '}
             <span className="gradient-text">Tang</span>
           </h1>
-          
+
           <h2 className="text-2xl md:text-3xl text-slate-700 mb-4">
             Worapat Chuchoed
           </h2>
-          
+
           <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Full Stack Developer & UI/UX Designer passionate about creating
-            beautiful, functional web experiences that make a difference.
+            Full Stack Developer with QA and DS experience.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <a href="#projects" className="btn-primary">
               View My Work
@@ -36,10 +36,10 @@ const Hero = () => {
               Get In Touch
             </a>
           </div>
-          
+
           <div className="flex justify-center space-x-6 mb-12">
             <a
-              href="https://github.com"
+              href="https://github.com/Akushu2357"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
@@ -47,7 +47,7 @@ const Hero = () => {
               <Github size={24} className="text-slate-700" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/worapat-chuchoed-9352b929b/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
@@ -62,7 +62,7 @@ const Hero = () => {
             </a>
           </div>
         </div>
-        
+
         <div className="animate-bounce-slow">
           <ChevronDown size={32} className="text-slate-400 mx-auto" />
         </div>

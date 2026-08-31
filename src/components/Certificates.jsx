@@ -16,100 +16,16 @@ const Certificates = () => {
   const certificates = [
     {
       id: 1,
-      title: 'AWS Certified Solutions Architect - Professional',
-      issuer: 'Amazon Web Services',
-      date: '2023',
-      credentialId: 'AWS-CSA-2023-001',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['AWS', 'Cloud Architecture', 'EC2', 'S3', 'Lambda', 'VPC', 'CloudFormation'],
-      verifyUrl: '#',
-      description: 'Advanced certification demonstrating expertise in designing distributed applications and systems on AWS platform.',
-      level: 'Professional'
+      title: 'Introduction to HTML, CSS, & JavaScript',
+      issuer: 'Coursera',
+      date: 'September 2024',
+      credentialId: 'N/A',
+      image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~1CKUVQAQZEEZ/CERTIFICATE_LANDING_PAGE~1CKUVQAQZEEZ.jpeg',
+      skills: ['HTML', 'CSS', 'JavaScript', 'Web Development', 'Frontend Development', 'Responsive Web Design'],
+      verifyUrl: 'https://coursera.org/share/ff662cfb1efca8ef01ddf5356421ca96',
+      description: ' Learn HTML structure, CSS styling, and JavaScript for interactivity, then finish with hands-on labs and a final webpage project.',
+      level: 'Beginner'
     },
-    {
-      id: 2,
-      title: 'Google Cloud Professional Developer',
-      issuer: 'Google Cloud',
-      date: '2023',
-      credentialId: 'GCP-PD-2023-002',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Google Cloud', 'Kubernetes', 'Docker', 'CI/CD', 'Cloud Functions', 'BigQuery'],
-      verifyUrl: '#',
-      description: 'Professional-level certification for developing scalable and highly available applications on Google Cloud.',
-      level: 'Professional'
-    },
-    {
-      id: 3,
-      title: 'MongoDB Certified Developer Associate',
-      issuer: 'MongoDB University',
-      date: '2022',
-      credentialId: 'MDB-DEV-2022-003',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['MongoDB', 'Database Design', 'Aggregation', 'Indexing', 'NoSQL', 'Performance Tuning'],
-      verifyUrl: '#',
-      description: 'Comprehensive certification covering MongoDB development, data modeling, and performance optimization.',
-      level: 'Associate'
-    },
-    {
-      id: 4,
-      title: 'Meta React Developer Professional Certificate',
-      issuer: 'Meta (Facebook)',
-      date: '2022',
-      credentialId: 'META-REACT-2022-004',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['React', 'JavaScript', 'Frontend Development', 'UI/UX', 'Redux', 'Testing'],
-      verifyUrl: '#',
-      description: 'Professional certificate program covering advanced React development and modern frontend practices.',
-      level: 'Professional'
-    },
-    {
-      id: 5,
-      title: 'Certified Kubernetes Administrator (CKA)',
-      issuer: 'Cloud Native Computing Foundation',
-      date: '2023',
-      credentialId: 'CKA-2023-005',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Kubernetes', 'Container Orchestration', 'DevOps', 'Docker', 'Helm', 'Monitoring'],
-      verifyUrl: '#',
-      description: 'Hands-on certification demonstrating skills in Kubernetes administration and cluster management.',
-      level: 'Professional'
-    },
-    {
-      id: 6,
-      title: 'Azure Fundamentals',
-      issuer: 'Microsoft',
-      date: '2022',
-      credentialId: 'AZ-900-2022-006',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Azure', 'Cloud Computing', 'Virtual Machines', 'Storage', 'Networking'],
-      verifyUrl: '#',
-      description: 'Foundational certification covering core Azure services and cloud computing concepts.',
-      level: 'Fundamentals'
-    },
-    {
-      id: 7,
-      title: 'Scrum Master Certified (SMC)',
-      issuer: 'Scrum Alliance',
-      date: '2021',
-      credentialId: 'SMC-2021-007',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Scrum', 'Agile', 'Project Management', 'Team Leadership', 'Sprint Planning'],
-      verifyUrl: '#',
-      description: 'Certification in Scrum methodology and agile project management practices.',
-      level: 'Professional'
-    },
-    {
-      id: 8,
-      title: 'Node.js Application Developer',
-      issuer: 'OpenJS Foundation',
-      date: '2022',
-      credentialId: 'JSNAD-2022-008',
-      image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Node.js', 'JavaScript', 'Backend Development', 'Express.js', 'API Development'],
-      verifyUrl: '#',
-      description: 'Professional certification for Node.js application development and server-side JavaScript.',
-      level: 'Professional'
-    }
   ];
 
   // Get all unique skills
@@ -120,14 +36,14 @@ const Certificates = () => {
   // Filter certificates based on multiple criteria
   const filteredCertificates = certificates.filter(cert => {
     // Search filter
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch = searchQuery === '' ||
       cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       cert.issuer.toLowerCase().includes(searchQuery.toLowerCase()) ||
       cert.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       cert.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()));
 
     // Skills filter (multiple selection)
-    const matchesSkills = selectedSkillFilters.length === 0 || 
+    const matchesSkills = selectedSkillFilters.length === 0 ||
       selectedSkillFilters.every(skill => cert.skills.includes(skill));
 
     // Level filter
@@ -140,8 +56,8 @@ const Certificates = () => {
   });
 
   const handleSkillToggle = (skill) => {
-    setSelectedSkillFilters(prev => 
-      prev.includes(skill) 
+    setSelectedSkillFilters(prev =>
+      prev.includes(skill)
         ? prev.filter(s => s !== skill)
         : [...prev, skill]
     );
@@ -157,9 +73,9 @@ const Certificates = () => {
     setShowIssuerFilter(false);
   };
 
-  const hasActiveFilters = selectedSkillFilters.length > 0 || 
-    selectedLevelFilter !== 'all' || 
-    selectedIssuerFilter !== 'all' || 
+  const hasActiveFilters = selectedSkillFilters.length > 0 ||
+    selectedLevelFilter !== 'all' ||
+    selectedIssuerFilter !== 'all' ||
     searchQuery !== '';
 
   const getLevelColor = (level) => {
@@ -265,26 +181,24 @@ const Certificates = () => {
               {/* Skills Filter */}
               <button
                 onClick={() => setShowSkillsFilter(!showSkillsFilter)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                  selectedSkillFilters.length > 0 
-                    ? 'bg-cyan-100 text-cyan-700 border border-cyan-200' 
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedSkillFilters.length > 0
+                    ? 'bg-cyan-100 text-cyan-700 border border-cyan-200'
                     : 'bg-slate-100 hover:bg-slate-200'
-                }`}
+                  }`}
               >
                 <Tag size={16} />
                 <span className="font-medium">
                   Skills {selectedSkillFilters.length > 0 && `(${selectedSkillFilters.length})`}
                 </span>
               </button>
-              
+
               {/* Level Filter */}
               <button
                 onClick={() => setShowLevelFilter(!showLevelFilter)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                  selectedLevelFilter !== 'all' 
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200' 
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedLevelFilter !== 'all'
+                    ? 'bg-blue-100 text-blue-700 border border-blue-200'
                     : 'bg-slate-100 hover:bg-slate-200'
-                }`}
+                  }`}
               >
                 <Award size={16} />
                 <span className="font-medium">Level</span>
@@ -293,16 +207,15 @@ const Certificates = () => {
               {/* Issuer Filter */}
               <button
                 onClick={() => setShowIssuerFilter(!showIssuerFilter)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                  selectedIssuerFilter !== 'all' 
-                    ? 'bg-green-100 text-green-700 border border-green-200' 
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedIssuerFilter !== 'all'
+                    ? 'bg-green-100 text-green-700 border border-green-200'
                     : 'bg-slate-100 hover:bg-slate-200'
-                }`}
+                  }`}
               >
                 <Filter size={16} />
                 <span className="font-medium">Issuer</span>
               </button>
-              
+
               {/* Clear All Filters */}
               {hasActiveFilters && (
                 <button
@@ -325,13 +238,13 @@ const Certificates = () => {
             <div className="mt-4 p-3 bg-slate-50 rounded-lg border">
               <div className="flex flex-wrap gap-2 items-center">
                 <span className="text-sm font-medium text-slate-700">Active filters:</span>
-                
+
                 {searchQuery && (
                   <span className="px-2 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">
                     Search: "{searchQuery}"
                   </span>
                 )}
-                
+
                 {selectedSkillFilters.map(skill => (
                   <span key={skill} className="px-2 py-1 bg-cyan-100 text-cyan-700 text-sm rounded-full flex items-center space-x-1">
                     <span>{skill}</span>
@@ -340,7 +253,7 @@ const Certificates = () => {
                     </button>
                   </span>
                 ))}
-                
+
                 {selectedLevelFilter !== 'all' && (
                   <span className="px-2 py-1 bg-blue-100 text-blue-700 text-sm rounded-full flex items-center space-x-1">
                     <span>Level: {selectedLevelFilter}</span>
@@ -349,7 +262,7 @@ const Certificates = () => {
                     </button>
                   </span>
                 )}
-                
+
                 {selectedIssuerFilter !== 'all' && (
                   <span className="px-2 py-1 bg-green-100 text-green-700 text-sm rounded-full flex items-center space-x-1">
                     <span>Issuer: {selectedIssuerFilter}</span>
@@ -371,11 +284,10 @@ const Certificates = () => {
                   <button
                     key={skill}
                     onClick={() => handleSkillToggle(skill)}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                      selectedSkillFilters.includes(skill)
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedSkillFilters.includes(skill)
                         ? 'bg-cyan-600 text-white'
                         : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                    }`}
+                      }`}
                   >
                     {skill}
                   </button>
@@ -393,11 +305,10 @@ const Certificates = () => {
                     setSelectedLevelFilter('all');
                     setShowLevelFilter(false);
                   }}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                    selectedLevelFilter === 'all'
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedLevelFilter === 'all'
                       ? 'bg-blue-600 text-white'
                       : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                  }`}
+                    }`}
                 >
                   All Levels
                 </button>
@@ -408,11 +319,10 @@ const Certificates = () => {
                       setSelectedLevelFilter(level);
                       setShowLevelFilter(false);
                     }}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                      selectedLevelFilter === level
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedLevelFilter === level
                         ? 'bg-blue-600 text-white'
                         : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                    }`}
+                      }`}
                   >
                     {level}
                   </button>
@@ -430,11 +340,10 @@ const Certificates = () => {
                     setSelectedIssuerFilter('all');
                     setShowIssuerFilter(false);
                   }}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                    selectedIssuerFilter === 'all'
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedIssuerFilter === 'all'
                       ? 'bg-green-600 text-white'
                       : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                  }`}
+                    }`}
                 >
                   All Issuers
                 </button>
@@ -445,11 +354,10 @@ const Certificates = () => {
                       setSelectedIssuerFilter(issuer);
                       setShowIssuerFilter(false);
                     }}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                      selectedIssuerFilter === issuer
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedIssuerFilter === issuer
                         ? 'bg-green-600 text-white'
                         : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                    }`}
+                      }`}
                   >
                     {issuer}
                   </button>
@@ -460,7 +368,7 @@ const Certificates = () => {
         </div>
 
         {/* Certificates Grid */}
-        <div 
+        <div
           ref={scrollContainerRef}
           className="overflow-x-auto pb-4 scrollbar-hide"
           onMouseEnter={handleMouseEnter}
@@ -469,8 +377,8 @@ const Certificates = () => {
         >
           <div className="flex space-x-6 w-max">
             {filteredCertificates.map((cert, index) => (
-              <div 
-                key={cert.id} 
+              <div
+                key={cert.id}
                 className="card overflow-hidden animate-slide-up flex-shrink-0 w-80 hover:scale-105 transition-transform duration-300"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -519,22 +427,21 @@ const Certificates = () => {
                         <span className="text-xs">Issued: {cert.date}</span>
                       </div>
                     </div>
-                    
+
                     <div className="text-xs text-slate-400 truncate">
                       ID: {cert.credentialId}
                     </div>
-                    
+
                     {/* Skills Tags */}
                     <div className="space-y-2">
                       <div className="flex flex-wrap gap-1">
                         {cert.skills.slice(0, 4).map((skill) => (
                           <span
                             key={skill}
-                            className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${
-                              selectedSkillFilters.includes(skill)
+                            className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${selectedSkillFilters.includes(skill)
                                 ? 'bg-cyan-600 text-white'
                                 : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                            }`}
+                              }`}
                             onClick={() => handleSkillToggle(skill)}
                           >
                             {skill}

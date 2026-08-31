@@ -13,11 +13,10 @@ const Footer = () => {
               Worapat Chuchoed (Tang)
             </h3>
             <p className="text-slate-400 leading-relaxed">
-              Full Stack Developer passionate about creating exceptional
-              digital experiences that make a difference.
+              Full Stack Developer with QA and DS experience. Passionate about creating functional web experiences that make a difference.
             </p>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -53,12 +52,12 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="text-lg font-semibold mb-4">Connect</h4>
             <div className="flex space-x-4">
               <a
-                href="https://github.com"
+                href="https://github.com/Akushu2357"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-300"
@@ -66,7 +65,7 @@ const Footer = () => {
                 <Github size={20} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/worapat-chuchoed-9352b929b/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-300"
@@ -82,12 +81,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-slate-800 pt-8 text-center">
           <p className="text-slate-400 flex items-center justify-center space-x-2">
-            <span>© {currentYear} Worapat Chuchoed (Tang). Made with</span>
-            <Heart size={16} className="text-red-500" />
-            <span>and lots of coffee.</span>
+            <span>© {currentYear} Worapat Chuchoed (Tang).</span>
+            {/* <span> Made with <Heart size={16} className="text-red-500" /> and lots of coffee.</span> */}
           </p>
         </div>
       </div>

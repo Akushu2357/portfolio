@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { sumExperienceYears } from '../utils/experienceUtils';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,17 +10,17 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Create email content
     const subject = `Portfolio Contact: Message from ${formData.name}`;
     const body = `Name: ${formData.name}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-    
+
     // Open email client with pre-filled content
     window.location.href = `mailto:tang.tang2004@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    
+
     // Reset form after sending
     setFormData({ name: '', message: '' });
-    
+
     // Show success message (optional)
     alert('Email client opened! Please send the email from your email application.');
   };
@@ -41,8 +42,8 @@ const Contact = () => {
     {
       icon: <Phone size={24} />,
       title: 'Phone',
-      value: '+66 (xxx) xxx-xxxx',
-      link: 'tel:+66xxxxxxxxx',
+      value: '+66 (086) 339-6866',
+      link: 'tel:+66863396866',
     },
     {
       icon: <MapPin size={24} />,
@@ -70,7 +71,7 @@ const Contact = () => {
             <h3 className="text-2xl font-bold text-slate-900 mb-8">
               Let's Start a Conversation
             </h3>
-            
+
             <div className="space-y-6 mb-8">
               {contactInfo.map((info) => (
                 <a
@@ -91,7 +92,7 @@ const Contact = () => {
               ))}
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            {/* <div className="bg-white p-6 rounded-lg shadow-md">
               <h4 className="font-bold text-slate-900 mb-4">
                 Why Work With Me?
               </h4>
@@ -101,7 +102,7 @@ const Contact = () => {
                 <li>✓ Modern, scalable solutions</li>
                 <li>✓ Ongoing support and maintenance</li>
               </ul>
-            </div>
+            </div> */}
           </div>
 
           <div className="animate-slide-up">
@@ -109,7 +110,7 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-slate-900 mb-6">
                 Send a Message
               </h3>
-              
+
               <div className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
@@ -126,7 +127,7 @@ const Contact = () => {
                     placeholder="Your name"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
                     Message
@@ -142,7 +143,7 @@ const Contact = () => {
                     placeholder="Tell me about your project..."
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   className="w-full btn-primary flex items-center justify-center space-x-2"

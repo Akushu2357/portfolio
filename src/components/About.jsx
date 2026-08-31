@@ -27,9 +27,11 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
             About Me
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            I'm a passionate developer with 5+ years of experience creating
-            digital solutions that bridge the gap between design and functionality.
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            I'm a graduate student in Computer Engineering with a passion for software development.
+            I have a foundation in frontend and backend technologies.
+            And also, I have experience in software QA and Data Science from my internship and part-time job.
+            My goal is to continuously learn and grow as a developer while contributing to meaningful projects.
           </p>
         </div>
 
@@ -41,20 +43,19 @@ const About = () => {
               className="rounded-2xl shadow-2xl"
             />
           </div>
-          
+
           <div className="animate-slide-up">
             <h3 className="text-3xl font-bold text-slate-900 mb-6">
               My Journey
             </h3>
             <p className="text-slate-600 mb-6 leading-relaxed">
               Started as a curious student who loved solving problems through code,
-              I've evolved into a full-stack developer who thrives on turning
-              complex challenges into elegant solutions.
+              After trying different roles, I want to growe up as a developer and making a positive impact through technology.
+
             </p>
             <p className="text-slate-600 mb-8 leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies,
-              contributing to open-source projects, or sharing knowledge with
-              the developer community.
+              I am always eager to learn new technologies and improve my skills.
+              I believe in the power of collaboration and enjoy working in teams to create innovative solutions.
             </p>
             <a href="#contact" className="btn-primary">
               Let's Work Together

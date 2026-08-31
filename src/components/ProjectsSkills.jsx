@@ -1,5 +1,21 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Code, Palette, Database, PenTool as Tool, Filter, X, Search, Tag } from 'lucide-react';
+import {
+  ExternalLink,
+  Github,
+  Code,
+  Palette,
+  Database,
+  PenTool,
+  Wrench,
+  Filter,
+  X,
+  TrendingUp,
+  Cloud,
+  Smartphone,
+  Search,
+  Tag
+} from 'lucide-react';
+import { projects } from '../utils/projectsUtils';
 
 const ProjectsSkills = () => {
   const [selectedProject, setSelectedProject] = useState(0); // Start with first project selected
@@ -9,139 +25,48 @@ const ProjectsSkills = () => {
   const [showSkillsFilter, setShowSkillsFilter] = useState(false);
   const [showTechFilter, setShowTechFilter] = useState(false);
 
-  const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with React, Node.js, and Stripe integration. Features include user authentication, product management, and secure payments.',
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#',
-      skills: [
-        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Node.js', category: 'Backend', icon: <Database size={20} /> },
-        { name: 'MongoDB', category: 'Database', icon: <Database size={20} /> },
-        { name: 'Stripe API', category: 'Integration', icon: <Tool size={20} /> },
-        { name: 'JWT Auth', category: 'Security', icon: <Tool size={20} /> },
-        { name: 'Responsive Design', category: 'Frontend', icon: <Palette size={20} /> },
-      ]
-    },
-    {
-      title: 'Task Management App',
-      description: 'A collaborative project management tool with real-time updates, drag-and-drop functionality, and team collaboration features.',
-      image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['React', 'TypeScript', 'Socket.io', 'PostgreSQL'],
-      liveUrl: '#',
-      githubUrl: '#',
-      skills: [
-        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'TypeScript', category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Socket.io', category: 'Real-time', icon: <Tool size={20} /> },
-        { name: 'PostgreSQL', category: 'Database', icon: <Database size={20} /> },
-        { name: 'Drag & Drop', category: 'UX', icon: <Palette size={20} /> },
-        { name: 'Team Collaboration', category: 'Features', icon: <Tool size={20} /> },
-      ]
-    },
-    {
-      title: 'Weather Dashboard',
-      description: 'A responsive weather application with location-based forecasts, interactive maps, and detailed weather analytics.',
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['React', 'API Integration', 'Chart.js', 'Tailwind'],
-      liveUrl: '#',
-      githubUrl: '#',
-      skills: [
-        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'API Integration', category: 'Backend', icon: <Tool size={20} /> },
-        { name: 'Chart.js', category: 'Visualization', icon: <Palette size={20} /> },
-        { name: 'Tailwind CSS', category: 'Styling', icon: <Palette size={20} /> },
-        { name: 'Geolocation', category: 'Features', icon: <Tool size={20} /> },
-        { name: 'Data Visualization', category: 'Analytics', icon: <Palette size={20} /> },
-      ]
-    },
-    {
-      title: 'Social Media Dashboard',
-      description: 'A comprehensive social media management platform with analytics, scheduling, and multi-platform integration.',
-      image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['Next.js', 'Python', 'Redis', 'AWS'],
-      liveUrl: '#',
-      githubUrl: '#',
-      skills: [
-        { name: 'Next.js', category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Python', category: 'Backend', icon: <Database size={20} /> },
-        { name: 'Redis', category: 'Caching', icon: <Database size={20} /> },
-        { name: 'AWS', category: 'Cloud', icon: <Tool size={20} /> },
-        { name: 'Social APIs', category: 'Integration', icon: <Tool size={20} /> },
-        { name: 'Analytics', category: 'Data', icon: <Palette size={20} /> },
-      ]
-    },
-    {
-      title: 'AI Chat Application',
-      description: 'An intelligent chat application with AI-powered responses, real-time messaging, and advanced natural language processing.',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['React', 'Python', 'OpenAI', 'WebSocket'],
-      liveUrl: '#',
-      githubUrl: '#',
-      skills: [
-        { name: 'React', category: 'Frontend', icon: <Code size={20} /> },
-        { name: 'Python', category: 'Backend', icon: <Database size={20} /> },
-        { name: 'OpenAI API', category: 'AI/ML', icon: <Tool size={20} /> },
-        { name: 'WebSocket', category: 'Real-time', icon: <Tool size={20} /> },
-        { name: 'NLP', category: 'AI/ML', icon: <Tool size={20} /> },
-        { name: 'Chat UI/UX', category: 'Design', icon: <Palette size={20} /> },
-      ]
-    },
-    {
-      title: 'Fitness Tracking App',
-      description: 'A comprehensive fitness application with workout tracking, nutrition monitoring, and progress analytics.',
-      image: 'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['React Native', 'Firebase', 'Chart.js', 'Health APIs'],
-      liveUrl: '#',
-      githubUrl: '#',
-      skills: [
-        { name: 'React Native', category: 'Mobile', icon: <Code size={20} /> },
-        { name: 'Firebase', category: 'Backend', icon: <Database size={20} /> },
-        { name: 'Chart.js', category: 'Visualization', icon: <Palette size={20} /> },
-        { name: 'Health APIs', category: 'Integration', icon: <Tool size={20} /> },
-        { name: 'Mobile UX', category: 'Design', icon: <Palette size={20} /> },
-        { name: 'Data Analytics', category: 'Analytics', icon: <Tool size={20} /> },
-      ]
-    },
-  ];
+  const groupedSkills = (project) => project.reduce((acc, skill) => {
+    if (!acc[skill.category]) {
+      acc[skill.category] = [];
+    }
+    acc[skill.category].push((skill));
+    return acc;
+  }, {});
 
   // Get all unique skills from projects
-  const allSkills = [...new Set(projects.flatMap(project => 
+  const allSkills = [...new Set(projects.flatMap(project =>
     project.skills.map(skill => skill.name)
   ))].sort();
-  
-  const allTechnologies = [...new Set(projects.flatMap(project => 
+
+  const allTechnologies = [...new Set(projects.flatMap(project =>
     project.technologies
   ))].sort();
 
   // Filter projects based on multiple criteria
   const filteredProjects = projects.filter(project => {
     // Search filter
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch = searchQuery === '' ||
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.technologies.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase())) ||
       project.skills.some(skill => skill.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
     // Skills filter (multiple selection)
-    const matchesSkills = selectedSkillFilters.length === 0 || 
-      selectedSkillFilters.every(skillName => 
+    const matchesSkills = selectedSkillFilters.length === 0 ||
+      selectedSkillFilters.every(skillName =>
         project.skills.some(skill => skill.name === skillName)
       );
 
     // Technology filter
-    const matchesTech = selectedTechFilter === 'all' || 
+    const matchesTech = selectedTechFilter === 'all' ||
       project.technologies.includes(selectedTechFilter);
 
     return matchesSearch && matchesSkills && matchesTech;
   });
 
   const handleSkillToggle = (skillName) => {
-    setSelectedSkillFilters(prev => 
-      prev.includes(skillName) 
+    setSelectedSkillFilters(prev =>
+      prev.includes(skillName)
         ? prev.filter(s => s !== skillName)
         : [...prev, skillName]
     );
@@ -155,8 +80,8 @@ const ProjectsSkills = () => {
     setShowTechFilter(false);
   };
 
-  const hasActiveFilters = selectedSkillFilters.length > 0 || 
-    selectedTechFilter !== 'all' || 
+  const hasActiveFilters = selectedSkillFilters.length > 0 ||
+    selectedTechFilter !== 'all' ||
     searchQuery !== '';
 
   const handleProjectHover = (index) => {
@@ -192,6 +117,26 @@ const ProjectsSkills = () => {
       'Mobile': 'bg-green-100 text-green-700 border-green-200',
     };
     return colors[category] || 'bg-slate-100 text-slate-700 border-slate-200';
+  };
+
+  const categoryIconMap = {
+    Frontend: Code,
+    Backend: Database,
+    Database: Database,
+    Integration: Wrench,
+    Security: Wrench,
+    UX: Palette,
+    'Real-time': TrendingUp,
+    Features: PenTool,
+    Visualization: Palette,
+    Styling: Palette,
+    Analytics: TrendingUp,
+    Cloud: Cloud,
+    Caching: Database,
+    Data: Database,
+    'AI/ML': TrendingUp,
+    Design: Palette,
+    Mobile: Smartphone,
   };
 
   return (
@@ -236,31 +181,29 @@ const ProjectsSkills = () => {
               {/* Skills Filter */}
               <button
                 onClick={() => setShowSkillsFilter(!showSkillsFilter)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                  selectedSkillFilters.length > 0 
-                    ? 'bg-cyan-100 text-cyan-700 border border-cyan-200' 
-                    : 'bg-slate-100 hover:bg-slate-200'
-                }`}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedSkillFilters.length > 0
+                  ? 'bg-cyan-100 text-cyan-700 border border-cyan-200'
+                  : 'bg-slate-100 hover:bg-slate-200'
+                  }`}
               >
                 <Tag size={16} />
                 <span className="font-medium">
                   Skills {selectedSkillFilters.length > 0 && `(${selectedSkillFilters.length})`}
                 </span>
               </button>
-              
+
               {/* Technology Filter */}
               <button
                 onClick={() => setShowTechFilter(!showTechFilter)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
-                  selectedTechFilter !== 'all' 
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200' 
-                    : 'bg-slate-100 hover:bg-slate-200'
-                }`}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedTechFilter !== 'all'
+                  ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                  : 'bg-slate-100 hover:bg-slate-200'
+                  }`}
               >
                 <Code size={16} />
                 <span className="font-medium">Technology</span>
               </button>
-              
+
               {/* Clear All Filters */}
               {hasActiveFilters && (
                 <button
@@ -283,13 +226,13 @@ const ProjectsSkills = () => {
             <div className="mt-4 p-3 bg-slate-50 rounded-lg border">
               <div className="flex flex-wrap gap-2 items-center">
                 <span className="text-sm font-medium text-slate-700">Active filters:</span>
-                
+
                 {searchQuery && (
                   <span className="px-2 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">
                     Search: "{searchQuery}"
                   </span>
                 )}
-                
+
                 {selectedSkillFilters.map(skill => (
                   <span key={skill} className="px-2 py-1 bg-cyan-100 text-cyan-700 text-sm rounded-full flex items-center space-x-1">
                     <span>{skill}</span>
@@ -298,7 +241,7 @@ const ProjectsSkills = () => {
                     </button>
                   </span>
                 ))}
-                
+
                 {selectedTechFilter !== 'all' && (
                   <span className="px-2 py-1 bg-blue-100 text-blue-700 text-sm rounded-full flex items-center space-x-1">
                     <span>Tech: {selectedTechFilter}</span>
@@ -320,11 +263,10 @@ const ProjectsSkills = () => {
                   <button
                     key={skill}
                     onClick={() => handleSkillToggle(skill)}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                      selectedSkillFilters.includes(skill)
-                        ? 'bg-cyan-600 text-white'
-                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                    }`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedSkillFilters.includes(skill)
+                      ? 'bg-cyan-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                      }`}
                   >
                     {skill}
                   </button>
@@ -342,11 +284,10 @@ const ProjectsSkills = () => {
                     setSelectedTechFilter('all');
                     setShowTechFilter(false);
                   }}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                    selectedTechFilter === 'all'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                  }`}
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedTechFilter === 'all'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                    }`}
                 >
                   All Technologies
                 </button>
@@ -357,11 +298,10 @@ const ProjectsSkills = () => {
                       setSelectedTechFilter(tech);
                       setShowTechFilter(false);
                     }}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
-                      selectedTechFilter === tech
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
-                    }`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedTechFilter === tech
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                      }`}
                   >
                     {tech}
                   </button>
@@ -381,11 +321,10 @@ const ProjectsSkills = () => {
               {filteredProjects.map((project, index) => (
                 <div
                   key={project.title}
-                  className={`card overflow-hidden cursor-pointer transition-all duration-300 ${
-                    selectedProject === index 
-                      ? 'ring-2 ring-cyan-500 shadow-2xl scale-[1.02]' 
-                      : 'hover:shadow-xl hover:scale-[1.01]'
-                  }`}
+                  className={`card overflow-hidden cursor-pointer transition-all duration-300 ${selectedProject === index
+                    ? 'ring-2 ring-cyan-500 shadow-2xl scale-[1.02]'
+                    : 'hover:shadow-xl hover:scale-[1.01]'
+                    }`}
                   onMouseEnter={() => handleProjectHover(index)}
                   onClick={() => handleProjectClick(index)}
                 >
@@ -414,7 +353,7 @@ const ProjectsSkills = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="p-4 sm:p-6">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">
                       {project.title}
@@ -436,7 +375,7 @@ const ProjectsSkills = () => {
                 </div>
               ))}
             </div>
-            
+
             {/* No Results Message */}
             {filteredProjects.length === 0 && (
               <div className="text-center py-12">
@@ -475,37 +414,39 @@ const ProjectsSkills = () => {
               </div>
 
               <div className="space-y-3 sm:space-y-4 flex-1 overflow-y-auto scrollbar-hide min-h-0">
-                {projects[selectedProject].skills.map((skill, skillIndex) => (
+                {Object.entries(groupedSkills(projects[selectedProject].skills)).map(([category, skills]) => (
                   <div
-                    key={skill.name}
-                    className={`bg-white rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 cursor-pointer ${
-                      selectedSkillFilters.includes(skill.name) ? 'ring-2 ring-cyan-500' : ''
-                    }`}
-                    style={{ animationDelay: `${skillIndex * 0.1}s` }}
-                    onClick={() => handleSkillToggle(skill.name)}
+                    key={category}
+                    className="bg-slate-100 rounded-lg p-4 sm:p-5"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="text-slate-600 flex-shrink-0">
-                        {skill.icon}
+                        {(() => {
+                          const Icon = categoryIconMap[category] || Code;
+                          return <Icon size={16} />;
+                        })()}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                          <span className="font-semibold text-slate-900 text-sm sm:text-base truncate">
+                      <div className={"font-semibold text-sm sm:text-base " + getCategoryColor(category)}>
+                        {category}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {skills.map(skill => (
+                          <div
+                            key={skill.name}
+                            className="bg-cyan-100 text-cyan-800 text-xs sm:text-sm font-medium px-3 py-1 rounded-full cursor-pointer transition-colors duration-300 hover:bg-cyan-200"
+                            onClick={() => handleSkillToggle(skill.name)}
+                          >
                             {skill.name}
-                          </span>
-                          <div className={`inline-block px-2 py-1 text-xs rounded-full border flex-shrink-0 ${
-                            selectedSkillFilters.includes(skill.name) 
-                              ? 'bg-cyan-600 text-white border-cyan-600' 
-                              : getCategoryColor(skill.category)
-                          }`}>
-                            {skill.category}
                           </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+
 
               <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg flex-shrink-0">
                 <h4 className="font-semibold text-cyan-900 mb-2 text-sm sm:text-base">
