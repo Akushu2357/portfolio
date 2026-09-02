@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
 import profileImage from '../assets/profile.jpg';
+import { handleNavClick } from '../utils/navUtils';
 
 const Hero = () => {
   return (
@@ -63,7 +64,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="animate-bounce-slow">
+        <div className="animate-bounce-slow cursor-pointer" onClick={() => handleNavClick('#contact')} >
           <ChevronDown size={32} className="text-slate-400 mx-auto" />
         </div>
       </div>

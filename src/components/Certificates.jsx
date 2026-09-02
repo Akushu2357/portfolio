@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Award, ExternalLink, Calendar, Filter, X, Search, Tag } from 'lucide-react';
+import { certificates } from '../utils/certificatesUtils';
 
 const Certificates = () => {
   const scrollContainerRef = useRef(null);
@@ -12,21 +13,6 @@ const Certificates = () => {
   const [showIssuerFilter, setShowIssuerFilter] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [scrollDirection, setScrollDirection] = useState(1); // 1 for right, -1 for left
-
-  const certificates = [
-    {
-      id: 1,
-      title: 'Introduction to HTML, CSS, & JavaScript',
-      issuer: 'Coursera',
-      date: 'September 2024',
-      credentialId: 'N/A',
-      image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~1CKUVQAQZEEZ/CERTIFICATE_LANDING_PAGE~1CKUVQAQZEEZ.jpeg',
-      skills: ['HTML', 'CSS', 'JavaScript', 'Web Development', 'Frontend Development', 'Responsive Web Design'],
-      verifyUrl: 'https://coursera.org/share/ff662cfb1efca8ef01ddf5356421ca96',
-      description: ' Learn HTML structure, CSS styling, and JavaScript for interactivity, then finish with hands-on labs and a final webpage project.',
-      level: 'Beginner'
-    },
-  ];
 
   // Get all unique skills
   const allSkills = [...new Set(certificates.flatMap(cert => cert.skills))].sort();

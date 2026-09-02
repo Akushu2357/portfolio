@@ -1,5 +1,52 @@
-import React from 'react';
-import { Code, Palette, Zap } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Code, Palette, GraduationCap, Zap, Award, Folder } from 'lucide-react';
+import { certificates } from '../utils/certificatesUtils';
+import { experiences } from '../utils/experienceUtils';
+import { projects } from '../utils/projectsUtils';
+import { handleNavClick } from '../utils/navUtils';
+
+const Cards = (icon, cards = null, href = null) => {
+  if (!cards || cards.length === 0) {
+    return (null);
+  }
+
+  return (
+    <div className="flex items-center gap-6 shrink-0 cursor-pointer" onClick={() => handleNavClick(href)}>
+      {
+        cards && cards.length > 0 && (
+          <div className='card overflow-hidden animate-slide-up flex-shrink-0 h-20 w-20 hover:scale-105 transition-transform duration-300 flex items-center justify-center'>
+            {icon}
+          </div>
+        )
+      }
+      {
+        cards && cards.map((card, index) => (
+          <div
+            key={card.id}
+            className="card overflow-hidden animate-slide-up flex-shrink-0 w-40 hover:scale-105 transition-transform duration-300"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <div className="relative overflow-hidden">
+              <img
+                src={card.image}
+                alt={card.title}
+                className="w-full h-40 object-cover"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <p className="text-white text-center px-4 text-wrap">{String(card.company || card.issuer || card.title).split('(').slice(-1)[0].split(')')[0].trim()}</p>
+              </div>
+            </div>
+            <div className="p-1">
+              <p className="text-slate-600 text-xs leading-tight line-clamp-1">
+                {card.highlight || card.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  );
+};
 
 const About = () => {
   const highlights = [
@@ -27,14 +74,61 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
             About Me
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            I'm a graduate student in Computer Engineering with a passion for software development.
-            I have a foundation in frontend and backend technologies.
-            And also, I have experience in software QA and Data Science from my internship and part-time job.
-            My goal is to continuously learn and grow as a developer while contributing to meaningful projects.
-          </p>
+          {
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              I'm a graduate student in Computer Engineering with a passion for software development.
+              I have a foundation in frontend and backend technologies.
+              And also, I have experience in DS and software QA from my internship and part-time job.
+              My goal is to continuously learn and grow as a developer while contributing to meaningful projects.
+            </p>
+          }
+          {/* <div className='flex'>
+            <div className='p-4 bg-gradient-to-br from-cyan-50 via-blue-50 to-slate-50 text-left rounded-lg'>
+              <h3 className='text-xl md:text-2xl'>Education</h3>
+              <div className='ml-1'>
+                <p>King Mongkut's University of Technology Thonburi (KMUTT)</p>
+                <div>
+                  <p>Computer Engineering Bachelor's Degree</p>
+                  <p>GPA: <span>3.54</span>/4.00 (Second Class Honors)</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>Experiences</h3>
+              <ul>
+                <li>Software QA (Part-Time)</li>
+                <li>Data Science (Internship)</li>
+              </ul>
+            </div>
+          </div> */}
         </div>
 
+        {/*Scroll*/}
+        <div className="overflow-hidden whitespace-nowrap w-full pt-4 pb-4">
+          <div
+            className="flex w-max gap-6"
+            style={{
+              animation: 'scroll-left 10s linear infinite',
+              animationPlayState: 'running',
+            }}
+          >
+            <div className="flex shrink-0 gap-6">
+              {Cards(<GraduationCap size={32} />, experiences.slice(-1), '#experience')}
+              {Cards(<Zap size={32} />, experiences.filter((exp) => exp.type === 'work').slice(0, 3), '#experience')}
+              {Cards(<Award size={32} />, certificates, '#certificates')}
+              {Cards(<Folder size={32} />, projects, '#projects')}
+            </div>
+
+            <div className="flex shrink-0 gap-6">
+              {Cards(<GraduationCap size={32} />, experiences.slice(-1), '#experience')}
+              {Cards(<Zap size={32} />, experiences.filter((exp) => exp.type === 'work').slice(0, 3), '#experience')}
+              {Cards(<Award size={32} />, certificates, '#certificates')}
+              {Cards(<Folder size={32} />, projects, '#projects')}
+            </div>
+          </div>
+        </div>
+
+        {/* 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="animate-slide-up">
             <img
@@ -82,6 +176,7 @@ const About = () => {
             </div>
           ))}
         </div>
+         */}
       </div>
     </section>
   );

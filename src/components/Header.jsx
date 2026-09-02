@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { handleNavClick } from '../utils/navUtils';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,14 +39,8 @@ const Header = () => {
     { href: '#contact', label: 'Contact' },
   ];
 
-  const handleNavClick = (href) => {
+  const handleSetMenuClose = () => {
     setIsMenuOpen(false);
-    // Smooth scroll to section
-    const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   const handleLogoClick = () => {
@@ -59,8 +54,8 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-lg'
-          : 'bg-transparent'
+        ? 'bg-white/95 backdrop-blur-sm shadow-lg'
+        : 'bg-transparent'
         }`}
     >
       <nav className="container-max section-padding py-4">
@@ -68,10 +63,10 @@ const Header = () => {
           <button
             onClick={handleLogoClick}
             className={`text-2xl font-bold transition-all duration-300 hover:scale-105 ${activeSection === 'home'
-                ? 'gradient-text'
-                : isScrolled
-                  ? 'text-slate-900 hover:text-cyan-600'
-                  : 'text-white hover:text-cyan-300'
+              ? 'gradient-text'
+              : isScrolled
+                ? 'text-slate-900 hover:text-cyan-600'
+                : 'text-white hover:text-cyan-300'
               }`}
           >
             Tang's Portfolio
@@ -86,14 +81,14 @@ const Header = () => {
               return (
                 <button
                   key={item.href}
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={() => handleNavClick(item.href, handleSetMenuClose)}
                   className={`font-medium transition-all duration-300 relative group ${isActive
-                      ? isScrolled
-                        ? 'text-cyan-600'
-                        : 'text-cyan-300'
-                      : isScrolled
-                        ? 'text-slate-700 hover:text-cyan-600'
-                        : 'text-white/90 hover:text-white'
+                    ? isScrolled
+                      ? 'text-cyan-600'
+                      : 'text-cyan-300'
+                    : isScrolled
+                      ? 'text-slate-700 hover:text-cyan-600'
+                      : 'text-white/90 hover:text-white'
                     }`}
                 >
                   {item.label}
@@ -127,10 +122,10 @@ const Header = () => {
               return (
                 <button
                   key={item.href}
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={() => handleNavClick(item.href, handleSetMenuClose)}
                   className={`block w-full text-left px-4 py-3 transition-all duration-300 ${isActive
-                      ? 'text-cyan-600 bg-cyan-50 border-r-2 border-cyan-600'
-                      : 'text-slate-700 hover:text-cyan-600 hover:bg-slate-50'
+                    ? 'text-cyan-600 bg-cyan-50 border-r-2 border-cyan-600'
+                    : 'text-slate-700 hover:text-cyan-600 hover:bg-slate-50'
                     }`}
                 >
                   {item.label}
