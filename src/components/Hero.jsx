@@ -5,7 +5,7 @@ import { handleNavClick } from '../utils/navUtils';
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-50 via-blue-50 to-slate-50 pt-20">
+    <section id="home" className="min-h-screen flex items-center justify-center bg-teal-50 pt-20">
       <div className="container-max section-padding text-center">
         <div className="animate-fade-in">
           <div className="mb-8">
@@ -26,7 +26,7 @@ const Hero = () => {
           </h2>
 
           <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Full Stack Developer with QA and DS experience.
+            Software Engineer / Backend Developer
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

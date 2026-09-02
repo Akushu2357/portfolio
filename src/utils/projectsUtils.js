@@ -5,7 +5,7 @@ export const projects = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Scrabble_2015.jpg/500px-Scrabble_2015.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail',
         technologies: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Supabase'],
         liveUrl: 'https://vocabulary-crossword-puzzles.vercel.app/',
-        githubUrl: 'https://github.com/Akushu2357/Vocabulary-Crossword-Puzzles',
+        // githubUrl: 'https://github.com/Akushu2357/Vocabulary-Crossword-Puzzles',
         skills: [
             { name: 'TypeScript', category: 'Frontend'},
             { name: 'React', category: 'Frontend'},

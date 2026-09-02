@@ -126,7 +126,7 @@ const Certificates = () => {
   }, [filteredCertificates]);
 
   return (
-    <section id="certificates" className="py-12 sm:py-16 lg:py-20 bg-white">
+    <section id="certificates" className="py-12 sm:py-16 lg:py-20 bg-cyan-50">
       <div className="container-max section-padding">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 sm:mb-6">
@@ -167,9 +167,10 @@ const Certificates = () => {
               {/* Skills Filter */}
               <button
                 onClick={() => setShowSkillsFilter(!showSkillsFilter)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedSkillFilters.length > 0
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300
+                  ${selectedSkillFilters.length > 0
                     ? 'bg-cyan-100 text-cyan-700 border border-cyan-200'
-                    : 'bg-slate-100 hover:bg-slate-200'
+                    : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Tag size={16} />
@@ -183,7 +184,7 @@ const Certificates = () => {
                 onClick={() => setShowLevelFilter(!showLevelFilter)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedLevelFilter !== 'all'
                     ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                    : 'bg-slate-100 hover:bg-slate-200'
+                    : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Award size={16} />
@@ -195,7 +196,7 @@ const Certificates = () => {
                 onClick={() => setShowIssuerFilter(!showIssuerFilter)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedIssuerFilter !== 'all'
                     ? 'bg-green-100 text-green-700 border border-green-200'
-                    : 'bg-slate-100 hover:bg-slate-200'
+                    : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Filter size={16} />
@@ -469,7 +470,7 @@ const Certificates = () => {
         )}
 
         {/* Summary Stats */}
-        <div className="mt-12 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-6 lg:p-8 border border-cyan-200">
+        <div className="mt-12 bg-white/80 rounded-xl p-6 lg:p-8 border border-cyan-200">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-cyan-600 mb-1">

@@ -1,4 +1,4 @@
-export const experiences = [
+export const experience = [
     {
       id: 1,
       title: 'Computer Engineering Student',
@@ -88,7 +88,7 @@ export const experiences = [
   ].reverse();
 
 export const sumExperienceYears = () => {
-  const totalMonths = experiences.reduce((acc, exp) => {
+  const totalMonths = experience.reduce((acc, exp) => {
     if (exp.type !== 'work') return acc;
     const [startMonth, startYear] = exp.period.split(' - ')[0].split(' ');
     const [endMonth, endYear] = exp.period.split(' - ')[1].split(' ');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Award, Briefcase, Star, TrendingUp } from 'lucide-react';
-import { experiences, sumExperienceYears } from '../utils/experienceUtils';
+import { experience, sumExperienceYears } from '../utils/experienceUtils';
 import { countCompletedProjects } from '../utils/projectsUtils';
 
 const Experience = () => {
@@ -70,7 +70,7 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-12 sm:py-16 lg:py-20 bg-slate-50">
+    <section id="experience" className="py-12 sm:py-16 lg:py-20 bg-teal-50">
       <div className="container-max section-padding">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 sm:mb-6">
@@ -89,14 +89,14 @@ const Experience = () => {
               <div className="animate-fade-in flex-1 flex flex-col min-h-0">
                 <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
-                    {getIcon(experiences[selectedExperience].type)}
+                    {getIcon(experience[selectedExperience].type)}
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900">
-                      {experiences[selectedExperience].title}
+                      {experience[selectedExperience].title}
                     </h3>
                     <p className="text-sm sm:text-base text-slate-600">
-                      {experiences[selectedExperience].company}
+                      {experience[selectedExperience].company}
                     </p>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ const Experience = () => {
                   <div className="bg-slate-50 rounded-lg p-4">
                     <h4 className="font-semibold text-slate-900 mb-2 text-sm sm:text-base">Description</h4>
                     <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">
-                      {experiences[selectedExperience].description}
+                      {experience[selectedExperience].description}
                     </p>
                   </div>
 
@@ -114,7 +114,7 @@ const Experience = () => {
                   <div className="bg-cyan-50 rounded-lg p-4">
                     <h4 className="font-semibold text-cyan-900 mb-3 text-sm sm:text-base">Key Achievements</h4>
                     <ul className="space-y-2">
-                      {experiences[selectedExperience].achievements.map((achievement, index) => (
+                      {experience[selectedExperience].achievements.map((achievement, index) => (
                         <li key={index} className="text-xs sm:text-sm text-cyan-800 flex items-start space-x-2">
                           <span className="text-cyan-500 mt-0.5 flex-shrink-0">✓</span>
                           <span>{achievement}</span>
@@ -130,7 +130,7 @@ const Experience = () => {
                       {/* Show all technologies in a scrollable container */}
                       <div className="max-h-32 overflow-y-auto scrollbar-hide">
                         <div className="flex flex-wrap gap-2">
-                          {experiences[selectedExperience].technologies.map((tech) => (
+                          {experience[selectedExperience].technologies.map((tech) => (
                             <span
                               key={tech}
                               className="px-3 py-1 bg-blue-200 text-blue-800 text-xs rounded-full font-medium flex-shrink-0"
@@ -140,9 +140,9 @@ const Experience = () => {
                           ))}
                         </div>
                       </div>
-                      {experiences[selectedExperience].technologies.length > 5 && (
+                      {experience[selectedExperience].technologies.length > 5 && (
                         <p className="text-xs text-blue-700 italic">
-                          Scroll to see all {experiences[selectedExperience].technologies.length} technologies
+                          Scroll to see all {experience[selectedExperience].technologies.length} technologies
                         </p>
                       )}
                     </div>
@@ -216,7 +216,7 @@ const Experience = () => {
 
                 {/* Timeline Items */}
                 <div className="space-y-8 sm:space-y-10 py-8">
-                  {experiences.map((exp, index) => (
+                  {experience.map((exp, index) => (
                     <div
                       key={exp.id}
                       className={`relative cursor-pointer transition-all duration-300 ${selectedExperience === index ? '' : 'hover:scale-102'

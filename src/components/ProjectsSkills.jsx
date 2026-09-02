@@ -158,7 +158,7 @@ const ProjectsSkills = () => {
   };
 
   return (
-    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-white">
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-teal-50">
       <div className="container-max section-padding">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 sm:mb-6">
@@ -201,7 +201,7 @@ const ProjectsSkills = () => {
                 onClick={() => setShowSkillsFilter(!showSkillsFilter)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedSkillFilters.length > 0
                   ? 'bg-cyan-100 text-cyan-700 border border-cyan-200'
-                  : 'bg-slate-100 hover:bg-slate-200'
+                  : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Tag size={16} />
@@ -215,7 +215,7 @@ const ProjectsSkills = () => {
                 onClick={() => setShowTechFilter(!showTechFilter)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedTechFilter !== 'all'
                   ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                  : 'bg-slate-100 hover:bg-slate-200'
+                  : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Code size={16} />
@@ -331,7 +331,7 @@ const ProjectsSkills = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Projects Grid */}
-          <div className="bg-slate-50 rounded-xl p-4 sm:p-6 lg:p-8">
+          <div className="bg-white/90 rounded-xl p-4 sm:p-6 lg:p-8">
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 lg:mb-6">
               Projects
             </h3>
@@ -354,20 +354,24 @@ const ProjectsSkills = () => {
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
                       <div className="flex space-x-4">
-                        <a
-                          href={project.liveUrl}
-                          className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink size={16} className="text-slate-700" />
-                        </a>
-                        <a
-                          href={project.githubUrl}
-                          className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Github size={16} className="text-slate-700" />
-                        </a>
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink size={16} className="text-slate-700" />
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            className="p-2 sm:p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Github size={16} className="text-slate-700" />
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -417,7 +421,7 @@ const ProjectsSkills = () => {
           </div>
 
           {/* Skills Panel */}
-          <div className="bg-slate-50 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
+          <div className="bg-white/90 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
             <div className="animate-fade-in flex-1 flex flex-col min-h-0">
               <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
@@ -435,7 +439,7 @@ const ProjectsSkills = () => {
                 {Object.entries(groupedSkills(projects[selectedProject].skills)).map(([category, { skills, icon }]) => (
                   <div
                     key={category}
-                    className="bg-slate-100 rounded-lg p-4 sm:p-5"
+                    className="bg-white rounded-lg p-4 sm:p-5 shadow-sm border border-slate-200 transition-all duration-300 hover:shadow-md hover:border-slate-300"
                   >
                     <div className="flex items-center space-x-3">
                       <div className={"flex-shrink-0 p-2 rounded-lg " + getCategoryColor(category)}>
