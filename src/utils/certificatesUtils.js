@@ -174,25 +174,24 @@ export const certificates = [
         description: 'Learned fundamental data analytics concepts including data cleaning, SQL, data visualization, data processing, and data-driven decision making.', // - Define and explain key concepts involved in data analytics including data, data analysis, and data ecosystems. - Conduct an analytical thinking self assessment giving specific examples of the application of analytical thinking. - Discuss the role of spreadsheets, query languages, and data visualization tools in data analytics. - Describe the role of a data analyst with specific reference to jobs.
         level: 'Beginner'
     },
-    {
-        id: 10,
-        title: 'Back-End Development and APIs',
-        issuer: 'freeCodeCamp',
-        date: 'Semptember 2026',
-        credentialId: 'N/A',
-        image: '',
-        skills: [
-            'Node.js',
-            'Express.js',
-            'REST API',
-            'Authentication',
-            'WebSockets',
-            'Security',
-            'API Development'
-        ], // 
-        verifyUrl: '',
-        description: 'Built backend applications and APIs using Node.js and Express, covering REST APIs, authentication, security, WebSockets, error handling, and API development.', // - Introduction to Node.js - Node.js Core Modules - Node Package Manager - Build a Prime Number Checker Module - HTTP and the Web Standards Model - Introduction to Express - Build a Personal Profile App - Express Middleware - REST API and Web Services - Build a Timestamp Microservice - Error Handling in Express - WebSockets - Build a Chat App - Security and Privacy - Authentication - Build a Family Movie Watchlist API - Back-End Development and APIs Review
-        level: ''
-    }
-
+    // {
+    //     id: 10,
+    //     title: 'Back-End Development and APIs',
+    //     issuer: 'freeCodeCamp',
+    //     date: 'Semptember 2026',
+    //     credentialId: 'N/A',
+    //     image: '',
+    //     skills: [
+    //         'Node.js',
+    //         'Express.js',
+    //         'REST API',
+    //         'Authentication',
+    //         'WebSockets',
+    //         'Security',
+    //         'API Development'
+    //     ], // 
+    //     verifyUrl: '',
+    //     description: 'Built backend applications and APIs using Node.js and Express, covering REST APIs, authentication, security, WebSockets, error handling, and API development.', // - Introduction to Node.js - Node.js Core Modules - Node Package Manager - Build a Prime Number Checker Module - HTTP and the Web Standards Model - Introduction to Express - Build a Personal Profile App - Express Middleware - REST API and Web Services - Build a Timestamp Microservice - Error Handling in Express - WebSockets - Build a Chat App - Security and Privacy - Authentication - Build a Family Movie Watchlist API - Back-End Development and APIs Review
+    //     level: ''
+    // },
 ];

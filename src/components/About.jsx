@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Code, LineChart, GraduationCap, Zap, Award, Folder, Puzzle } from 'lucide-react';
 import { certificates } from '../utils/certificatesUtils';
 import { experience } from '../utils/experienceUtils';
-import { projects } from '../utils/projectsUtils';
+import { projects, getImageUrl } from '../utils/projectsUtils';
 import { handleNavClick } from '../utils/navUtils';
 
 const CardsList = ({ icon, cards = [], href = null }) => {
@@ -31,7 +31,7 @@ const CardsList = ({ icon, cards = [], href = null }) => {
         >
           <div className="relative overflow-hidden">
             <img
-              src={card.image}
+              src={getImageUrl(card.image)}
               alt={card.title}
               className="w-full h-40 object-cover"
             />
@@ -174,7 +174,7 @@ const About = () => {
               <CardsList key={iteration * 4 + 1} icon={<GraduationCap size={32} />} cards={experience.slice(-1)} href="#experience" />
               <CardsList key={iteration * 4 + 2} icon={<Zap size={32} />} cards={experience.filter((exp) => exp.type === 'work').slice(0, 3)} href="#experience" />
               <CardsList key={iteration * 4 + 3} icon={<Award size={32} />} cards={certificates.sort((a, b) => compareLevelsAndDate(a, b)).slice(0, 3)} href="#certificates" />
-              <CardsList key={iteration * 4 + 4} icon={<Folder size={32} />} cards={projects} href="#projects" />
+              <CardsList key={iteration * 4 + 4} icon={<Folder size={32} />} cards={projects.sort((a, b) => b.date - a.date).slice(0, 3)} href="#projects" />
             </div>
           ))}
         </div>

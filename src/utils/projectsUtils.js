@@ -168,3 +168,7 @@ export const projects = [
 export const countCompletedProjects = () => {
     return projects.filter(project => project.completed).length;
 }
+
+export const getImageUrl = (path) => {
+    return new URL(path ? path : '../projects/default.jpg', import.meta.url).href;
+};

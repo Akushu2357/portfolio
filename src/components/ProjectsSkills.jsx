@@ -28,8 +28,10 @@ import {
   Bot,
   Smartphone,
   Rocket,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
-import { projects } from '../utils/projectsUtils.js';
+import { projects, getImageUrl } from '../utils/projectsUtils.js';
 
 const ProjectsSkills = () => {
   const [selectedProject, setSelectedProject] = useState(0); // Start with first project selected
@@ -38,6 +40,7 @@ const ProjectsSkills = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSkillsFilter, setShowSkillsFilter] = useState(false);
   const [showTechFilter, setShowTechFilter] = useState(false);
+  const [showAllSkillsProjects, setShowAllSkillsProjects] = useState(projects.map(() => false)); // Track which projects have all skills shown
 
   const categoryIconMap = {
     Frontend: [Code, "#0e7490"],
@@ -319,11 +322,11 @@ const ProjectsSkills = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Projects Grid */}
-          <div className="bg-white/90 rounded-xl p-4 sm:p-6 lg:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 lg:mb-6">
+          <div className="bg-white/90 rounded-xl p-4 sm:p-4 lg:p-6 max-h-[70vh] flex flex-col">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 lg:mb-4">
               Projects
             </h3>
-            <div className="space-y-4 sm:space-y-6 max-h-[60vh] overflow-y-auto scrollbar-hide p-2 sm:p-3 lg:p-4">
+            <div className="space-y-4 sm:space-y-6 overflow-y-auto scrollbar-hide p-2 sm:p-4 lg:p-6">
               {filteredProjects.map((project, index) => (
                 <div
                   key={project.title}
@@ -336,7 +339,7 @@ const ProjectsSkills = () => {
                 >
                   <div className="relative overflow-hidden rounded-t-xl">
                     <img
-                      src={project.image}
+                      src={getImageUrl(project.image)}
                       alt={project.title}
                       className="w-full h-32 sm:h-40 lg:h-48 object-cover transition-transform duration-300 hover:scale-110"
                     />
@@ -371,15 +374,34 @@ const ProjectsSkills = () => {
                     <p className="text-slate-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs sm:text-sm rounded-full font-medium"
-                        >
-                          {tech}
+                    <div
+                      onClick={() => {
+                        setShowAllSkillsProjects(prev => {
+                          const newState = [...prev];
+                          newState[index] = !newState[index];
+                          return newState;
+                        });
+                      }}
+                      className="flex cursor-pointer"
+                    >
+                      <div
+                        className={`relative flex gap-1 sm:gap-2 max-h-min ${showAllSkillsProjects[index]
+                          ? 'flex-wrap'
+                          : 'flex-row overflow-y-auto scrollbar-hide'}`}>
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs sm:text-sm rounded-full font-medium flex items-center justify-center whitespace-nowrap"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="ml-auto flex items-center justify-center">
+                        <span className="ml-1 sm:ml-2 bg-slate-100 text-slate-700 text-xs sm:text-sm rounded-full font-medium flex items-center justify-center whitespace-nowrap">
+                          {showAllSkillsProjects[index] ? <ChevronDown /> : <ChevronUp />}
                         </span>
-                      ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -477,7 +499,7 @@ const ProjectsSkills = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 
