@@ -69,6 +69,15 @@ const About = () => {
     },
   ];
 
+  const compareLevelsAndDate = (a, b) => {
+    const levels = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+    const levelDiff = levels.indexOf(a.level) - levels.indexOf(b.level);
+    if (levelDiff !== 0) {
+      return levelDiff;
+    }
+    return new Date(b.date) - new Date(a.date);
+  };
+
   return (
     <section id="about" className="py-10 lg:py-20 bg-cyan-50">
       <div className="section-padding flex flex-col lg:flex-row gap-0 lg:gap-12 items-center justify-center">
@@ -164,7 +173,7 @@ const About = () => {
             <div key={iteration} className="flex shrink-0 gap-6">
               <CardsList icon={<GraduationCap size={32} />} cards={experience.slice(-1)} href="#experience" />
               <CardsList icon={<Zap size={32} />} cards={experience.filter((exp) => exp.type === 'work').slice(0, 3)} href="#experience" />
-              <CardsList icon={<Award size={32} />} cards={certificates} href="#certificates" />
+              <CardsList icon={<Award size={32} />} cards={certificates.sort((a, b) => compareLevelsAndDate(a, b)).slice(0, 3)} href="#certificates" />
               <CardsList icon={<Folder size={32} />} cards={projects} href="#projects" />
             </div>
           ))}
