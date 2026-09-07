@@ -320,13 +320,13 @@ const ProjectsSkills = () => {
           )}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+        <div className="grid w-full min-w-0 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Projects Grid */}
-          <div className="bg-white/90 rounded-xl p-4 sm:p-4 lg:p-6 max-h-[70vh] flex flex-col">
+          <div className="min-w-0 bg-white/90 rounded-xl p-4 sm:p-4 lg:p-6 max-h-[70vh] flex flex-col">
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 lg:mb-4">
               Projects
             </h3>
-            <div className="space-y-4 sm:space-y-6 overflow-y-auto scrollbar-hide p-2 sm:p-4 lg:p-6">
+            <div className="min-w-0 space-y-4 sm:space-y-6 overflow-y-auto scrollbar-hide p-2 sm:p-4 lg:p-6">
               {filteredProjects.map((project, index) => (
                 <div
                   key={project.title}
@@ -341,7 +341,7 @@ const ProjectsSkills = () => {
                     <img
                       src={getImageUrl(project.image)}
                       alt={project.title}
-                      className="w-full h-32 sm:h-40 lg:h-48 object-cover transition-transform duration-300 hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
                       <div className="flex space-x-4">
@@ -385,9 +385,9 @@ const ProjectsSkills = () => {
                       className="flex cursor-pointer"
                     >
                       <div
-                        className={`relative flex gap-1 sm:gap-2 max-h-min ${showAllSkillsProjects[index]
+                        className={`relative min-w-0 flex gap-1 sm:gap-2 max-h-min ${showAllSkillsProjects[index]
                           ? 'flex-wrap'
-                          : 'flex-row overflow-y-auto scrollbar-hide'}`}>
+                          : 'flex-row overflow-x-auto scrollbar-hide'}`}>
                         {project.technologies.map((tech) => (
                           <span
                             key={tech}
@@ -431,7 +431,7 @@ const ProjectsSkills = () => {
           </div>
 
           {/* Skills Panel */}
-          <div className="bg-white/90 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
+          <div className="min-w-0 bg-white/90 rounded-xl p-4 sm:p-6 lg:p-8 max-h-[70vh] flex flex-col">
             <div className="animate-fade-in flex-1 flex flex-col min-h-0">
               <div className="flex items-center mb-4 sm:mb-6 flex-shrink-0">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
@@ -475,7 +475,6 @@ const ProjectsSkills = () => {
                   </div>
                 ))}
               </div>
-
 
               <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg flex-shrink-0">
                 <h4 className="font-semibold text-cyan-900 mb-2 text-sm sm:text-base">
