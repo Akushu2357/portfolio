@@ -25,7 +25,7 @@ const CardsList = ({ icon, cards = [], href = null }) => {
       </div>
       {cards.map((card, index) => (
         <div
-          key={card.id}
+          key={card.id ?? card.title}
           className="card overflow-hidden animate-slide-up flex-shrink-0 w-40 hover:scale-105 transition-transform duration-300"
           style={{ animationDelay: `${index * 0.1}s` }}
         >
@@ -68,6 +68,15 @@ const About = () => {
       description: 'Always exploring new technologies and improving my skills.',
     },
   ];
+
+  const compareLevelsAndDate = (a, b) => {
+    const levels = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+    const levelDiff = levels.indexOf(a.level) - levels.indexOf(b.level);
+    if (levelDiff !== 0) {
+      return levelDiff;
+    }
+    return new Date(b.date) - new Date(a.date);
+  };
 
   return (
     <section id="about" className="py-10 lg:py-20 bg-cyan-50">
@@ -162,10 +171,10 @@ const About = () => {
         >
           {[0, 1].map((iteration) => (
             <div key={iteration} className="flex shrink-0 gap-6">
-              <CardsList icon={<GraduationCap size={32} />} cards={experience.slice(-1)} href="#experience" />
-              <CardsList icon={<Zap size={32} />} cards={experience.filter((exp) => exp.type === 'work').slice(0, 3)} href="#experience" />
-              <CardsList icon={<Award size={32} />} cards={certificates} href="#certificates" />
-              <CardsList icon={<Folder size={32} />} cards={projects} href="#projects" />
+              <CardsList key={iteration * 4 + 1} icon={<GraduationCap size={32} />} cards={experience.slice(-1)} href="#experience" />
+              <CardsList key={iteration * 4 + 2} icon={<Zap size={32} />} cards={experience.filter((exp) => exp.type === 'work').slice(0, 3)} href="#experience" />
+              <CardsList key={iteration * 4 + 3} icon={<Award size={32} />} cards={certificates.sort((a, b) => compareLevelsAndDate(a, b)).slice(0, 3)} href="#certificates" />
+              <CardsList key={iteration * 4 + 4} icon={<Folder size={32} />} cards={projects} href="#projects" />
             </div>
           ))}
         </div>

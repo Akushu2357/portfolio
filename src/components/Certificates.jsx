@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Award, ExternalLink, Calendar, Filter, X, Search, Tag } from 'lucide-react';
 import { certificates } from '../utils/certificatesUtils';
 
 const Certificates = () => {
-  const scrollContainerRef = useRef(null);
   const [selectedSkillFilters, setSelectedSkillFilters] = useState([]);
   const [selectedLevelFilter, setSelectedLevelFilter] = useState('all');
   const [selectedIssuerFilter, setSelectedIssuerFilter] = useState('all');
@@ -11,26 +10,35 @@ const Certificates = () => {
   const [showSkillsFilter, setShowSkillsFilter] = useState(false);
   const [showLevelFilter, setShowLevelFilter] = useState(false);
   const [showIssuerFilter, setShowIssuerFilter] = useState(false);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const [scrollDirection, setScrollDirection] = useState(1); // 1 for right, -1 for left
+  const [activeCertificateIndex, setActiveCertificateIndex] = useState(0);
+  const [carouselProgress, setCarouselProgress] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const dragStartX = useRef(null);
+  const isDragging = useRef(false);
+  const wasDragged = useRef(false);
+  const duration = 3; // Duration for each certificate in seconds
+
+  const durationRate = 100 / (duration * 10); // Rate of progress increment per 100ms
 
   // Get all unique skills
   const allSkills = [...new Set(certificates.flatMap(cert => cert.skills))].sort();
   const allLevels = [...new Set(certificates.map(cert => cert.level))].sort();
   const allIssuers = [...new Set(certificates.map(cert => cert.issuer))].sort();
 
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
   // Filter certificates based on multiple criteria
   const filteredCertificates = certificates.filter(cert => {
     // Search filter
-    const matchesSearch = searchQuery === '' ||
-      cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cert.issuer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cert.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cert.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesSearch = normalizedSearchQuery === '' ||
+      cert.title.toLowerCase().includes(normalizedSearchQuery) ||
+      cert.issuer.toLowerCase().includes(normalizedSearchQuery) ||
+      cert.description.toLowerCase().includes(normalizedSearchQuery) ||
+      cert.skills.some(skill => skill.toLowerCase().includes(normalizedSearchQuery));
 
-    // Skills filter (multiple selection)
+    // Multiple selected skills are alternatives within the same filter.
     const matchesSkills = selectedSkillFilters.length === 0 ||
-      selectedSkillFilters.every(skill => cert.skills.includes(skill));
+      selectedSkillFilters.some(skill => cert.skills.includes(skill));
 
     // Level filter
     const matchesLevel = selectedLevelFilter === 'all' || cert.level === selectedLevelFilter;
@@ -40,6 +48,92 @@ const Certificates = () => {
 
     return matchesSearch && matchesSkills && matchesLevel && matchesIssuer;
   });
+
+  const filteredCertificateKey = filteredCertificates.map(cert => cert.id).join('-');
+
+  useEffect(() => {
+    setActiveCertificateIndex(0);
+    setCarouselProgress(0);
+  }, [filteredCertificateKey]);
+
+  useEffect(() => {
+    if (filteredCertificates.length < 2) {
+      return undefined;
+    }
+
+    const timer = setInterval(() => {
+      setCarouselProgress((previousProgress) => {
+        if (previousProgress >= 100) {
+          setActiveCertificateIndex((previousIndex) =>
+            (previousIndex + 1) % filteredCertificates.length
+          );
+          return 0;
+        }
+
+        return previousProgress + durationRate;
+      });
+    }, 100);
+
+    return () => clearInterval(timer);
+  }, [filteredCertificateKey, filteredCertificates.length]);
+
+  const selectCertificate = (index) => {
+    setActiveCertificateIndex(index);
+    setCarouselProgress(0);
+  };
+
+  const handlePointerDown = (event) => {
+    if (filteredCertificates.length < 2) {
+      return;
+    }
+
+    dragStartX.current = event.clientX;
+    isDragging.current = true;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!isDragging.current || dragStartX.current === null) {
+      return;
+    }
+
+    const offset = event.clientX - dragStartX.current;
+    if (Math.abs(offset) > 8) {
+      wasDragged.current = true;
+    }
+    setDragOffset(offset);
+  };
+
+  const handlePointerUp = (event) => {
+    if (!isDragging.current || dragStartX.current === null) {
+      return;
+    }
+
+    const offset = event.clientX - dragStartX.current;
+    const swipeThreshold = 60;
+    if (Math.abs(offset) >= swipeThreshold) {
+      const direction = offset < 0 ? 1 : -1;
+      selectCertificate(
+        (activeCertificateIndex + direction + filteredCertificates.length) % filteredCertificates.length
+      );
+    }
+
+    setDragOffset(0);
+    dragStartX.current = null;
+    isDragging.current = false;
+    if (wasDragged.current) {
+      setTimeout(() => {
+        wasDragged.current = false;
+      }, 0);
+    }
+  };
+
+  const handleCardClick = (event) => {
+    if (wasDragged.current) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
 
   const handleSkillToggle = (skill) => {
     setSelectedSkillFilters(prev =>
@@ -62,7 +156,7 @@ const Certificates = () => {
   const hasActiveFilters = selectedSkillFilters.length > 0 ||
     selectedLevelFilter !== 'all' ||
     selectedIssuerFilter !== 'all' ||
-    searchQuery !== '';
+    normalizedSearchQuery !== '';
 
   const getLevelColor = (level) => {
     switch (level) {
@@ -77,54 +171,6 @@ const Certificates = () => {
     }
   };
 
-  // Auto-scroll functionality
-  useEffect(() => {
-    if (!isAutoScrolling || !scrollContainerRef.current) return;
-
-    const scrollContainer = scrollContainerRef.current;
-    const scrollSpeed = 1; // pixels per frame
-    const scrollInterval = 50; // milliseconds
-
-    const autoScroll = () => {
-      if (!scrollContainer) return;
-
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
-      const maxScroll = scrollWidth - clientWidth;
-
-      // Check if we've reached the end or beginning
-      if (scrollDirection === 1 && scrollLeft >= maxScroll - 10) {
-        setScrollDirection(-1); // Change direction to left
-      } else if (scrollDirection === -1 && scrollLeft <= 10) {
-        setScrollDirection(1); // Change direction to right
-      }
-
-      // Scroll in the current direction
-      scrollContainer.scrollLeft += scrollSpeed * scrollDirection;
-    };
-
-    const intervalId = setInterval(autoScroll, scrollInterval);
-
-    return () => clearInterval(intervalId);
-  }, [isAutoScrolling, scrollDirection, filteredCertificates]);
-
-  // Pause auto-scroll on hover
-  const handleMouseEnter = () => {
-    setIsAutoScrolling(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsAutoScrolling(true);
-  };
-
-  // Reset auto-scroll when filters change
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = 0;
-      setScrollDirection(1);
-      setIsAutoScrolling(true);
-    }
-  }, [filteredCertificates]);
-
   return (
     <section id="certificates" className="py-12 sm:py-16 lg:py-20 bg-cyan-50">
       <div className="container-max section-padding">
@@ -138,7 +184,7 @@ const Certificates = () => {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="mb-8 lg:mb-12">
+        <div className="mb-2 lg:mb-4">
           {/* Search Bar */}
           <div className="mb-4">
             <div className="relative max-w-md mx-auto">
@@ -183,8 +229,8 @@ const Certificates = () => {
               <button
                 onClick={() => setShowLevelFilter(!showLevelFilter)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedLevelFilter !== 'all'
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                    : 'bg-white/90 hover:bg-white'
+                  ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                  : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Award size={16} />
@@ -195,8 +241,8 @@ const Certificates = () => {
               <button
                 onClick={() => setShowIssuerFilter(!showIssuerFilter)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${selectedIssuerFilter !== 'all'
-                    ? 'bg-green-100 text-green-700 border border-green-200'
-                    : 'bg-white/90 hover:bg-white'
+                  ? 'bg-green-100 text-green-700 border border-green-200'
+                  : 'bg-white/90 hover:bg-white'
                   }`}
               >
                 <Filter size={16} />
@@ -265,15 +311,15 @@ const Certificates = () => {
           {/* Filter Dropdowns */}
           {showSkillsFilter && (
             <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
-              <h4 className="font-semibold text-slate-900 mb-3">Select Skills (multiple selection):</h4>
+              <h4 className="font-semibold text-slate-900 mb-3">Select Skills (any match):</h4>
               <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto scrollbar-hide">
                 {allSkills.map((skill) => (
                   <button
                     key={skill}
                     onClick={() => handleSkillToggle(skill)}
                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedSkillFilters.includes(skill)
-                        ? 'bg-cyan-600 text-white'
-                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                      ? 'bg-cyan-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                       }`}
                   >
                     {skill}
@@ -293,8 +339,8 @@ const Certificates = () => {
                     setShowLevelFilter(false);
                   }}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedLevelFilter === 'all'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                     }`}
                 >
                   All Levels
@@ -307,8 +353,8 @@ const Certificates = () => {
                       setShowLevelFilter(false);
                     }}
                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedLevelFilter === level
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                       }`}
                   >
                     {level}
@@ -328,8 +374,8 @@ const Certificates = () => {
                     setShowIssuerFilter(false);
                   }}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedIssuerFilter === 'all'
-                      ? 'bg-green-600 text-white'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                     }`}
                 >
                   All Issuers
@@ -342,8 +388,8 @@ const Certificates = () => {
                       setShowIssuerFilter(false);
                     }}
                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${selectedIssuerFilter === issuer
-                        ? 'bg-green-600 text-white'
-                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
+                      ? 'bg-green-600 text-white'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300'
                       }`}
                   >
                     {issuer}
@@ -354,152 +400,198 @@ const Certificates = () => {
           )}
         </div>
 
-        {/* Certificates Grid */}
-        <div
-          ref={scrollContainerRef}
-          className="overflow-x-auto pb-4 scrollbar-hide"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{ scrollBehavior: 'auto' }}
-        >
-          <div className="flex space-x-6 w-max">
-            {filteredCertificates.map((cert, index) => (
-              <div
-                key={cert.id}
-                className="card overflow-hidden animate-slide-up flex-shrink-0 w-80 hover:scale-105 transition-transform duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Certificate Image */}
-                <div className="relative overflow-hidden">
-                  <img
-                    src={cert.image}
-                    alt={cert.title}
-                    className="w-full h-32 object-cover"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <div className={`px-2 py-1 text-xs rounded-full border font-medium ${getLevelColor(cert.level)}`}>
-                      {cert.level}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Certificate Content */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-slate-900 mb-1 text-sm leading-tight line-clamp-2">
-                        {cert.title}
-                      </h3>
-                      <p className="text-cyan-600 font-semibold text-sm">
-                        {cert.issuer}
-                      </p>
-                    </div>
-                    <a
-                      href={cert.verifyUrl}
-                      className="ml-2 p-1.5 text-slate-400 hover:text-cyan-600 transition-colors duration-300 flex-shrink-0"
-                      title="Verify Certificate"
-                    >
-                      <ExternalLink size={16} />
-                    </a>
-                  </div>
-
-                  <p className="text-slate-600 text-xs mb-4 leading-relaxed line-clamp-3">
-                    {cert.description}
-                  </p>
-
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center space-x-1 text-slate-500">
-                        <Calendar size={12} />
-                        <span className="text-xs">Issued: {cert.date}</span>
-                      </div>
-                    </div>
-
-                    <div className="text-xs text-slate-400 truncate">
-                      ID: {cert.credentialId}
-                    </div>
-
-                    {/* Skills Tags */}
-                    <div className="space-y-2">
-                      <div className="flex flex-wrap gap-1">
-                        {cert.skills.slice(0, 4).map((skill) => (
-                          <span
-                            key={skill}
-                            className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${selectedSkillFilters.includes(skill)
-                                ? 'bg-cyan-600 text-white'
-                                : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                              }`}
-                            onClick={() => handleSkillToggle(skill)}
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        {cert.skills.length > 4 && (
-                          <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full font-medium">
-                            +{cert.skills.length - 4}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* No Results Message */}
-        {filteredCertificates.length === 0 && (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Award className="text-slate-400" size={24} />
-            </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              No certificates found
-            </h3>
-            <p className="text-slate-600 mb-4">
-              No certificates match the selected skill filter.
-            </p>
-            <button
-              onClick={clearAllFilters}
-              className="btn-primary"
+        {/* Certificates Carousel */}
+        {filteredCertificates.length > 0 && (
+          <div className="pt-2 pb-4">
+            <div
+              className="overflow-hidden w-full cursor-grab touch-pan-y active:cursor-grabbing pt-2 pb-8"
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
             >
-              Show All Certificates
-            </button>
+              <div
+                key={filteredCertificateKey}
+                className={`flex gap-6 ${isDragging.current ? '' : 'transition-transform duration-700 ease-out'}`}
+                style={{
+                  '--active-index': activeCertificateIndex,
+                  '--drag-offset': `${dragOffset}px`,
+                  transform: 'translateX(calc(50% - (var(--active-index) * (min(20rem, calc(100vw - 2rem)) + 1.5rem)) - (min(20rem, calc(100vw - 2rem)) / 2) + var(--drag-offset))',
+                }}
+                onClick={handleCardClick}
+              >
+                {filteredCertificates.map((cert, index) => (
+                  <div
+                    key={cert.id}
+                    className={`card overflow-hidden flex-shrink-0 w-[min(20rem,calc(100vw-2rem))] transition-all duration-700 ${index === activeCertificateIndex
+                      ? 'scale-100 opacity-100'
+                      : 'scale-95 opacity-60'
+                      }`}
+                  >
+                    {/* Certificate Image */}
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={cert.image}
+                        alt={cert.title}
+                        className="w-full h-32 object-cover"
+                      />
+                      <div className="absolute top-3 right-3">
+                        <div className={`px-2 py-1 text-xs rounded-full border font-medium ${getLevelColor(cert.level)}`}>
+                          {cert.level}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Certificate Content */}
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-bold text-slate-900 mb-1 text-sm leading-tight line-clamp-2">
+                            {cert.title}
+                          </h3>
+                          <p className="text-cyan-600 font-semibold text-sm">
+                            {cert.issuer}
+                          </p>
+                        </div>
+                        <a
+                          href={cert.verifyUrl}
+                          className="ml-2 p-1.5 text-slate-400 hover:text-cyan-600 transition-colors duration-300 flex-shrink-0"
+                          title="Verify Certificate"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      </div>
+
+                      <p className="text-slate-600 text-xs mb-4 leading-relaxed line-clamp-3">
+                        {cert.description}
+                      </p>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center space-x-1 text-slate-500">
+                            <Calendar size={12} />
+                            <span className="text-xs">Issued: {cert.date}</span>
+                          </div>
+                        </div>
+
+                        <div className="text-xs text-slate-400 truncate">
+                          ID: {cert.credentialId}
+                        </div>
+
+                        {/* Skills Tags */}
+                        <div className="space-y-2">
+                          <div className="flex flex-wrap gap-1">
+                            {cert.skills.slice(0, 4).map((skill) => (
+                              <span
+                                key={skill}
+                                className={`px-2 py-1 text-xs rounded-full font-medium transition-colors duration-300 cursor-pointer ${selectedSkillFilters.includes(skill)
+                                  ? 'bg-cyan-600 text-white'
+                                  : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                                  }`}
+                                onClick={() => handleSkillToggle(skill)}
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                            {cert.skills.length > 4 && (
+                              <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full font-medium">
+                                +{cert.skills.length - 4}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {filteredCertificates.length > 1 && (
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex items-center gap-2" role="tablist" aria-label="Certificate positions">
+                  {filteredCertificates.map((cert, index) => (
+                    <button
+                      key={cert.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={index === activeCertificateIndex}
+                      aria-label={`Show certificate ${index + 1}: ${cert.title}`}
+                      onClick={() => selectCertificate(index)}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${index === activeCertificateIndex
+                        ? 'w-10 bg-cyan-500'
+                        : 'w-6 bg-slate-300 hover:bg-slate-400'
+                        }`}
+                    >
+                      {index === activeCertificateIndex && (
+                        <span
+                          className="block h-full rounded-full bg-cyan-700 transition-[width] duration-100"
+                          style={{ width: `${carouselProgress}%` }}
+                        />
+                      )}
+                    </button>
+                  ))}
+                </div>
+                <span className="text-xs text-slate-500" aria-live="polite">
+                  Next certificate in {Math.max(0, Math.ceil((100 - carouselProgress) /100 * duration))}s
+                </span>
+              </div>
+            )}
           </div>
         )}
 
-        {/* Summary Stats */}
-        <div className="mt-12 bg-white/80 rounded-xl p-6 lg:p-8 border border-cyan-200">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cyan-600 mb-1">
-                {certificates.length}
-              </div>
-              <div className="text-sm text-slate-600">Total Certificates</div>
+      {/* No Results Message */}
+      {filteredCertificates.length === 0 && (
+        <div className="text-center py-8">
+          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Award className="text-slate-400" size={24} />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-900 mb-2">
+            No certificates found
+          </h3>
+          <p className="text-slate-600 mb-4">
+            No certificates match the selected skill filter.
+          </p>
+          <button
+            onClick={clearAllFilters}
+            className="btn-primary"
+          >
+            Show All Certificates
+          </button>
+        </div>
+      )}
+
+      {/* Summary Stats */}
+      <div className="mt-4 bg-white/80 rounded-xl p-6 lg:p-8 border border-cyan-200">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-cyan-600 mb-1">
+              {certificates.length}
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600 mb-1">
-                {certificates.filter(cert => cert.level === 'Professional').length}
-              </div>
-              <div className="text-sm text-slate-600">Professional Level</div>
+            <div className="text-sm text-slate-600">Total Certificates</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600 mb-1">
+              {certificates.filter(cert => cert.level === 'Professional').length}
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600 mb-1">
-                {allSkills.length}
-              </div>
-              <div className="text-sm text-slate-600">Certified Skills</div>
+            <div className="text-sm text-slate-600">Professional Level</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600 mb-1">
+              {allSkills.length}
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600 mb-1">
-                {new Set(certificates.map(cert => cert.issuer)).size}
-              </div>
-              <div className="text-sm text-slate-600">Issuing Organizations</div>
+            <div className="text-sm text-slate-600">Certified Skills</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-600 mb-1">
+              {new Set(certificates.map(cert => cert.issuer)).size}
             </div>
+            <div className="text-sm text-slate-600">Issuing Organizations</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    </section >
   );
 };
 

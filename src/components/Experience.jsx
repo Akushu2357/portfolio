@@ -48,7 +48,6 @@ const Experience = () => {
     } else {
       setSelectedExperience(focusExperience);
     }
-    console.log(`Hovered: ${hoveredExperience}, Focused: ${focusExperience}, Selected: ${selectedExperience}`);
   }, [hoveredExperience, focusExperience, selectedExperience]);
 
   const careerStatsComponent = () => {

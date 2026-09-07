@@ -26,7 +26,13 @@ const Hero = () => {
           </h2>
 
           <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Software Engineer / Backend Developer
+            Software Engineer
+          </p>
+          <p className="text-lg md:text-xl text-slate-600 mb-4 max-w-3xl mx-auto">
+            Computer Engineering graduate with hands-on experience in backend development, web applications, test automation, and data-driven systems.
+          </p>
+          <p className="text-lg md:text-xl text-slate-600 mb-4 max-w-3xl mx-auto">
+            I enjoy building reliable software, working with APIs and databases, and turning real-world problems into practical solutions.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

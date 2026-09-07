@@ -29,7 +29,7 @@ import {
   Smartphone,
   Rocket,
 } from 'lucide-react';
-import { projects } from '../utils/projectsUtils';
+import { projects } from '../utils/projectsUtils.js';
 
 const ProjectsSkills = () => {
   const [selectedProject, setSelectedProject] = useState(0); // Start with first project selected
@@ -43,43 +43,31 @@ const ProjectsSkills = () => {
     Frontend: [Code, "#0e7490"],
     Backend: [Server, "#3b82f6"],
     Database: [Database, "#6b7280"],
-    Integration: [Plug, "#8b5cf6"],
+    Testing: [Shield, "#ef4444"],
     Security: [Shield, "#ef4444"],
-    UX: [Layout, "#ec4899"],
-    'Real-time': [Zap, "#f59e0b"],
-    Features: [Layers, "#8b5cf6"],
-    Visualization: [PieChart, "#10b981"],
-    Styling: [Palette, "#8b5cf6"],
-    Analytics: [BarChart3, "#3b82f6"],
-    Cloud: [Cloud, "#6b7280"],
-    Caching: [HardDrive, "#6b7280"],
+    AI: [Bot, "#f59e0b"],
     Data: [Table, "#6b7280"],
-    'AI/ML': [Bot, "#f59e0b"],
-    Design: [Palette, "#8b5cf6"],
-    Mobile: [Smartphone, "#10b981"],
     Deployment: [Rocket, "#f59e0b"],
+    Cloud: [Cloud, "#6b7280"],
+    Styling: [Palette, "#8b5cf6"],
+    Visualization: [PieChart, "#10b981"],
+    UX: [Layout, "#ec4899"],
   };
 
   const getCategoryColor = (category) => {
     const colors = {
-      'Frontend': 'bg-cyan-100 text-cyan-700 border-cyan-200',
-      'Backend': 'bg-blue-100 text-blue-700 border-blue-200',
-      'Database': 'bg-slate-100 text-slate-700 border-slate-200',
-      'Integration': 'bg-indigo-100 text-indigo-700 border-indigo-200',
-      'Security': 'bg-red-100 text-red-700 border-red-200',
-      'UX': 'bg-rose-100 text-rose-700 border-rose-200',
-      'Real-time': 'bg-yellow-100 text-yellow-700 border-yellow-200',
-      'Features': 'bg-purple-100 text-purple-700 border-purple-200',
-      'Visualization': 'bg-teal-100 text-teal-700 border-teal-200',
-      'Styling': 'bg-sky-100 text-sky-700 border-sky-200',
-      'Analytics': 'bg-emerald-100 text-emerald-700 border-emerald-200',
-      'Cloud': 'bg-gray-100 text-gray-700 border-gray-200',
-      'Caching': 'bg-violet-100 text-violet-700 border-violet-200',
-      'Data': 'bg-orange-100 text-orange-700 border-orange-200',
-      'AI/ML': 'bg-amber-100 text-amber-700 border-amber-200',
-      'Design': 'bg-pink-100 text-pink-700 border-pink-200',
-      'Mobile': 'bg-green-100 text-green-700 border-green-200',
-      'Deployment': 'bg-lime-100 text-lime-700 border-lime-200',
+      Frontend: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+      Backend: 'bg-blue-100 text-blue-700 border-blue-200',
+      Database: 'bg-slate-100 text-slate-700 border-slate-200',
+      Testing: 'bg-indigo-100 text-indigo-700 border-indigo-200',
+      Security: 'bg-red-100 text-red-700 border-red-200',
+      AI: 'bg-amber-100 text-amber-700 border-amber-200',
+      Data: 'bg-orange-100 text-orange-700 border-orange-200',
+      Deployment: 'bg-lime-100 text-lime-700 border-lime-200',
+      Cloud: 'bg-gray-100 text-gray-700 border-gray-200',
+      Styling: 'bg-sky-100 text-sky-700 border-sky-200',
+      Visualization: 'bg-teal-100 text-teal-700 border-teal-200',
+      UX: 'bg-rose-100 text-rose-700 border-rose-200',
     };
     return colors[category] || 'bg-slate-100 text-slate-700 border-slate-200';
   };
