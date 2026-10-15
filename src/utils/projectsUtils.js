@@ -13,7 +13,7 @@ export const projects = [
             'Supabase',
             'Vercel',
         ],
-        liveUrl: 'https://vocabulary-crossword-puzzles.vercel.app/',
+        // liveUrl: 'https://vocabulary-crossword-puzzles.vercel.app/',
         // githubUrl: 'https://github.com/Akushu2357/Vocabulary-Crossword-Puzzles',
         skills: [
             { name: 'TypeScript', category: 'Frontend' },

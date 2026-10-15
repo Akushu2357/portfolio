@@ -80,7 +80,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-10 lg:py-20 bg-cyan-50">
-      <div className="section-padding flex flex-col lg:flex-row gap-0 lg:gap-12 items-center justify-center">
+      <div className="container-max section-padding flex flex-col lg:flex-row gap-0 lg:gap-12 items-center justify-center">
         {/* Profile Card */}
         <div className="bg-gradient-to-br from-slate-50 to-white rounded-lg shadow-lg p-8 mb-12 max-w-2xl mx-auto animate-slide-up">
           <div className="flex flex-col md:flex-row lg:flex-col gap-8 items-center md:items-start lg:items-center">

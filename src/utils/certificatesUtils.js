@@ -174,24 +174,43 @@ export const certificates = [
         description: 'Learned fundamental data analytics concepts including data cleaning, SQL, data visualization, data processing, and data-driven decision making.', // - Define and explain key concepts involved in data analytics including data, data analysis, and data ecosystems. - Conduct an analytical thinking self assessment giving specific examples of the application of analytical thinking. - Discuss the role of spreadsheets, query languages, and data visualization tools in data analytics. - Describe the role of a data analyst with specific reference to jobs.
         level: 'Beginner'
     },
-    // {
-    //     id: 10,
-    //     title: 'Back-End Development and APIs',
-    //     issuer: 'freeCodeCamp',
-    //     date: 'Semptember 2026',
-    //     credentialId: 'N/A',
-    //     image: '',
-    //     skills: [
-    //         'Node.js',
-    //         'Express.js',
-    //         'REST API',
-    //         'Authentication',
-    //         'WebSockets',
-    //         'Security',
-    //         'API Development'
-    //     ], // 
-    //     verifyUrl: '',
-    //     description: 'Built backend applications and APIs using Node.js and Express, covering REST APIs, authentication, security, WebSockets, error handling, and API development.', // - Introduction to Node.js - Node.js Core Modules - Node Package Manager - Build a Prime Number Checker Module - HTTP and the Web Standards Model - Introduction to Express - Build a Personal Profile App - Express Middleware - REST API and Web Services - Build a Timestamp Microservice - Error Handling in Express - WebSockets - Build a Chat App - Security and Privacy - Authentication - Build a Family Movie Watchlist API - Back-End Development and APIs Review
-    //     level: ''
-    // },
+    {
+        id: 10,
+        title: 'Back-End Development and APIs',
+        issuer: 'freeCodeCamp',
+        date: 'Semptember 2026',
+        credentialId: 'akushu2357-bedv9',
+        image: '../certificates/freecodecamp_backend.png',
+        skills: [
+            'Node.js',
+            'Express.js',
+            'REST API',
+            'Authentication',
+            'WebSockets',
+            'Security',
+            'API Development'
+        ], // 
+        verifyUrl: 'https://freecodecamp.org/certification/akushu2357/back-end-development-and-apis-v9',
+        description: 'Built backend applications and APIs using Node.js and Express, covering REST APIs, authentication, security, WebSockets, error handling, and API development.', // - Introduction to Node.js - Node.js Core Modules - Node Package Manager - Build a Prime Number Checker Module - HTTP and the Web Standards Model - Introduction to Express - Build a Personal Profile App - Express Middleware - REST API and Web Services - Build a Timestamp Microservice - Error Handling in Express - WebSockets - Build a Chat App - Security and Privacy - Authentication - Build a Family Movie Watchlist API - Back-End Development and APIs Review
+        level: 'N/A'
+    },
+    {
+        id: 11,
+        title: 'Responsive Web Design',
+        issuer: 'freeCodeCamp',
+        date: 'October 2026',
+        credentialId: 'akushu2357-rwdv9',
+        image: '../certificates/freecodecamp_responsive.png',
+        skills: [
+            'HTML',
+            'CSS',
+            'Responsive Design',
+            'Web Accessibility',
+            'Custom Properties',
+            'Media Queries'
+        ], // 
+        description: 'Learned responsive web design principles, including HTML, CSS, Flexbox, CSS Grid, media queries, and web accessibility.', // - Learn HTML and CSS - Build a Tribute Page - Build a Survey Form - Build a Product Landing Page - Build a Technical Documentation Page - Build a Personal Portfolio Webpage - Learn CSS Flexbox - Learn CSS Grid - Build a Responsive Website - Learn Accessibility
+        level: 'N/A',
+        verifyUrl: 'https://www.freecodecamp.org/certification/akushu2357/responsive-web-design-v9',
+    }
 ];
