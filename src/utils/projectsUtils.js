@@ -1,174 +1,137 @@
 export const projects = [
-    {
-        title: 'Vocabulary Crossword Puzzles',
-        description: 'An interactive vocabulary learning platform that generates crossword puzzles from English vocabulary data. Built with a modern full-stack architecture featuring React, Next.js, PostgreSQL, authentication, and API integration.',
-        image: '',
-        technologies: [
-            'TypeScript',
-            'React',
-            'Next.js',
-            'Tailwind CSS',
-            'Node.js',
-            'PostgreSQL',
-            'Supabase',
-            'Vercel',
-        ],
-        // liveUrl: 'https://vocabulary-crossword-puzzles.vercel.app/',
-        // githubUrl: 'https://github.com/Akushu2357/Vocabulary-Crossword-Puzzles',
-        skills: [
-            { name: 'TypeScript', category: 'Frontend' },
-            { name: 'React', category: 'Frontend' },
-            { name: 'Next.js', category: 'Frontend' },
-            { name: 'Tailwind CSS', category: 'Styling' },
-            { name: 'Responsive Design', category: 'Frontend' },
-            { name: 'Node.js', category: 'Backend' },
-            { name: 'PostgreSQL', category: 'Database' },
-            { name: 'Supabase', category: 'Database' },
-            { name: 'REST API', category: 'Testing' },
-            { name: 'OAuth 2.0', category: 'Security' },
-            { name: 'Vercel', category: 'Deployment' },
-        ],
-        completed: false,
-    },
-    {
-        title: 'Databricks Data Integrity Test Automation',
-        description: 'An automated testing solution for validating data integrity in Databricks workflows. Built internal GUI tools and automated UI workflows to reduce repetitive manual testing and improve validation efficiency.',
-        image: '',
-        technologies: [
-            'Python',
-            'PyQt',
-            'Selenium',
-            'Robot Framework',
-            'Playwright',
-            'SQL',
-            'Databricks',
-        ],
-        skills: [
-            { name: 'Python', category: 'Programming' },
-            { name: 'PyQt', category: 'UX' },
-            { name: 'Selenium', category: 'Testing' },
-            { name: 'Robot Framework', category: 'Testing' },
-            { name: 'Playwright', category: 'Testing' },
-            { name: 'SQL', category: 'Database' },
-            { name: 'Databricks', category: 'Data' },
-            { name: 'Test Automation', category: 'Testing' }
-        ],
-        completed: true,
-    },
-    {
-        title: 'Thai Labor Law Chatbot',
-        description: 'A web-based AI chatbot designed to help users understand Thai labor laws through natural-language questions. The system combines a React frontend, FastAPI backend, PostgreSQL database, and LLM-based retrieval to provide relevant legal information.',
-        image: '',
-        technologies: [
-            'Python',
-            'FastAPI',
-            'React',
-            'JavaScript',
-            'PostgreSQL',
-            'Supabase',
-            'LLM',
-            'Google Cloud',
-            'Netlify',
-        ],
-        // liveUrl: '',
-        // githubUrl: '',
-        skills: [
-            { name: 'Python', category: 'Backend' },
-            { name: 'FastAPI', category: 'Backend' },
-            { name: 'React', category: 'Frontend' },
-            { name: 'PostgreSQL', category: 'Database' },
-            { name: 'Supabase', category: 'Database' },
-            { name: 'LLM', category: 'AI' },
-            { name: 'REST API', category: 'Testing' },
-            { name: 'OAuth 2.0', category: 'Security' },
-            { name: 'Google Cloud', category: 'Cloud' },
-            { name: 'Netlify', category: 'Deployment' },
-        ],
-        completed: true,
-    },
-    {
-        title: 'Personal Portfolio Website',
-        description: 'A responsive personal portfolio built to showcase my software engineering experience, technical projects, and certifications. Designed and developed as a single-page application with React and Tailwind CSS.',
-        image: '',
-        technologies: [
-            'JavaScript',
-            'React',
-            'Vite',
-            'Tailwind CSS',
-            'GitHub Pages'
-        ],
-        liveUrl: 'https://akushu2357.github.io/portfolio/',
-        githubUrl: 'https://github.com/Akushu2357/portfolio',
-        skills: [
-            { name: 'JavaScript', category: 'Frontend' },
-            { name: 'React', category: 'Frontend' },
-            { name: 'Vite', category: 'Frontend' },
-            { name: 'Tailwind CSS', category: 'Styling' },
-            { name: 'Responsive Design', category: 'UX' },
-            { name: 'GitHub Pages', category: 'Deployment' },
-        ],
-        completed: true,
-    },
-    {
-        title: 'Audio Classification',
-        description: 'A machine learning system for classifying audio signals and distinguishing different types of sounds and noise. The project covers data preprocessing, feature engineering, model training, evaluation, and visualization using multiple machine learning algorithms.',
-        image: '',
-        technologies: [
-            'Python',
-            'Scikit-learn',
-            'XGBoost',
-            'CatBoost',
-            'LightGBM',
-            'Pandas',
-            'NumPy',
-            'Matplotlib',
-        ],
-        // liveUrl: '',
-        // githubUrl: '',
-        skills: [
-            { name: 'Python', category: 'Programming' },
-            { name: 'Scikit-learn', category: 'AI' },
-            { name: 'XGBoost', category: 'AI' },
-            { name: 'CatBoost', category: 'AI' },
-            { name: 'LightGBM', category: 'AI' },
-            { name: 'Pandas', category: 'Data' },
-            { name: 'NumPy', category: 'Data' },
-            { name: 'Matplotlib', category: 'Visualization' },
-        ],
-        completed: true
-    },
-    {
-        title: 'KOO-KIN — Food Social Web Application',
-        description: 'A social web application that connects users based on their food preferences. The platform allows users to discover restaurants, find people with similar tastes, and interact through a shared food-focused community.',
-        image: '',
-        technologies: [
-            'JavaScript',
-            'React',
-            'Node.js',
-            'Express.js',
-            'MongoDB',
-            'Mongoose',
-            'Tailwind CSS',
-        ],
-        // liveUrl: '',
-        githubUrl: 'https://github.com/SOtwoX1/Project-SE',
-        skills: [
-            { name: 'JavaScript', category: 'Frontend' },
-            { name: 'React', category: 'Frontend' },
-            { name: 'Node.js', category: 'Backend' },
-            { name: 'Express.js', category: 'Backend' },
-            { name: 'MongoDB', category: 'Database' },
-            { name: 'Mongoose', category: 'Database' },
-            { name: 'Tailwind CSS', category: 'Styling' },
-        ],
-        completed: true,
-    }
+  {
+    id: 'labor-law',
+    title: 'Thai Labor Law Chatbot',
+    kind: 'Senior project · Full stack',
+    featured: true,
+    description:
+      'Making Thai labor-law information easier to find and understand through a searchable library and natural-language questions.',
+    contributions:
+      'I worked on the full-stack application, particularly backend APIs, legal-data processing, database integration, deployment, and automation for collecting legal information.',
+    decisions:
+      'React provides the interface; FastAPI handles backend requests. PostgreSQL/Supabase stores legal and user data, with vector-based retrieval supplying relevant context to the Typhoon LLM. Python and regex prepare legal documents; Robot Framework automates collection from the Office of the Council of State website.',
+    outcome:
+      'Our team built a working web application combining a labor-law information library with an AI chatbot. Users can search for information and ask questions in natural language.',
+    technologies: [
+      'Python',
+      'FastAPI',
+      'React',
+      'PostgreSQL',
+      'Supabase',
+      'RAG',
+      'Typhoon LLM',
+      'Robot Framework',
+      'Google Cloud VM',
+      'Netlify',
+    ],
+    completed: true,
+  },
+  {
+    id: 'koo-kin',
+    title: 'KOO-KIN',
+    kind: 'Team of eight · Full stack',
+    featured: true,
+    description:
+      'A food connection web application designed to help people find others interested in eating together.',
+    contributions:
+      'As part of an eight-person team, I contributed to frontend and backend development, REST APIs, database integration, requirements definition, and coordination between parts of the team.',
+    decisions:
+      'React and Tailwind CSS support the frontend, Node.js/Express.js provides REST APIs, and MongoDB stores application data.',
+    outcome:
+      'Our team produced a full-stack web application. I gained practical experience translating requirements and UI designs into working interfaces, APIs, and database functionality. A key lesson was keeping requirements and UI designs synchronized during team development.',
+    technologies: [
+      'JavaScript',
+      'React',
+      'Tailwind CSS',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+    ],
+    githubUrl: 'https://github.com/SOtwoX1/Project-SE',
+    completed: true,
+  },
+  {
+    id: 'databricks',
+    title: 'Databricks validation tools',
+    kind: 'Professional work · Automation',
+    description:
+      'Python dataset comparisons and Qt GUI tools supporting repeatable data validation and repetitive Databricks operations.',
+    contributions:
+      'I wrote automated dataset comparisons and built Python/Qt tools for validation workflows, including Databricks UI file uploads and execution.',
+    decisions:
+      'Python, SQL/PySpark, and Databricks support data validation; Robot Framework, Selenium, and Playwright support testing and UI automation.',
+    outcome:
+      'Reduced repetitive manual verification and made validation workflows more repeatable. Internal work; no public source or demo is provided.',
+    technologies: [
+      'Python',
+      'Qt',
+      'SQL',
+      'PySpark',
+      'Databricks',
+      'Robot Framework',
+      'Selenium',
+      'Playwright',
+    ],
+    completed: true,
+  },
+  {
+    id: 'dek-vocab',
+    title: 'dek-vocab',
+    kind: 'Personal project · In progress',
+    description:
+      'An interactive vocabulary learning project with crossword puzzles generated from English vocabulary data.',
+    contributions:
+      'Developing a vocabulary learning application and exploring frontend, database, and API integration.',
+    decisions:
+      'Uses TypeScript, React, Tailwind CSS, and PostgreSQL/Supabase, with Cloudflare deployment tooling.',
+    outcome:
+      'Work in progress; included as an example of ongoing learning rather than a completed production system.',
+    technologies: [
+      'TypeScript',
+      'React',
+      'Tailwind CSS',
+      'PostgreSQL',
+      'Supabase',
+      'Cloudflare',
+    ],
+    completed: false,
+  },
+  {
+    id: 'portfolio',
+    title: 'Personal portfolio',
+    kind: 'Personal project · Web development',
+    description:
+      'A responsive portfolio connecting software engineering skills to project and professional experience.',
+    contributions:
+      'Designed and developed a single-page application to present projects, experience, and credentials.',
+    decisions:
+      'React and Vite with Tailwind CSS and static hosting through GitHub Pages.',
+    outcome: 'A central place to explore my work and contact me.',
+    technologies: [
+      'JavaScript',
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'GitHub Pages',
+    ],
+    githubUrl: 'https://github.com/Akushu2357/portfolio',
+    liveUrl: 'https://akushu2357.github.io/portfolio/',
+    completed: true,
+  },
 ];
-
-export const countCompletedProjects = () => {
-    return projects.filter(project => project.completed).length;
-}
-
-export const getImageUrl = (path) => {
-    return new URL(path ? path : '../projects/default.jpg', import.meta.url).href;
+export const countCompletedProjects = () =>
+  projects.filter((project) => project.completed).length;
+export const getImageUrl = (path) =>
+  /^https?:\/\//.test(path || '')
+    ? path
+    : import.meta.env.BASE_URL +
+      (path || 'projects/default.jpg').replace(/^(\.\.\/|\/)+/, '');
+export const filterProjects = (items, query) => {
+  const term = query.trim().toLowerCase();
+  return items.filter((project) =>
+    [project.title, project.description, ...project.technologies]
+      .join(' ')
+      .toLowerCase()
+      .includes(term),
+  );
 };

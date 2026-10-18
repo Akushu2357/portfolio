@@ -1,163 +1,135 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { sumExperienceYears } from '../utils/experienceUtils';
-
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    message: '',
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Create email content
-    const subject = `Portfolio Contact: Message from ${formData.name}`;
-    const body = `Name: ${formData.name}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-
-    // Open email client with pre-filled content
-    window.location.href = `mailto:tang.tang2004@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-
-    // Reset form after sending
-    setFormData({ name: '', message: '' });
-
-    // Show success message (optional)
-    alert('Email client opened! Please send the email from your email application.');
+import { useState } from 'react';
+import { Copy, Mail, Github, Linkedin, Send } from 'lucide-react';
+import { email, openEmailDraft } from '../utils/contactUtils';
+export default function Contact() {
+  const [status, setStatus] = useState('');
+  const [draftStatus, setDraftStatus] = useState('');
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setStatus('Email address copied.');
+    } catch {
+      setStatus(
+        'Could not copy. Select the email address above, or use the email link.',
+      );
+    }
   };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const submit = (event) => {
+    event.preventDefault();
+    openEmailDraft(name, message);
+    setDraftStatus(
+      'Email draft requested. Send it from your email app. Your message stays here if no app opens.',
+    );
   };
-
-  const contactInfo = [
-    {
-      icon: <Mail size={24} />,
-      title: 'Email',
-      value: 'tang.tang2004@gmail.com',
-      link: 'mailto:tang.tang2004@gmail.com',
-    },
-    {
-      icon: <Phone size={24} />,
-      title: 'Phone',
-      value: '+66 (086) 339-6866',
-      link: 'tel:+66863396866',
-    },
-    {
-      icon: <MapPin size={24} />,
-      title: 'Location',
-      value: 'Thailand',
-      link: '#',
-    },
-  ];
-
   return (
-    <section id="contact" className="py-20 bg-slate-50">
-      <div className="container-max section-padding">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            Get In Touch
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Ready to start your next project? Let's discuss how we can work
-            together to bring your ideas to life.
+    <section id="contact" className="section restored contact-section">
+      <div className="container">
+        <div className="section-heading">
+          <h2>Get In Touch</h2>
+          <p className="muted">
+            For software engineering opportunities or a conversation about my
+            work, you can reach me here.
           </p>
         </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="animate-slide-up">
-            <h3 className="text-2xl font-bold text-slate-900 mb-8">
-              Let's Start a Conversation
-            </h3>
-
-            <div className="space-y-6 mb-8">
-              {contactInfo.map((info) => (
-                <a
-                  key={info.title}
-                  href={info.link}
-                  className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-                >
-                  <div className="text-cyan-600 mr-4">
-                    {info.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">
-                      {info.title}
-                    </h4>
-                    <p className="text-slate-600">{info.value}</p>
-                  </div>
-                </a>
-              ))}
+        <div className="contact-columns">
+          <div id="contact-links">
+            <h3 className="contact-subtitle">Let’s start a conversation</h3>
+            <div className="contact-methods">
+              <a className="contact-method" href={'mailto:' + email}>
+                <span className="panel-icon">
+                  <Mail size={23} />
+                </span>
+                <span>
+                  <strong>Email</strong> <span className="muted">{email}</span>
+                </span>
+              </a>
+              <a
+                className="contact-method"
+                href="https://github.com/Akushu2357"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="panel-icon">
+                  <Github size={23} />
+                </span>
+                <span>
+                  <strong>GitHub</strong>{' '}
+                  <span className="muted">Akushu2357</span>
+                </span>
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a
+                className="contact-method"
+                href="https://www.linkedin.com/in/worapat-chuchoed-9352b929b/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="panel-icon">
+                  <Linkedin size={23} />
+                </span>
+                <span>
+                  <strong>LinkedIn</strong>{' '}
+                  <span className="muted">Worapat Chuchoed</span>
+                </span>
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
             </div>
-
-            {/* <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-bold text-slate-900 mb-4">
-                Why Work With Me?
-              </h4>
-              <ul className="space-y-2 text-slate-600">
-                <li>✓ 5+ years of professional experience</li>
-                <li>✓ Fast turnaround and reliable communication</li>
-                <li>✓ Modern, scalable solutions</li>
-                <li>✓ Ongoing support and maintenance</li>
-              </ul>
-            </div> */}
+            <button className="button" onClick={copy}>
+              <Copy size={16} /> Copy email address
+            </button>
+            <p role="status" className="copy-status">
+              {status}
+            </p>
           </div>
-
-          <div className="animate-slide-up">
-            <form onSubmit={handleSubmit} className="card p-8">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">
-                Send a Message
-              </h3>
-
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full btn-primary flex items-center justify-center space-x-2"
-                >
-                  <Send size={20} />
-                  <span>Send Message</span>
-                </button>
-              </div>
-            </form>
-          </div>
+          <form
+            id="contact-draft"
+            className="contact-form detail-panel"
+            onSubmit={submit}
+          >
+            <h3>Send a message</h3>
+            <div className="field">
+              <label htmlFor="contact-name">Your name</label>
+              <input
+                id="contact-name"
+                name="name"
+                autoComplete="name"
+                required
+                maxLength={120}
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
+            <div className="field">
+              <label htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows={3}
+                maxLength={3000}
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+              />
+            </div>
+            <p className="muted form-note" id="draft-help">
+              This opens a draft in your email app. You review and send the
+              email there.
+            </p>
+            <button
+              className="button primary"
+              type="submit"
+              aria-describedby="draft-help"
+            >
+              <Send size={17} /> Open email draft
+            </button>
+            <p role="status" className="draft-status">
+              {draftStatus}
+            </p>
+          </form>
         </div>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

@@ -1,81 +1,51 @@
-import React from 'react';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
-import profileImage from '../assets/profile.jpg';
-import { handleNavClick } from '../utils/navUtils';
-
-const Hero = () => {
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import profile from '../assets/profile.jpg';
+export default function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-teal-50 pt-20">
-      <div className="container-max section-padding text-center">
-        <div className="animate-fade-in">
-          <div className="mb-8">
-            <img
-              src={profileImage}
-              alt="Profile"
-              className="w-32 h-32 rounded-full mx-auto mb-6 shadow-xl border-4 border-white aspect-auto object-cover"
-            />
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6">
-            Hi, I'm{' '}
-            <span className="gradient-text">Tang</span>
+    <section id="home" className="hero section">
+      <div className="container hero-grid">
+        <div>
+          <p className="eyebrow">WORAPAT CHUCHOED · SOFTWARE DEVELOPER</p>
+          <h1>
+            Thoughtful code.
+            <br />
+            <span>Practical solutions.</span>
           </h1>
-
-          <h2 className="text-2xl md:text-3xl text-slate-700 mb-4">
-            Worapat Chuchoed
-          </h2>
-
-          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Software Engineer
+          <p className="hero-intro">
+            Hi, I’m Tang. I build APIs, connect databases, and turn ideas into
+            working web applications.
           </p>
-          <p className="text-lg md:text-xl text-slate-600 mb-4 max-w-3xl mx-auto">
-            Computer Engineering graduate with hands-on experience in backend development, web applications, test automation, and data-driven systems.
+          <p className="muted">
+            Computer Engineering graduate with hands-on full-stack development
+            and professional experience in testing and automation.
           </p>
-          <p className="text-lg md:text-xl text-slate-600 mb-4 max-w-3xl mx-auto">
-            I enjoy building reliable software, working with APIs and databases, and turning real-world problems into practical solutions.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <a href="#projects" className="btn-primary">
-              View My Work
+          <div className="actions">
+            <a className="button primary" href="#projects">
+              View projects <ArrowDown size={17} />
             </a>
-            <a href="#contact" className="btn-secondary">
-              Get In Touch
+            <a className="button" href="#contact">
+              Contact me <ArrowUpRight size={17} />
             </a>
           </div>
-
-          <div className="flex justify-center space-x-6 mb-12">
-            <a
-              href="https://github.com/Akushu2357"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
-            >
-              <Github size={24} className="text-slate-700" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/worapat-chuchoed-9352b929b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
-            >
-              <Linkedin size={24} className="text-cyan-600" />
-            </a>
-            <a
-              href="mailto:tang.tang2004@gmail.com"
-              className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
-            >
-              <Mail size={24} className="text-blue-500" />
-            </a>
-          </div>
+          <p className="hero-caption">
+            Python / JavaScript / FastAPI / React / SQL
+          </p>
         </div>
-
-        <div className="animate-bounce-slow cursor-pointer" onClick={() => handleNavClick('#contact')} >
-          <ChevronDown size={32} className="text-slate-400 mx-auto" />
+        <div className="portrait-wrap">
+          <img
+            className="portrait"
+            src={profile}
+            alt="Tang — Worapat Chuchoed"
+            width="440"
+            height="490"
+            fetchpriority="high"
+          />
+          <div className="portrait-note">
+            <span className="accent-dot" /> From the API to the interface.
+            <small>Backend thinking. Full-stack experience.</small>
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

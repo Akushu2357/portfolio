@@ -1,142 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { handleNavClick } from '../utils/navUtils';
-
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-
+import ThemeSelector from './Theme';
+const links = [
+  ['projects', 'Projects'],
+  ['experience', 'Experience'],
+  ['about', 'About'],
+  ['certificates', 'Certificates'],
+  ['contact', 'Contact'],
+];
+export default function Header() {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('home');
+  const toggle = useRef(null);
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 5);
-
-      // Get all sections
-      const sections = ['home', 'about', 'experience', 'certificates', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100; // Offset for better detection
-
-      // Find current active section
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
-        }
+    const update = () => {
+      const sections = ['home', ...links.map(([id]) => id)];
+      setActive(
+        sections
+          .filter(
+            (id) =>
+              document.getElementById(id)?.getBoundingClientRect().top <= 140,
+          )
+          .at(-1) || 'home',
+      );
+    };
+    const escape = (event) => {
+      if (event.key === 'Escape' && open) {
+        setOpen(false);
+        toggle.current?.focus();
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Call once to set initial state
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navItems = [
-    { href: '#about', label: 'About' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#certificates', label: 'Certificates' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' },
-  ];
-
-  const handleSetMenuClose = () => {
-    setIsMenuOpen(false);
-  };
-
-  const handleLogoClick = () => {
-    setIsMenuOpen(false);
-    const homeElement = document.getElementById('home');
-    if (homeElement) {
-      homeElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+    const resize = () => {
+      if (window.innerWidth >= 900) setOpen(false);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('keydown', escape);
+    window.addEventListener('resize', resize);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('keydown', escape);
+      window.removeEventListener('resize', resize);
+    };
+  }, [open]);
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-white/95 backdrop-blur-sm shadow-lg'
-        : 'bg-transparent'
-        }`}
-    >
-      <nav className="container-max section-padding py-4">
-        <div className="flex items-center justify-between">
+    <header className="site-header">
+      <nav className="container nav" aria-label="Main navigation">
+        <a href="#home" className="brand" onClick={() => setOpen(false)}>
+          tang<span>.</span>
+        </a>
+        <div
+          id="navigation-links"
+          className={'nav-links ' + (open ? 'is-open' : '')}
+        >
+          {links.map(([id, label]) => (
+            <a
+              key={id}
+              href={'#' + id}
+              aria-current={active === id ? 'location' : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+        <div className="nav-controls">
+          <ThemeSelector />
           <button
-            onClick={handleLogoClick}
-            className={`text-2xl font-bold transition-all duration-300 hover:scale-105 ${activeSection === 'home'
-              ? 'gradient-text'
-              : isScrolled
-                ? 'text-slate-900 hover:text-cyan-600'
-                : 'text-white hover:text-cyan-300'
-              }`}
+            ref={toggle}
+            className="icon-button menu-toggle"
+            aria-label={open ? 'Close navigation' : 'Open navigation'}
+            aria-expanded={open}
+            aria-controls="navigation-links"
+            onClick={() => setOpen(!open)}
           >
-            Tang's Portfolio
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const sectionId = item.href.substring(1);
-              const isActive = activeSection === sectionId;
-
-              return (
-                <button
-                  key={item.href}
-                  onClick={() => handleNavClick(item.href, handleSetMenuClose)}
-                  className={`font-medium transition-all duration-300 relative group ${isActive
-                    ? isScrolled
-                      ? 'text-cyan-600'
-                      : 'text-cyan-300'
-                    : isScrolled
-                      ? 'text-slate-700 hover:text-cyan-600'
-                      : 'text-white/90 hover:text-white'
-                    }`}
-                >
-                  {item.label}
-                  {/* Active indicator */}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-current transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className={`md:hidden p-2 transition-colors duration-300 ${isScrolled ? 'text-slate-900' : 'text-white'
-              }`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={21} /> : <Menu size={21} />}
           </button>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 bg-white rounded-lg shadow-lg animate-slide-up">
-            {navItems.map((item) => {
-              const sectionId = item.href.substring(1);
-              const isActive = activeSection === sectionId;
-
-              return (
-                <button
-                  key={item.href}
-                  onClick={() => handleNavClick(item.href, handleSetMenuClose)}
-                  className={`block w-full text-left px-4 py-3 transition-all duration-300 ${isActive
-                    ? 'text-cyan-600 bg-cyan-50 border-r-2 border-cyan-600'
-                    : 'text-slate-700 hover:text-cyan-600 hover:bg-slate-50'
-                    }`}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
-          </div>
-        )}
       </nav>
     </header>
   );
-};
-
-export default Header;
+}
